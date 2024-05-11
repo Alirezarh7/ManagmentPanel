@@ -6,7 +6,6 @@ import { dashboardActions } from '../../pages/PublicPages/Actions/Dashboard/acti
 import { IApplicationState } from '../../store/state';
 import { connect } from 'react-redux';
 import NapAlerts from '../general/NapAlerts/NapAlerts';
-import Footer from './__archive/Footer';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
@@ -20,7 +19,7 @@ const MainLayout = (props: IProps) => {
 			<div className='flex h-screen overflow-hidden'>
 				<Sidebar sidebarOpen={isOpenSidebar} setSidebarOpen={setIsOpenSidebar} />
 				<div className='relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden'>
-					<Header sidebarOpen={isOpenSidebar} setSidebarOpen={setIsOpenSidebar} />
+					<Header sidebarOpen={isOpenSidebar} setSidebarOpen={setIsOpenSidebar} isConnected={props.isConnected} />
 					<main>
 						<div className='mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10'>
 							<WebRoute />
