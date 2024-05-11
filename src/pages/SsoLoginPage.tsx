@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import NapLoading from '../../../components/general/NapLoading/NapLoading';
-import { shareData } from '../../../shareData';
-import Ziarat from '../../../assets/ziarat.png';
+import NapLoading from '../components/general/NapLoading/NapLoading';
+import { shareData } from '../shareData';
+import Ziarat from '../assets/ziarat.png';
 import './SsoLogin.css';
 
-function SsoLogin(): React.JSX.Element {
+function SsoLoginPage(): React.JSX.Element {
 	const myGovSso = (): void => {
 		localStorage.setItem(shareData.CONSTANT.SSO_APPROACH_SELECTED, 'true');
 		localStorage.setItem(shareData.CONSTANT.SSO_APPROACH, 'mygov');
@@ -76,4 +76,4 @@ function SsoLogin(): React.JSX.Element {
 	);
 }
 
-export default SsoLogin;
+export default SsoLoginPage;
