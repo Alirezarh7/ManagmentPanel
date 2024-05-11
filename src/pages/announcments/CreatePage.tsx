@@ -5,25 +5,26 @@ import { Controller, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ICreateAnnouncementDto } from '../../typs/announcement.types';
-import { ObjectSchema } from 'yup';
 import CustomButton from '../../components/general/Buttons/CustomButton';
-import { isValidUploadedImageType } from '../../utils/uploadFileUtils';
+import { convertToBase64, isValidUploadedImageType } from '../../utils/fileUtils';
+import { AnnouncementServiceTypes } from '../../constants/announcement.const';
+import CustomInput from '../../components/general/inputs/CustomInput';
+import { useCreateAnnouncement } from '../../services/announcement.service';
 
 const AnnouncementsCreatePage = () => {
 	const [image, setImage] = useState<File | undefined>(undefined);
+	const { mutate, isPending } = useCreateAnnouncement();
 
 	const defaultFormValues: ICreateAnnouncementDto = {
 		subject: '',
 		body: '',
-		serviceTypeId: 0,
-		image: ''
+		serviceTypeId: 0
 	};
 
 	const createAnnouncementsSchema = Yup.object().shape({
-		subject: Yup.string().required(),
-		body: Yup.string().required(),
-		serviceTypeId: Yup.number().required().min(1),
-		image: Yup.string().required()
+		subject: Yup.string().required('این فیلد اجباری است'),
+		body: Yup.string().required('این فیلد اجباری است'),
+		serviceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید')
 	});
 
 	const {
@@ -35,12 +36,23 @@ const AnnouncementsCreatePage = () => {
 		resolver: yupResolver(createAnnouncementsSchema)
 	});
 
-	const onSubmitFormHandler = (submittedData: ICreateAnnouncementDto) => {
-		console.log(submittedData);
-	};
+	const onSubmitFormHandler = async (submittedData: ICreateAnnouncementDto) => {
+		if (!image) {
+			alert('آپلود عکس اجباری است');
+			return;
+		}
 
-	const onFormErrorHandler = (error: any) => {
-		console.log(error);
+		const base64: any = await convertToBase64(image);
+		const data = { ...submittedData, image: base64 };
+		console.log(data);
+		mutate(data, {
+			onSuccess: () => {
+				alert('موفق');
+			},
+			onError: error => {
+				console.log(error);
+			}
+		});
 	};
 
 	const uploadOrDropFileHandler = (event: any) => {
@@ -73,70 +85,82 @@ const AnnouncementsCreatePage = () => {
 			<h1 className='text-xl mb-3'>ایجاد اطلاعیه جدید</h1>
 
 			<div className='max-w-screen-xl w-full mx-auto flex flex-col'>
-				<div className='border'>
-					<form className='flex flex-col gap-6' onSubmit={handleSubmit(onSubmitFormHandler, onFormErrorHandler)}>
+				<form className='flex flex-col gap-6' onSubmit={handleSubmit(onSubmitFormHandler)}>
+					<div className='grid md:grid-cols-3 gap-6'>
 						<Controller
 							name='subject'
 							control={control}
-							render={({ field }) => (
-								<div>
-									<label className='form-label'>موضوع اطلاعیه</label>
-									<input type='text' className='form-control' {...field} />
-								</div>
-							)}
-						/>
-						<Controller
-							name='body'
-							control={control}
-							render={({ field }) => (
-								<div>
-									<label className='form-label'>متن اطلاعیه</label>
-									<input type='text' className='form-control' {...field} />
-								</div>
+							render={({ field: { value, onChange } }) => (
+								<CustomInput
+									type={'text'}
+									label='موضوع اطلاعیه'
+									className='md:col-span-2'
+									value={value}
+									onChange={onChange}
+									error={errors.subject && errors.subject.message}
+								/>
 							)}
 						/>
 						<Controller
 							name='serviceTypeId'
 							control={control}
-							render={({ field }) => (
+							render={({ field: { value, onChange } }) => (
 								<div>
-									<label className='form-label'>موضوع</label>
-									<input type='text' className='form-control' {...field} />
+									<label>نوع سرویس</label>
+									<select
+										value={value}
+										onChange={e => onChange(e.target.value)}
+										className={`${errors.serviceTypeId ? '!border-danger' : ''}`}>
+										<option value={0}>انتخاب کنید</option>
+										{AnnouncementServiceTypes.map(item => (
+											<option key={item.id} value={item.id}>
+												{item.nameFa}
+											</option>
+										))}
+									</select>
+									{errors.serviceTypeId ? <span className='text-danger'>{errors.serviceTypeId.message}</span> : null}
 								</div>
 							)}
 						/>
-						<Controller
-							name='image'
-							control={control}
-							render={({ field }) => (
-								<div className='flex flex-col justify-center items-center gap-4 py-2'>
-									<label
-										htmlFor='image-uploader'
-										className='w-full cursor-pointer flex flex-col justify-center items-center gap-4 border !border-green-600'
-										onDrop={event => uploadOrDropFileHandler(event)}
-										onDragOver={event => event.preventDefault()}>
-										<span>جهت آپلود کلیک کنید</span>
-										<span>یا عکس را اینجا رها کنید</span>
-										<input
-											className='relative z-10'
-											type='file'
-											accept='.jpeg, .png, .jpg, .webp, .mp4, .webm, image/jpeg, image/png, image/webp'
-											id='image-uploader'
-											hidden
-											multiple={false}
-											disabled={false}
-											onChange={event => uploadOrDropFileHandler(event)}
-										/>
-									</label>
-									{image ? <img src={URL.createObjectURL(image)} alt='پیش نمایش موقت' className='max-w-96' /> : null}
-								</div>
-							)}
-						/>
-						<div>
-							<CustomButton variant={'primary'} type={'submit'} label={'ذخیره'} onClick={() => {}} />
-						</div>
-					</form>
-				</div>
+					</div>
+
+					<Controller
+						name='body'
+						control={control}
+						render={({ field }) => (
+							<div>
+								<label className='form-label'>متن اطلاعیه</label>
+								<textarea rows={10} {...field} className={`${errors.body ? '!border-danger' : ''}`}></textarea>
+								{errors.body ? <span className='text-danger'>{errors.body.message}</span> : null}
+							</div>
+						)}
+					/>
+
+					<div className='flex flex-col justify-center items-center gap-4 py-2'>
+						<label
+							htmlFor='image-uploader'
+							className={`w-full cursor-pointer flex flex-col justify-center items-center gap-4 border ${image ? '!border-gray-300' : '!border-red-300'}`}
+							onDrop={event => uploadOrDropFileHandler(event)}
+							onDragOver={event => event.preventDefault()}>
+							<span>جهت آپلود کلیک کنید</span>
+							<span>یا عکس را اینجا رها کنید</span>
+							<input
+								className='relative z-10'
+								type='file'
+								accept='.jpeg, .png, .jpg, .webp, .mp4, .webm, image/jpeg, image/png, image/webp'
+								id='image-uploader'
+								hidden
+								multiple={false}
+								disabled={false}
+								onChange={event => uploadOrDropFileHandler(event)}
+							/>
+						</label>
+						{image ? <img src={URL.createObjectURL(image)} alt='پیش نمایش موقت' className='max-w-96' /> : null}
+					</div>
+					<div>
+						<CustomButton variant={'primary'} type={'submit'} label={'ذخیره'} onClick={() => {}} />
+					</div>
+				</form>
 			</div>
 		</>
 	);
