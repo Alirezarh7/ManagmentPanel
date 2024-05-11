@@ -1,0 +1,29 @@
+.buttonOffice {
+    background-color: #05251E;
+    color: #f1f3d0;
+    border-radius: 10px;
+    width: 90px;
+    height: 40px;
+
+}
+
+.buttonOffice:hover {
+    background-color: #c1a821;
+    color: #05251E;
+    box-shadow: 1px #05251E
+}
+.searchBarinBuyList {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 720px) {
+    .searchBarinBuyList {
+        justify-content: center;
+        width: 90%;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 10px !important
+    }
+}

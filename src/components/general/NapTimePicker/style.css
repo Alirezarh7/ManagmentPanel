@@ -1,0 +1,297 @@
+.Main {
+    position: relative;
+    margin: 0 auto;
+    flex: 1 1 50%;
+    max-width: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.napTimePicker {
+    width: 220px;
+    border: 1px solid #bbb;
+    /* min-height: 520px; */
+    margin-top: 5px auto;
+    /* margin-left: 0 auto;
+    margin-right: 0 auto;
+    margin-bottom: 0 auto; */
+    position: absolute;
+    left: 0;
+    z-index: 2;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+    color: black;
+}
+
+.timePickerCloser {
+    width: 220px;
+    border: 1px solid #bbb;
+    /* min-height: 520px; */
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    z-index: 2;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+    color: black;
+}
+
+.timePickerCloser {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #0000;
+    top: 0;
+    left: 0;
+}
+
+.minuteModal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    opacity: 1;
+    transition: all 300ms;
+}
+
+.clock {
+    position: relative;
+    height: 210px;
+    width: 210px;
+    border: 8px solid #e0e0e0;
+    border-radius: 50%;
+    margin: 5px auto;
+    background: #e0e0e0;
+    color: #2e2e2e;
+    box-sizing: border-box;
+    opacity: 1;
+    transition: all 300ms;
+}
+
+.hourHandleBase {
+    width: 0px;
+    height: 0px;
+    background-color: #0763ad;
+    z-index: 1;
+    border-radius: 50%;
+    position: absolute;
+    top: calc(50% - 4px);
+    left: calc(50% - 4px);
+}
+
+.hourHandle {
+    background-color: #0763ad;
+    width: 1px;
+    height: 85px;
+    left: calc(50% - 2px);
+    position: relative;
+}
+
+.hourHandHead {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    top: 90%;
+    left:-13px;
+    background-color: #0763ad;
+    border-radius: 56%;
+}
+
+.minuteHandleBase {
+    width: 0px;
+    height: 0px;
+    background-color: #0763ad;
+    z-index: 1;
+    border-radius: 50%;
+    position: absolute;
+    top: calc(50% - 4px);
+    left: calc(50% - 4px);
+}
+
+.minuteHandle {
+    background-color: #0763ad;
+    width: 1px;
+    height: 85px;
+    left: calc(50% - 2px);
+    position: relative;
+}
+
+.minuteHandHead {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 94%;
+    left:-10px;
+    background-color: #0763ad;
+    border-radius: 56%;
+}
+
+.clock .hours {
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    opacity: 1;
+    -webkit-transition: all 300ms;
+    transition: all 300ms;
+    z-index: 2;
+    -webkit-transform-origin: bottom center;
+    transform-origin: bottom center;
+    top: -3px;
+    left: calc(50% - 12px);
+    color: black;
+}
+
+.dotTime {
+    height: 1px;
+    width: 1px;
+}
+
+.hours span {
+    display: inline-block;
+    cursor: pointer;
+    /* margin-left: -10px !important; */
+}
+
+.clock .minute {
+    position: absolute;
+    width: 12px;
+    height: 105px;
+    padding: 3px;
+    text-align: center;
+    font-size: 12px;
+    opacity: 1;
+    transition: all 100ms;
+    z-index: 2;
+    transform-origin: center bottom;
+    top: -9px;
+    left: calc(50% - 6px);
+    color: black;
+}
+
+.clock .minute1 {
+    position: absolute;
+    width: 12px;
+    height: 95px;
+    padding: 3px;
+    text-align: center;
+    font-size: 12px;
+    opacity: 1;
+    transition: all 100ms;
+    z-index: 2;
+    transform-origin: center bottom;
+    left: calc(50% - 6px);
+    color: black;
+}
+
+.minute span {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.minute1 span {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.digitalClockModal{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    opacity: 1;
+    transition: all 300ms;
+}
+
+.digitalTimeNumber, .digitalTimeAMPM {
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10%;
+    font-size:large;
+    background-color: #ebe6f3;
+}
+
+.AmPm {
+    position: absolute;
+    top: 120px;
+    left: 80px;
+    z-index: 10;
+}
+
+.digitalAm, .analogAm {
+    border-top-right-radius: 10%;
+    border-bottom-right-radius: 10%;
+    max-width: 30px;
+    border: 1px solid #c0bec3;
+}
+
+.digitalTimeNumber:hover, .digitalAm:hover, .digitalPm:hover, .analogAm:hover, .analogPm:hover {
+    cursor: pointer;
+}
+
+.digitalAm.active, .digitalPm.active {
+    background-color: #ece0fd;
+}
+
+.analogAm.active, .analogPm.active {
+    background-color: #ffffff;
+}
+
+.digitalPm, .analogPm {
+    border-top-left-radius: 10%;
+    border-bottom-left-radius: 10%;
+    max-width: 30px;
+    border: 1px solid #c0bec3;
+}
+
+.digitalHourModal {
+    display: flex;
+    height: 100px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    opacity: 1;
+    transition: all 300ms;
+    flex-direction: row;
+    direction: ltr;
+}
+
+.hourName {
+    flex-basis: 25%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.digitalMinuteModal {
+    display: flex;
+    height: 100px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    opacity: 1;
+    transition: all 300ms;
+    flex-direction: row;
+    direction: ltr;
+}
+
+.minuteName {
+    flex-basis: 25%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.timePickerHeader{
+    background: #b400ffa6;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.timePickerHeader > span{
+    color: white;
+}

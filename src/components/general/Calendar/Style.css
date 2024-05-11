@@ -1,0 +1,421 @@
+.Main {
+    position: relative;
+    margin: 0 auto;
+    flex: 1 1 50%;
+    max-width: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.niliDatePicker {
+    width: 270px;
+    border: 1px solid #bbb;
+    /* min-height: 520px; */
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    z-index: 2;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+    color: black;
+}
+
+.datePickerCloser {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #0000;
+    top: 0;
+    left: 0;
+}
+
+.niliCalendar {
+    width: 270px;
+    border: 1px solid #bbb;
+    position: relative;
+    z-index: 2;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+    height: 500p;
+    color: black;
+}
+
+.calendarBtns {
+    position: inherit;
+    bottom: 0;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    border-top: 1px solid blue;
+}
+
+.calendarBtns .niliactioButton {
+    color: blue;
+    background-color: white;
+    border: 1px solid blue;
+    padding: 2px;
+    border-radius: 3px;
+    height: 30px;
+    flex-basis: 20%;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.calendarBtns .niliactioButton:hover {
+    color: white;
+    background-color: blue;
+    border: 1px solid white;
+}
+
+.calendarAction {
+    position: absolute;
+    height: 30px;
+    width: 100%;
+    bottom: 0;
+    background-color: #00000073;
+}
+
+.header {
+    padding: 5px 0;
+    height: 160px;
+    color: white;
+    background-color: #0763ad;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.pickerHeader {
+    padding: 5px 0;
+    color: white;
+    background-color: #0763ad;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    height: 30px;
+}
+
+.pickerCurrentDate {
+    direction: rtl;
+}
+
+.jallaliCurrentDate {
+    direction: rtl;
+    height: 115px;
+}
+
+.NiliCalbtn {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background: white;
+    border: none;
+    width: 50px;
+    cursor: pointer;
+}
+
+.pervBtn {
+    left: 0;
+    border-top-right-radius: 20px;
+}
+
+.nextBtn {
+    right: 0;
+    border-top-left-radius: 20px;
+}
+
+.month {
+    padding: 5px;
+    cursor: pointer;
+    height: 55px;
+}
+
+.weekTitle {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 12px;
+}
+
+.niliDays.disablead {
+    background-color: #fff;
+    color: gray;
+    text-decoration-line: line-through;
+    cursor: default;
+}
+
+.niliDays.disablead:hover {
+    background-color: #fff;
+    color: gray;
+}
+
+.jallaliCurrentTime span {
+    cursor: pointer;
+    font-size: 45px;
+}
+
+.calendarAction span {
+    cursor: pointer;
+}
+
+.jallaliCurrentTime span:hover,
+.calendarAction span:hover {
+    color: #d771ff;
+    border-bottom: 1px dashed white;
+}
+
+.weekDays {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(7, 1fr);
+    padding-bottom: 15px;
+}
+
+.monthNames {
+    flex-basis: 30%;
+    height: 50px;
+    margin: 10px auto;
+    cursor: pointer;
+}
+
+.monthModal {
+    display: flex;
+    height: 300px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    opacity: 1;
+    transition: all 300ms;
+    flex-direction: row;
+}
+
+.niliDays {
+    height: 20px;
+    font-size: 12px;
+    width: 30px;
+    margin: 4px;
+    padding: 4px 0;
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 30px;
+}
+
+.notCurrent {
+    color: blue;
+    background-color: #e6e6ff;
+}
+
+.nodays {
+    height: 20px;
+    font-size: 12px;
+    width: 30px;
+    margin: 4px;
+    padding: 4px 0;
+}
+
+.yearModal {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 250px;
+    overflow-y: scroll;
+    opacity: 1;
+    transition: all 300ms;
+    flex-direction: row-reverse;
+}
+
+.years {
+    flex-basis: 23%;
+    margin: 5px auto;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.yearActive {
+    background-color: #097ad6;
+    color: white;
+}
+
+.minuteModal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    opacity: 1;
+    transition: all 300ms;
+}
+
+
+/* .minute {
+    flex-basis: 13%;
+    margin: 5px 5px;
+    font-size: 12px;
+    height: 20px;
+} */
+
+.niliDays:hover {
+    background-color: #80bef0;
+}
+
+.daysActive {
+    border: 1px solid blue;
+}
+
+.activeTodayDate {
+    background-color: #d771ff;
+}
+
+.clock {
+    position: relative;
+    height: 260px;
+    width: 260px;
+    border: 8px solid #eee;
+    border-radius: 50%;
+    margin: 5px auto;
+    background: #eee;
+    color: #2e2e2e;
+    box-sizing: border-box;
+    opacity: 1;
+    transition: all 300ms;
+}
+
+.ampm div {
+    border: 1px solid #ccc;
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ampm .active {
+    color: white;
+    background-color: #0763ad;
+}
+
+.ampm {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 9px;
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    top: 0;
+}
+
+.clockHandleBase {
+    width: 12px;
+    height: 12px;
+    background-color: #0763ad;
+    z-index: 1;
+    border-radius: 50%;
+    position: absolute;
+    top: calc(50% - 6px);
+    left: calc(50% - 6px);
+}
+
+.clockHandle {
+    background-color: #0763ad;
+    width: 4px;
+    height: 115px;
+    left: calc(50% - 2px);
+    position: relative;
+}
+
+.clockHandHead {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 94%;
+    background-color: #0763ad;
+    border-radius: 56%;
+    left: -10px;
+}
+
+.clock .hours {
+    position: absolute;
+    width: 20px;
+    height: 125px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    opacity: 1;
+    -webkit-transition: all 300ms;
+    transition: all 300ms;
+    z-index: 2;
+    -webkit-transform-origin: bottom center;
+    transform-origin: bottom center;
+    top: -3px;
+    left: calc(50% - 7px);
+    color: black;
+}
+
+.dotTime {
+    height: 12px;
+    width: 12px;
+}
+
+.hours span {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.clock .minute {
+    position: absolute;
+    width: 12px;
+    height: 130px;
+    text-align: center;
+    font-size: 12px;
+    opacity: 1;
+    transition: all 100ms;
+    z-index: 2;
+    transform-origin: center bottom;
+    top: -9px;
+    left: calc(50% - 6px);
+    color: black;
+}
+
+.minute span {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.txtInput {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.txtInput:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+}

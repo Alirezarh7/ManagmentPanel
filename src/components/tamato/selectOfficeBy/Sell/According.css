@@ -1,0 +1,35 @@
+.bodyAccording{
+    color: #05251E;
+}
+
+.boyPanel{
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+
+.dataDivAccording {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;  
+}
+
+.alirezaAccording {
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media (max-width: 771px) {
+    .dataDivAccording {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+}

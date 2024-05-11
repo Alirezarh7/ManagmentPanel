@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    input {
+        @apply  px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none;
+    }
+    button {
+        @apply outline-none focus:outline-none
+    }
+}
+@layer components {
+    .checkBoxTailwind {
+        @apply text-blue-600 bg-gray-100 border-gray-300 rounded ;
+    }
+}
+
+.link:hover {
+    cursor: pointer;
+}
+
+.flex-row-fluid {
+    -webkit-box-flex: 1;
+    flex: 1 auto;
+    -ms-flex: 1 0 0px;
+    min-width: 0;
+}
+
+.bgi-position-center {
+    background-position: center;
+}
+
+.bgi-no-repeat {
+    background-repeat: no-repeat;
+}
+
+.bgi-size-cover {
+    background-size: cover;
+}
+.ag-theme-balham .ag-cell {
+    text-align: center;
+    line-height: 26px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border: 1px solid transparent;
+    padding-left: 11px;
+    padding-right: 11px;
+}
+
+.sso-login-btns {
+    padding: 10px 18px;
+    transition: all 0.3s ease;
+    border: 0;
+    outline: none;
+    color:#fff;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 580px){
+    .sso-login-btns {
+        width: 330px;
+    }
+}

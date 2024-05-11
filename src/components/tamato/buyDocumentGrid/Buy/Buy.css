@@ -1,0 +1,27 @@
+.bodyOfBuyWay {
+    background-color: #05251E;
+    color: aliceblue;
+}
+
+.bodyOfBuyWay:hover {
+    background-color: #c1a821;
+    color: #05251E;
+    box-shadow: 1px #05251E
+}
+
+.searchBarinOfficeList {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+@media (max-width: 720px) {
+    .searchBarinOfficeList {
+        justify-content: center;
+        width: 90%;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 10px !important
+    }
+}

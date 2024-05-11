@@ -1,0 +1,135 @@
+.group_card {
+    display: flex;
+    background-color: #ffffff;
+    max-height: 250px;
+    border-radius: 4px;
+    box-shadow: 0 3px 10px #ddd;
+    padding: 20px;
+}
+.group_card:hover {
+    box-shadow: 0 2px 10px #ccc;
+    /*box-shadow: 1px 1px 1px 1px #05251E;*/
+}
+
+.selected {
+    background-color: #f1f3d0;
+}
+
+.card__grouping__karvan__img {
+    width: 45px;
+    border-radius: 50%;
+    padding: 5px;
+    border: 1px dashed #1d2124;
+}
+
+.card__grouping__karvan__img__date {
+    width: 25px;
+}
+
+.kargozar__number__group {
+    margin-bottom: 0 !important;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+.cost__group__card {
+    font-size: 18px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.data__information__group {
+    margin-left: 20px;
+}
+
+@media (max-width: 991px) {
+    .data__information__group {
+        margin-right: 0;
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .group_card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-height: unset;
+    }
+
+}
+
+
+  .buttonBuyRequestGroup {
+    background-color:#FFFFFF;
+    color: #05251e;
+      border: 1px solid  #05251e;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-top: 10px;
+      width: 130px;
+      transition: all .3s ease;
+}
+
+  .buttonBuyRequestGroupDanger {
+      background-color:#FFFFFF;
+      color: #bd2130;
+      border: 1px solid  #bd2130;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-top: 10px;
+      width: 130px;
+      transition: all .3s ease;
+  }
+
+.buttonBuyRequestGroupDanger:hover {
+    background-color:#bd2130 !important;
+    color: #fff !important;
+}
+
+  .buttonBuyRequestGroup:hover {
+      background-color:#05251e !important;
+      color: #fff !important;
+  }
+
+  .select__section__group {
+      border-right: 1px solid #ccc;
+      padding-right: 30px;
+  }
+
+.buttonBuyRequest:hover {
+    background-color: #0767cc;
+    color: #fff;
+}
+
+.grouping-parent {
+    width: 100%;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 740px) {
+    .select__section__group {
+        border-right: unset;
+        width: 100%;
+        padding-right: 0;
+    }
+    .cost__group__card {
+        font-size: 15px;
+        border-bottom: unset;
+    }
+    .buttonBuyRequestGroup {
+        margin-top: 15px;
+        width: 100%;
+    }
+    .buttonBuyRequestGroupDanger {
+        margin-top: 15px;
+        width: 100%;
+    }
+    .grouping-parent {
+        width: 100%;
+    }
+}

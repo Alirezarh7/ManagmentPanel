@@ -1,0 +1,58 @@
+
+
+.bodyAccordingOmre {
+    background-color: #05251E;
+}
+
+.BorderReduceForTitle {
+    border-top-left-radius: 30px !important;
+    border-top-right-radius: 30px !important; 
+
+}
+.BorderReduceForTitle .ant-collapse-header {
+    border: none !important;
+}
+
+.someOtherClass {
+    border: 1px solid black;
+}
+.someOtherClass .bodyAccordingOmre {
+    border: none;
+}
+
+.titleColorText{
+    color: rgb(245, 245, 245);
+}
+
+
+.boyPanelOmre{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+.dataDivAccording {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;  
+}
+
+.alirezaAccording {
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media (max-width: 771px) {
+    .dataDivAccording {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+}

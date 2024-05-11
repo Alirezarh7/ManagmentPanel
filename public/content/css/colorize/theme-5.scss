@@ -1,0 +1,55 @@
+@mixin themable($theme-name, $first-color, $second-color) {
+    .#{$theme-name} {
+
+        .menu,
+        .bg-gradient-theme {
+            background-image: linear-gradient(135deg, $first-color, $second-color);
+
+            li {
+                .menu_item {
+
+                    &[data-toggle="collapse"]:not(.collapsed),
+                    &.menu_item--active {
+                        background-image: linear-gradient(135deg, $first-color, $second-color);
+                        box-shadow: -3px 0 0 $first-color inset;
+                    }
+
+                    &:hover {
+                        background-image: linear-gradient(135deg, $first-color, $first-color);
+                    }
+                }
+            }
+
+            &:not(.open) {
+                li {
+                    .collapse {
+                        background-image: linear-gradient(135deg, $first-color, $second-color);
+                    }
+
+                    &:hover {
+                        .menu_item {
+                            background-image: linear-gradient(135deg, $first-color, $second-color);
+
+                        }
+                    }
+                }
+            }
+        }
+
+        .text-theme-light {
+            color: $first-color;
+        }
+
+        .text-theme-dark {
+            color: $second-color;
+        }
+
+        .panel-subject {
+            &::after {
+                background-color: $first-color;
+            }
+        }
+    }
+}
+
+@include themable(theme-5, #fc8a91, #886fef);

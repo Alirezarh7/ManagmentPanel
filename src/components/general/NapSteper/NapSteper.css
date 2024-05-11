@@ -1,0 +1,36 @@
+.prevNumberCircle {
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    background-color: #4f96ff;
+    text-align: center;
+    font-size: large;
+    color: white;
+}
+.current{
+  width: 30px;
+  height: 30px;
+}
+.nextNumberCircle {
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  background-color: #e0e0e0;
+  text-align: center;
+  font-size: large;
+  color: white;
+}
+.stepColumnNumber {
+  display: flex;
+  justify-content: center;
+}
+
+.svg-line {
+    width: 120px;
+}
+
+@media screen and (max-width:580px) {
+    .svg-line {
+        width: 35px;
+    }
+}

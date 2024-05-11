@@ -1,0 +1,188 @@
+.theme-4 .menu-custom,
+.theme-4 .bg-gradient-theme {
+  background: #fff !important;
+}
+.theme-4 .menu-custom li .menu_item[data-toggle="collapse"]:not(.collapsed),
+.theme-4 .menu-custom li .menu_item.menu_item--active,
+.theme-4
+  .bg-gradient-theme
+  li
+  .menu_item[data-toggle="collapse"]:not(.collapsed),
+.theme-4 .bg-gradient-theme li .menu_item.menu_item--active {
+  background: rgba(189, 161, 87,0.3) !important;
+  box-shadow: -3px 0 0 #5128c1 inset;
+}
+.theme-4 .menu-custom li .menu_item:hover,
+.theme-4 .bg-gradient-theme li .menu_item:hover {
+  background: rgba(189, 161, 87,0.3) !important;
+}
+.theme-4 .menu-custom:not(.open) li .collapse,
+.theme-4 .bg-gradient-theme:not(.open) li .collapse {
+  background: rgba(189, 161, 87,0.3) !important;
+}
+.theme-4 .menu-custom:not(.open) li:hover .menu_item,
+.theme-4 .bg-gradient-theme:not(.open) li:hover .menu_item {
+  background: rgba(189, 161, 87,0.3) !important;
+}
+
+/**/
+
+.theme-4 .text-theme-light {
+  color: #5128c1;
+}
+.theme-4 .text-theme-dark {
+  color: #9a5ae4;
+}
+.theme-4 .panel-subject::after {
+  background-color: #5128c1;
+}
+
+.menu-custom-width-open {
+  width: 250px;
+}
+
+.menu-custom-width-close {
+  width: 50px;
+}
+
+.menu-custom {
+  margin-right: -250px;
+  z-index: 1;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  will-change: transition;
+  overflow-x: hidden;
+  background: #fff !important;
+}
+.menu-custom .logo {
+  background: url("../../../../../assets/ziarat.png") no-repeat center center !important;
+  background-size: 150px !important;
+  height: 180px !important;
+  padding-right: 50px;
+  color: white;
+}
+.menu-custom .logo .logo-text {
+  font-size: 18px;
+  font-weight: bold;
+}
+.menu-custom.open {
+  margin-right: 0;
+}
+.menu-custom li {
+  position: relative;
+}
+.menu-custom li .menu_item {
+  padding: 12px 20px;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  will-change: transition;
+  color: rgba(255, 255, 255, 0.6);
+}
+.menu-custom li .menu_item[data-toggle="collapse"]:not(.collapsed),
+.menu-custom li .menu_item.menu_item--active {
+  color: white;
+}
+.menu-custom
+  li
+  .menu_item[data-toggle="collapse"]:not(.collapsed)
+  .mdi.mdi-chevron-left::before,
+.menu-custom li .menu_item.menu_item--active .mdi.mdi-chevron-left::before {
+  content: "\f140";
+}
+.menu-custom li .menu_item .mdi:not(.collpase-hide) {
+  margin-left: 10px;
+}
+.menu-custom li .menu_item:hover {
+  color: white;
+}
+.menu-custom .collapse,
+.menu-custom .collapsing {
+  position: relative;
+  padding-right: 3rem;
+}
+.menu-custom .collapse a,
+.menu-custom .collapsing a {
+  position: relative;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: #000;
+}
+.menu-custom .collapse a:hover,
+.menu-custom .collapsing a:hover {
+ color:rgb(189, 161, 87);
+}
+.menu-custom:not(.open) {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 60px;
+  margin: 0;
+  overflow-x: visible;
+}
+.menu-custom:not(.open) .logo {
+  background-image: none !important;
+  height: 40px !important;
+  width: 30px;
+  background-size: 100%;
+  padding: 0;
+}
+.menu-custom:not(.open) .logo .logo-text {
+  display: none;
+}
+.menu-custom:not(.open) + .main {
+  margin-right: 60px;
+}
+.menu-custom:not(.open) .menu-custom-title {
+  display: none;
+}
+.menu-custom:not(.open) li .menu_item {
+  width: 60px;
+  overflow: hidden;
+}
+.menu-custom:not(.open) li .menu_item .mdi {
+  margin-left: 20px;
+}
+.menu-custom:not(.open) li .collpase-hide {
+  display: none;
+}
+.menu-custom:not(.open) li .collapse {
+  position: absolute;
+  padding: 1rem;
+  right: 0;
+  min-width: 190px;
+}
+.menu-custom:not(.open) li:hover .menu_item {
+  width: 250px;
+  color: white;
+}
+.menu-custom:not(.open) li:hover .collapse {
+  display: block !important;
+}
+.menu-custom:not(.open) li .collapse {
+  right: 60px !important;
+}
+
+
+.drawer-scroll-antd::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+.drawer-scroll-antd::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.drawer-scroll-antd::-webkit-scrollbar-thumb {
+  background: #ccc;
+}
+
+/* Handle on hover */
+.drawer-scroll-antd::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

@@ -1,0 +1,21 @@
+
+.DivTowForApplication{
+    width: 90%;
+    border-radius: 20px;
+    border: solid 1px #afafaf;
+    display: flex;
+    justify-content: space-around;
+    align-items: end
+}
+
+.ContentDivApplication{
+    display: flex;
+    justify-content: space-around;
+}
+.QrcodeBoxApplication{
+    border: solid 1px #afafaf;
+    border-radius: 20px;
+}
+.FontWeightApplication{
+    font-size: 18px;
+}

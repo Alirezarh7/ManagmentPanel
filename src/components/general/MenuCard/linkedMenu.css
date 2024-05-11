@@ -1,0 +1,81 @@
+.nap-dashboard .nap-dashboard_item {
+  position: relative;
+  overflow: hidden;
+  font-weight: bold;
+  color: white;
+  font-size: 25px;
+}
+.nap-dashboard .nap-dashboard_item .bg-cover {
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  will-change: transition;
+}
+.nap-dashboard .nap-dashboard_item .corners {
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  opacity: 0.7;
+}
+.nap-dashboard .nap-dashboard_item .corners .corners_top,
+.nap-dashboard .nap-dashboard_item .corners .corners_bottom {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 4px;
+  background: white;
+  -webkit-transition: width 0.2s;
+  -moz-transition: width 0.2s;
+  -ms-transition: width 0.2s;
+  -o-transition: width 0.2s;
+  will-change: transition;
+}
+.nap-dashboard .nap-dashboard_item .corners .corners_right,
+.nap-dashboard .nap-dashboard_item .corners .corners_left {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 50%;
+  width: 4px;
+  background: white;
+  -webkit-transition: height 0.2s;
+  -moz-transition: height 0.2s;
+  -ms-transition: height 0.2s;
+  -o-transition: height 0.2s;
+  will-change: transition;
+}
+.nap-dashboard .nap-dashboard_item .corners .corners_bottom {
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: 0;
+}
+.nap-dashboard .nap-dashboard_item .corners .corners_left {
+  bottom: 0;
+  right: auto;
+  top: auto;
+  left: 0;
+}
+.nap-dashboard .nap-dashboard_item:hover .bg-cover {
+  -webkit-transform: rotate(10deg) scale(1.2);
+  -moz-transform: rotate(10deg) scale(1.2);
+  -ms-transform: rotate(10deg) scale(1.2);
+  -o-transform: rotate(10deg) scale(1.2);
+  will-change: transform;
+}
+.nap-dashboard .nap-dashboard_item:hover .corners {
+  opacity: 1;
+}
+.nap-dashboard .nap-dashboard_item:hover .corners .corners_bottom,
+.nap-dashboard .nap-dashboard_item:hover .corners .corners_top {
+  width: 100%;
+}
+.nap-dashboard .nap-dashboard_item:hover .corners .corners_left,
+.nap-dashboard .nap-dashboard_item:hover .corners .corners_right {
+  height: 100%;
+}
+

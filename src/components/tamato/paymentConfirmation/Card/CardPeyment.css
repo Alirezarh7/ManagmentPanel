@@ -1,0 +1,102 @@
+.cardInformationPeyment {
+    width: 80%;
+    background-color: #eee;
+    border: 1px solid #000000;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
+}
+
+.cardTitleInformationPeyment {
+    background-color: #0c3a2f;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    color: #f1f3d0;
+    width: 100%;
+    padding: 3px 0
+}
+
+
+.parent {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.child {
+    width: 50%;
+
+}
+
+.buxData {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.select__section__ForPeyment {
+    border-right: 2px solid #424242;
+    padding-right: 10px;
+}
+
+.peymentContanerFirst {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+
+}
+
+.peymentContanerThird {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.peymentContanerEnd {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+}
+
+.peymentText {
+    font-weight: 500;
+}
+
+.peymentContanerSecend {
+    display: flex; 
+    justify-content: space-around;
+}
+
+.peymentButtonPay {
+    background-color: #05251E;
+    font-size: 13px;
+    color: #f1f3d0;
+    border-radius: 10px;
+    width: 80px;
+    height: 39px;
+}
+
+@media screen and (max-width: 564px) {
+    .peymentContanerSecend {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 884px) {
+    .child {
+        width: 100%;
+    }
+
+    .buxData {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .select__section__ForPeyment {
+        padding-right: 10px;
+        border-right: none;
+    }
+}

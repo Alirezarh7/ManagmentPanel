@@ -1,0 +1,8 @@
+.hoverforInfo:hover {
+    color: #c1a821; 
+    cursor: pointer; 
+}
+
+.hoverforInfo:hover svg {
+    stroke: #c1a821;
+}

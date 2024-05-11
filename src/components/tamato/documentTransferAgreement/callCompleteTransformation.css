@@ -1,0 +1,126 @@
+
+.complete-information-panel {
+  right: 0;
+  bottom: 0;
+  top: 0;
+  justify-content: space-around;
+  width: 90% !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  margin-top: 30px !important;
+}
+
+.complete-information-panel-data {
+  width: 100% !important;
+  margin-bottom: 30px !important;
+}
+
+.displayData {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px !important
+}
+
+.requirements-auth {
+  margin: 30px;
+  display: flex;
+  justify-content: space-around;
+  gap: 5px;
+}
+
+.requirements-auth-ruls {
+  margin: 30px;
+  justify-content: center;
+  display: flex;
+  gap: 5px;
+}
+
+.requirements-auth-ruls label {
+  font-size: 13px;
+  margin-top: 8px;
+  color: black;
+  font-weight: bold;
+}
+
+.requirements-auth label {
+  font-size: 13px;
+  margin-top: 8px;
+  color: black;
+  font-weight: bold;
+}
+
+@media (max-width: 591px) {
+  .displayData {
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 30px !important
+  }
+}
+ /* alirezaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */
+
+.bodyOfBuyWayReuls{
+  background-color: #05251E; 
+}
+.buttonRulls {
+  background-color: #05251E;
+  font-size: 13px;
+  color: #f1f3d0;
+  border-radius: 10px;
+  width: 80px;
+  height: 50px;
+}
+.marginforBox{
+  margin-top: 80px;
+}
+
+.buttonRulls:hover {
+  background-color: #c1a821;
+  color: #05251E;
+  box-shadow: 1px 1px 1px 1px #05251E;
+}
+
+
+@media screen and (max-width: 600px) {
+  .buttonRulls {
+    width: 250px;
+    height: 50px;
+  }
+}
+
+/* .input {
+  position: relative;
+  
+  &__label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: calc(var(--size-bezel) * 0.75) calc(var(--size-bezel) * .5);
+    margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * .5);
+    background: pink;
+    white-space: nowrap;
+    transform: translate(0, 0);
+    transform-origin: 0 0;
+    background: var(--color-background);
+    transition: transform 120ms ease-in;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+  &__field {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border: 3px solid currentColor;
+    padding: calc(var(--size-bezel) * 1.5) var(--size-bezel);
+    color: currentColor;
+    background: transparent;
+    border-radius: var(--size-radius);
+    
+    &:focus,
+    &:not(:placeholder-shown) {
+      & + .input__label {
+        transform: translate(.25rem, -65%) scale(.8);
+        color: var(--color-accent);
+      }
+    }
+  }
+} */

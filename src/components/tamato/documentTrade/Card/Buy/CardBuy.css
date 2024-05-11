@@ -1,0 +1,116 @@
+.Card {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px 3px #bec0c0;
+    padding: 20px;
+}
+
+.Card>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Card:hover {
+    box-shadow: 1px 1px 1px 1px #05251E;
+}
+
+.dataDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.dataa {
+    align-items: center;
+    justify-content: space-between
+}
+
+.selected {
+    background-color: #f1f3d0;
+}
+
+.button {
+    background-color: #05251E;
+    color: #f1f3d0;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+
+}
+
+button:hover {
+    background-color: #c1a821;
+    color: #05251E;
+    box-shadow: 1px #05251E
+}
+
+
+@media (max-width: 991px) {
+    .Card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .dataDiv {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .button {
+        background-color: #05251E;
+        color: #f1f3d0;
+        border-radius: 10px;
+        width: 100px;
+        height: 50px;
+        margin-top: 50px;
+
+    }
+
+}
+
+.svgImage {
+    width: 25px;
+    height: 25px;
+}
+
+.alireza {
+    align-items: center;
+    justify-content: space-between;
+}
+
+  .LinkWithoutBlueHover:hover {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .CardWithoutBlueHover:hover{
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .buttonBuyRequest {
+    background-color: #05251E;
+    color: #f1f3d0;
+    border-radius: 10px;
+    width: 120px;
+    height: 50px;
+    font-size: 12px;
+
+}
+
+.buttonBuyRequest:hover {
+    background-color: #c1a821;
+    color: #05251E;
+    box-shadow: 1px #05251E
+}

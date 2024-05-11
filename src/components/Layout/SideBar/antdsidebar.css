@@ -1,0 +1,24 @@
+.antd-sidebar-title {
+    background: -webkit-linear-gradient(bottom,rgb(189, 161, 87), #000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.links-drawer-antd {
+ transition: all 0.3s ease;
+ color: #ccc;
+}
+
+.links-drawer-antd:hover {
+    color: black;
+}
+
+.logout-antd-drawer-btn {
+    background-color: #dc3545;
+    border-radius: 5px;
+}
+
+.profile-antd-drawer-btn {
+    border: 1px solid #333;
+    border-radius: 5px;
+}

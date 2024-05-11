@@ -1,0 +1,21 @@
+.TopMarginForDashbord{
+  margin-top: 200px;
+}
+
+.DashbordContainer{
+
+
+
+  top: 300px;
+  /*transform: translate(-5%,-5%);*/
+
+}
+
+.DashbordContainer strong {
+  font-size: 1.2rem;
+  color: #333;
+}
+.CarouselContainer{
+  width: 100%;
+  z-index: 0;
+}

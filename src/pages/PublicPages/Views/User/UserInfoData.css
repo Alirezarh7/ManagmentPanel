@@ -1,0 +1,20 @@
+/* .responsiveDiesein {
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+}
+
+.formDiesein {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+
+}
+
+@media screen and (max-width: 800px) {
+    .formDiesein {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+} */

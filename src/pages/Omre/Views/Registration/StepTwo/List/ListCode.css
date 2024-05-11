@@ -1,0 +1,50 @@
+.buttonListCode {
+    background-color: #05251E;
+    color: #f1f3d0;
+    border-radius: 10px;
+    width: 150px;
+    height: 35px;
+
+}
+
+.buttonListCode:hover {
+    background-color: #c1a821;
+    color: #05251E;
+    box-shadow: 1px #05251E
+}
+.select__section__ForList {
+    border-right: 1px solid #ccc;
+    padding-right: 30px;
+}
+
+.containerListMobile{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.containerList{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+@media screen and (max-width: 943px) {
+    .containerList{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+}
+@media screen and (max-width: 501px) {
+    .containerListMobile {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+}

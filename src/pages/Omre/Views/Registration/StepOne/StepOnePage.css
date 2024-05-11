@@ -1,0 +1,19 @@
+.cardDataInfo {
+    width: 82%;
+    margin: 0 auto;
+}
+
+.omre__card__wrapper {
+    width: 60%;
+}
+
+@media screen and (max-width: 740px) {
+    .cardDataInfo {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .omre__card__wrapper {
+        width: 100%;
+    }
+}

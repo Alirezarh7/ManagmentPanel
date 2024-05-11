@@ -1,0 +1,54 @@
+.Modal-Container {
+    z-index: 101;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: -10px auto;
+    min-width: 400px;
+    max-width: 700px;
+    transition: ease-in-out 250ms;
+    background-color: white;
+    transform: scale(0);
+    position: absolute;
+    top: 10%;
+}
+
+.Modal-Parent {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+}
+
+.Modal {
+    position: absolute;
+    top: 0;
+}
+
+.Modal-Fade {
+    background-color: rgba(0, 0, 0, 0.336);
+    top: 0;
+    left: 0;
+    position: fixed;
+    transition: ease-in-out 250ms;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.Modal-Parent.Modal-Parent-active {
+    width: 100%;
+    height: 100%;
+}
+
+.Modal-Container.modal-active {
+    transform: scale(1);
+}
+
+.Modal-Fade.modalFade-active {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    z-index: 100;
+}

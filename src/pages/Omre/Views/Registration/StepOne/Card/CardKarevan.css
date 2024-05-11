@@ -1,0 +1,165 @@
+.Card {
+    display: flex;
+    background-color: #ffffff;
+    max-height: 250px;
+    border-radius: 4px;
+    box-shadow: 0 3px 10px #ddd;
+    padding: 20px;
+}
+
+/*.Card>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}*/
+
+.Card:hover {
+    box-shadow: 0 2px 10px #ccc;
+    /*box-shadow: 1px 1px 1px 1px #05251E;*/
+}
+
+.dataDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.dataa {
+    align-items: center;
+    justify-content: space-between
+}
+
+.selected {
+    background-color: #f1f3d0;
+}
+
+.button {
+    background-color: #05251E;
+    color: #f1f3d0;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+
+}
+
+/*button:hover {
+    background-color: #c1a821;
+    color: #05251E;
+    box-shadow: 1px #05251E
+}*/
+
+.card__omre__karvan__img {
+    width: 45px;
+    border-radius: 50%;
+    padding: 5px;
+    border: 1px dashed #1d2124;
+}
+
+.card__omre__karvan__img__date {
+    width: 25px;
+}
+
+.kargozar__number__omre {
+    /*margin-top: -5px;*/
+}
+
+.cost__omre__card {
+    font-size: 18px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.data__information__omre {
+    margin-right: 70px;
+}
+
+@media (max-width: 991px) {
+    .data__information__omre {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .Card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-height: unset;
+    }
+
+    .dataDiv {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .button {
+        background-color: #05251E;
+        color: #f1f3d0;
+        border-radius: 10px;
+        width: 100px;
+        height: 50px;
+        margin-top: 50px;
+
+    }
+
+}
+
+.svgImage {
+    width: 25px;
+    height: 25px;
+}
+
+.alireza {
+    align-items: center;
+    justify-content: space-between;
+}
+
+  .LinkWithoutBlueHover:hover {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .CardWithoutBlueHover:hover{
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .buttonBuyRequest {
+    background-color: #0d77e4;
+    color: #f1f3d0;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+  .select__section__omre {
+      border-right: 1px solid #ccc;
+      padding-right: 60px;
+  }
+
+.buttonBuyRequest:hover {
+    background-color: #0767cc;
+    color: #fff;
+}
+
+@media screen and (max-width: 740px) {
+    .select__section__omre {
+        border-right: unset;
+        width: 100%;
+        padding-right: 0;
+    }
+    .cost__omre__card {
+        font-size: 15px;
+        border-bottom: unset;
+    }
+    .buttonBuyRequest {
+        margin-top: 35px;
+        width: 100%;
+    }
+}

@@ -1,0 +1,40 @@
+.btn-text{
+  transition: all 0.2s;
+  font-size: 1.2rem;
+}
+
+.btn-text{
+  color: #fff;
+  transition: all 0.2s;
+  font-size: 1.2rem;
+}
+
+.btn-loading .btn-text{
+  visibility: hidden;
+  opacity: 0;
+}
+
+.btn-loading::after{
+content: "";
+position: absolute;
+width: 20px;
+height: 20px;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+margin: auto;
+border: 3px solid transparent;
+border-top-color:rgba(255, 255, 255, 0.919) ;
+border-radius: 50%;
+animation: btn-loading-spinner ease 1s infinite;
+}
+
+@keyframes btn-loading-spinner{
+  form{
+    transform:rotate(0turn) ;
+  }
+  to{
+    transform:rotate(1turn)
+  }
+}
