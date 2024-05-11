@@ -8,7 +8,7 @@ import { Store } from 'redux';
 import './i18n';
 import { OidcProvider } from 'redux-oidc';
 import userManager from './store/userManager';
-import SsoLogin from './pages/PublicPages/Views/SsoLogin';
+import SsoLoginPage from './pages/SsoLoginPage';
 import { shareData } from './shareData';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -27,7 +27,7 @@ if (window.location.pathname == '/SilentCallback') {
 					{/*@ts-ignore*/}
 					<OidcProvider userManager={userManager} store={store as Store}>
 						{/*if user does not select a sso approach to login in application show a sso login page */}
-						{localStorage.getItem(shareData.CONSTANT.SSO_APPROACH_SELECTED) === 'true' ? <App /> : <SsoLogin />}
+						{localStorage.getItem(shareData.CONSTANT.SSO_APPROACH_SELECTED) === 'true' ? <App /> : <SsoLoginPage />}
 					</OidcProvider>
 				</Provider>
 				{/*<ReactQueryDevtools initialIsOpen={false} />*/}

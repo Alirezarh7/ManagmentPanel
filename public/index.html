@@ -1,66 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="icon" href="ziarat.png" />
-    <base href="/" />
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="content/lib/bootstrap-4.4.1/css/bootstrap.min.css"
-    />
-    <meta name="theme-color" content="#000" />
-    <link rel="apple-touch-icon" href="./icon512_rounded" />
-    <link rel="manifest" href="./manifest.json">
-    <title>پنجره واحد سازمان حج و زیارت</title>
-  </head>
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<link rel="icon" href="ziarat.png" />
+		<base href="/" />
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="content/lib/bootstrap-4.4.1/css/bootstrap.min.css" />
+		<meta name="theme-color" content="#000" />
+		<link rel="apple-touch-icon" href="./icon512_rounded" />
+		<link rel="manifest" href="./manifest.json" />
+		<title>پنل مدیریت سازمان حج و زیارت</title>
+	</head>
 
-  <body>
-    <link rel="stylesheet" href="content/css/style.min.css" />
-    <link rel="stylesheet" href="content/css/colorize/theme-4.min.css" />
-    <div
-      id="root"
-      class="App wrapper d-flex position-relative theme-4 bg-white"
-    ></div>
-    <script src="content/lib/jquery/jquery-3.3.1.min.js"></script>
-    <script src="content/lib/bootstrap-4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script>
-      $(function () {
-        $('[data-toggle="tooltip"]').tooltip();
+	<body>
+		<link rel="stylesheet" href="content/css/style.min.css" />
+		<link rel="stylesheet" href="content/css/colorize/theme-4.min.css" />
+		<div id="root"></div>
+		<script src="content/lib/jquery/jquery-3.3.1.min.js"></script>
+		<script src="content/lib/bootstrap-4.4.1/js/bootstrap.bundle.min.js"></script>
+		<script>
+			$(function () {
+				$('[data-toggle="tooltip"]').tooltip();
 
-        $(document).on("click", ".btn-panel", function () {
-          $("." + $(this).attr("data-toggle")).toggleClass("open");
-        });
+				$(document).on('click', '.btn-panel', function () {
+					$('.' + $(this).attr('data-toggle')).toggleClass('open');
+				});
 
-        $('[data-toggle="menu"]').click(function () {
-          $(".menu").toggleClass("open");
-        });
-      });
-      // LTR RTL
-      //       $(document).ready(function () {
-      //         $("#RootLang").change(function () {
-      //           var lang = $(this).children("option:selected").val();
-      //           if (lang == "fa"){
-      //             $("#root").css("direction","rtl");
-      //           } else {
-      //             $("#root").css("direction","ltr");
-      //           }
-      //         });
-      //       });
-    </script>
-    <script>
-      if('serviceWorker' in  navigator) {
-        window.addEventListener('load',() => {
-          navigator.serviceWorker.register('./serviceworker.js')
-                  
-                  
-        })
-      }
-    </script>
-  </body>
+				$('[data-toggle="menu"]').click(function () {
+					$('.menu').toggleClass('open');
+				});
+			});
+			// LTR RTL
+			//       $(document).ready(function () {
+			//         $("#RootLang").change(function () {
+			//           var lang = $(this).children("option:selected").val();
+			//           if (lang == "fa"){
+			//             $("#root").css("direction","rtl");
+			//           } else {
+			//             $("#root").css("direction","ltr");
+			//           }
+			//         });
+			//       });
+		</script>
+		<script>
+			if ('serviceWorker' in navigator) {
+				window.addEventListener('load', () => {
+					navigator.serviceWorker.register('./serviceworker.js');
+				});
+			}
+		</script>
+	</body>
 </html>
