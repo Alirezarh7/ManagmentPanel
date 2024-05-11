@@ -7,7 +7,13 @@
 		@apply font-normal text-base text-body bg-whiten relative z-1;
 	}
 	input {
-		@apply px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none;
+		@apply block w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg;
+	}
+	select {
+		@apply block w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg
+	}
+	textarea {
+		@apply block w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg;
 	}
 	button {
 		@apply outline-none focus:outline-none;

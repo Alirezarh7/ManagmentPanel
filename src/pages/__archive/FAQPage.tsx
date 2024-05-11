@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { mainFaqData } from '../constants/faq.const';
-import FaqAccordion from '../components/faq/FaqAccordion';
+import { mainFaqData } from '../../constants/faq.const';
+import FaqAccordion from '../../components/faq/FaqAccordion';
 
 const FaqPage = () => {
 	useEffect(() => {

@@ -10,7 +10,7 @@ import { MdOutlineAppRegistration } from 'react-icons/md';
 import { CiForkAndKnife } from 'react-icons/ci';
 import { MdApartment } from 'react-icons/md';
 import { IApplicationState } from '../../../../store/state';
-import { ButtonInfoProps } from '../../../../typs/tamatoDocs.types';
+import { ButtonInfoProps } from '../../../../typs/__archive/tamatoDocs.types';
 import { callCompleteInformationActions } from '../../../../pages/Tamato/Actions/CallCompleteInformations/action';
 import { ICallCompleteInformationState } from '../../../../pages/Tamato/Actions/CallCompleteInformations/model';
 import { reserveAndRegisterActions } from '../../../../pages/Tamato/Actions/ReserveAndRegister/action';
