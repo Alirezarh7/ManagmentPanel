@@ -14,7 +14,6 @@ import { LicenseManager } from 'ag-grid-enterprise';
 import { callCompleteInformationActions } from './pages/Tamato/Actions/CallCompleteInformations/action';
 import { bindActionCreators } from 'redux';
 import { shareData } from './shareData';
-import AntdSideBar from './components/Layout/SideBar/AntdSideBar';
 
 LicenseManager.setLicenseKey('[enterprise][v22.1.1]_MjU3NjA1OTQ4NDg4MQ==6f80fdbb7e9fee2fc012e9dabb28db2c');
 
@@ -109,8 +108,6 @@ const App = (props: IProps) => {
 		return (
 			<>
 				<NapLoading loading={props.oidc.isLoadingUser} />
-				{/*<SideBar />*/}
-				<AntdSideBar />
 				<MainLayout isConnected={isConnected} />
 			</>
 		);
