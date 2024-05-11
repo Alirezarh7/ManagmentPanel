@@ -10,7 +10,7 @@ import { callCompleteInformationActions } from '../../../pages/Tamato/Actions/Ca
 import { ICallCompleteInformationState } from '../../../pages/Tamato/Actions/CallCompleteInformations/model';
 import { IReserveAndRegisterState } from '../../../pages/Tamato/Actions/ReserveAndRegister/model';
 import { reserveAndRegisterActions } from '../../../pages/Tamato/Actions/ReserveAndRegister/action';
-import { TamatoDocsTypes } from '../../../typs/tamatoDocs.types';
+import { TamatoDocsTypes } from '../../../typs/__archive/tamatoDocs.types';
 import NapLoading from '../../general/NapLoading/NapLoading';
 import NapAlerts from '../../general/NapAlerts/NapAlerts';
 import CustomButton from '../../general/Buttons/CustomButton';

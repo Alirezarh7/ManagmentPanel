@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IFaqAccordionCard } from '../../typs/faq.types';
+import { IFaqAccordionCard } from '../../typs/__archive/faq.types';
 import FaqAccordionCard from './FaqAccordionCard';
 
 interface IProps {

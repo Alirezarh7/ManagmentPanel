@@ -1,5 +1,5 @@
 import React from 'react';
-import { IFaqData } from '../typs/faq.types';
+import { IFaqData } from '../typs/__archive/faq.types';
 
 export const mainFaqData: IFaqData[] = [
 	{

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BsQuestionLg } from 'react-icons/bs';
 import { HiOutlineChevronDown } from 'react-icons/hi';
-import { IFaqAccordionCard } from '../../typs/faq.types';
+import { IFaqAccordionCard } from '../../typs/__archive/faq.types';
 
 interface IProps {
 	data: IFaqAccordionCard;
