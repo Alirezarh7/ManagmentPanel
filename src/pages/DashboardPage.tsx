@@ -8,7 +8,7 @@ import useTitle from '../hooks/useTitle';
 type IProps = typeof dashboardActions & IDashboardState;
 
 const DashboardPage = (props: IProps) => {
-	useTitle('mainSettings');
+	useTitle('mainTitle');
 
 	useEffect(() => {
 		props.setCrumbs([]);
