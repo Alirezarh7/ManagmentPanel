@@ -12,7 +12,7 @@ const Breadcrumb = ({ items = [] }: IProps) => {
 
 	return (
 		<nav>
-			<ol className='flex items-center gap-2 mb-2'>
+			<ol className='flex items-center gap-2'>
 				<li>
 					<Link className='font-medium' to='/'>
 						خانه /

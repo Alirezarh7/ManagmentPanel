@@ -7,9 +7,17 @@ export interface AnnouncementServiceType {
 export interface ICreateAnnouncementDto {
 	subject: string;
 	body: string;
+	isActive: boolean;
+	isDisplayMainPage: boolean;
 	serviceTypeId: number;
+	showDuration: number;
+	showFromDate: string;
 }
 
 export interface ICreateAnnouncementFnDto extends ICreateAnnouncementDto {
 	image: string;
+}
+
+export interface IAnnouncementResponse extends ICreateAnnouncementFnDto {
+	id: string;
 }

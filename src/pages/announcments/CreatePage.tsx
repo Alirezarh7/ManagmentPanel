@@ -10,21 +10,37 @@ import { convertToBase64, isValidUploadedImageType } from '../../utils/fileUtils
 import { AnnouncementServiceTypes } from '../../constants/announcement.const';
 import CustomInput from '../../components/general/inputs/CustomInput';
 import { useCreateAnnouncement } from '../../services/announcement.service';
+import DatePicker, { DateObject } from 'react-multi-date-picker';
+import persian from 'react-date-object/calendars/persian';
+import persian_fa from 'react-date-object/locales/persian_fa';
+import CustomTextEditor from '../../components/general/textEditor/CustomTextEditor';
+import { enqueueSnackbar } from 'notistack';
+import { useNavigate } from 'react-router-dom';
 
 const AnnouncementsCreatePage = () => {
 	const [image, setImage] = useState<File | undefined>(undefined);
 	const { mutate, isPending } = useCreateAnnouncement();
 
+	const navigate = useNavigate();
+
 	const defaultFormValues: ICreateAnnouncementDto = {
 		subject: '',
 		body: '',
-		serviceTypeId: 0
+		isActive: true,
+		isDisplayMainPage: true,
+		serviceTypeId: 0,
+		showDuration: 0,
+		showFromDate: new Date().toString()
 	};
 
 	const createAnnouncementsSchema = Yup.object().shape({
 		subject: Yup.string().required('این فیلد اجباری است'),
 		body: Yup.string().required('این فیلد اجباری است'),
-		serviceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید')
+		isActive: Yup.boolean().required('این فیلد اجباری است'),
+		isDisplayMainPage: Yup.boolean().required('این فیلد اجباری است'),
+		serviceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
+		showDuration: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
+		showFromDate: Yup.string().required('این فیلد اجباری است')
 	});
 
 	const {
@@ -38,7 +54,7 @@ const AnnouncementsCreatePage = () => {
 
 	const onSubmitFormHandler = async (submittedData: ICreateAnnouncementDto) => {
 		if (!image) {
-			alert('آپلود عکس اجباری است');
+			enqueueSnackbar('آپلود عکس اجباری است', { variant: 'error' });
 			return;
 		}
 
@@ -47,10 +63,11 @@ const AnnouncementsCreatePage = () => {
 		console.log(data);
 		mutate(data, {
 			onSuccess: () => {
-				alert('موفق');
+				enqueueSnackbar('اطلاعیه با موفقیت ایجاد شد', { variant: 'success' });
+				navigate(PATHS.announcements.index);
 			},
 			onError: error => {
-				console.log(error);
+				enqueueSnackbar('خطا در ایجاد اطلاعیه جدید', { variant: 'error' });
 			}
 		});
 	};
@@ -80,7 +97,7 @@ const AnnouncementsCreatePage = () => {
 	};
 
 	return (
-		<>
+		<div className='space-y-4'>
 			<Breadcrumb items={[{ label: 'اطلاعیه ها', url: PATHS.announcements.index }, { label: 'ایجاد' }]} />
 			<h1 className='text-xl mb-3'>ایجاد اطلاعیه جدید</h1>
 
@@ -123,23 +140,97 @@ const AnnouncementsCreatePage = () => {
 							)}
 						/>
 					</div>
-
 					<Controller
 						name='body'
 						control={control}
-						render={({ field }) => (
-							<div>
-								<label className='form-label'>متن اطلاعیه</label>
-								<textarea rows={10} {...field} className={`${errors.body ? '!border-danger' : ''}`}></textarea>
-								{errors.body ? <span className='text-danger'>{errors.body.message}</span> : null}
-							</div>
+						render={({ field: { value, onChange } }) => (
+							<CustomTextEditor
+								showPreview={true}
+								label='متن اطلاعیه'
+								value={value}
+								onChange={onChange}
+								error={errors.body && errors.body.message}
+							/>
 						)}
 					/>
+					<div className='grid md:grid-cols-2 gap-6'>
+						<Controller
+							name='isActive'
+							control={control}
+							render={({ field: { value, onChange } }) => (
+								<div>
+									<label>وضعیت فعال بودن اطلاعیه</label>
+									<select
+										value={Number(value)}
+										onChange={e => onChange(Boolean(e.target.value))}
+										className={`${errors.serviceTypeId ? '!border-danger' : ''}`}>
+										<option value={0}>غیرفعال</option>
+										<option value={1}>فعال</option>
+									</select>
+									{errors.serviceTypeId ? <span className='text-danger'>{errors.serviceTypeId.message}</span> : null}
+								</div>
+							)}
+						/>
+						<Controller
+							name='isDisplayMainPage'
+							control={control}
+							render={({ field: { value, onChange } }) => (
+								<div>
+									<label>آیا اطلاعیه در صفحه اصلی نمایش داده شود؟</label>
+									<select
+										value={Number(value)}
+										onChange={e => onChange(Boolean(e.target.value))}
+										className={`${errors.serviceTypeId ? '!border-danger' : ''}`}>
+										<option value={0}>خیر</option>
+										<option value={1}>بلی</option>
+									</select>
+									{errors.serviceTypeId ? <span className='text-danger'>{errors.serviceTypeId.message}</span> : null}
+								</div>
+							)}
+						/>
+					</div>
+
+					<div className='grid md:grid-cols-2 gap-6'>
+						<Controller
+							name='showDuration'
+							control={control}
+							render={({ field: { value, onChange } }) => (
+								<CustomInput
+									type={'number'}
+									label='مدت نمایش (به روز)'
+									value={value.toString()}
+									onChange={onChange}
+									error={errors.showDuration && errors.showDuration.message}
+								/>
+							)}
+						/>
+						<Controller
+							name='showFromDate'
+							control={control}
+							render={({ field: { value, onChange } }) => (
+								<div>
+									<label>زمان شروع نمایش</label>
+									<DatePicker
+										containerClassName='!block'
+										inputClass=' w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg'
+										calendar={persian}
+										locale={persian_fa}
+										minDate={new Date()}
+										value={value}
+										onChange={date => {
+											if (date instanceof DateObject) onChange(date.toDate().toISOString());
+										}}
+									/>
+									{errors.showFromDate ? <span className='text-danger'>{errors.showFromDate.message}</span> : null}
+								</div>
+							)}
+						/>
+					</div>
 
 					<div className='flex flex-col justify-center items-center gap-4 py-2'>
 						<label
 							htmlFor='image-uploader'
-							className={`w-full cursor-pointer flex flex-col justify-center items-center gap-4 border ${image ? '!border-gray-300' : '!border-red-300'}`}
+							className={`w-full cursor-pointer flex flex-col justify-center items-center gap-4 border ${image ? '!border-gray-300 text-black' : '!border-red-300 text-red-300'} rounded-md`}
 							onDrop={event => uploadOrDropFileHandler(event)}
 							onDragOver={event => event.preventDefault()}>
 							<span>جهت آپلود کلیک کنید</span>
@@ -157,12 +248,13 @@ const AnnouncementsCreatePage = () => {
 						</label>
 						{image ? <img src={URL.createObjectURL(image)} alt='پیش نمایش موقت' className='max-w-96' /> : null}
 					</div>
+
 					<div>
-						<CustomButton variant={'primary'} type={'submit'} label={'ذخیره'} onClick={() => {}} />
+						<CustomButton variant={'primary'} type={'submit'} label={'ذخیره'} onClick={() => {}} loading={isPending} />
 					</div>
 				</form>
 			</div>
-		</>
+		</div>
 	);
 };
 
