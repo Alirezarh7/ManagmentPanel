@@ -17,3 +17,7 @@ export interface ICreateAnnouncementDto {
 export interface ICreateAnnouncementFnDto extends ICreateAnnouncementDto {
 	image: string;
 }
+
+export interface IAnnouncementResponse extends ICreateAnnouncementFnDto {
+	id: string;
+}

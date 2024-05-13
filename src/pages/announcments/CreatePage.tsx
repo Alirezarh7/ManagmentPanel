@@ -176,7 +176,7 @@ const AnnouncementsCreatePage = () => {
 							control={control}
 							render={({ field: { value, onChange } }) => (
 								<div>
-									<label>آیا اطلاعیه صفحه اصلی است؟</label>
+									<label>آیا اطلاعیه در صفحه اصلی نمایش داده شود؟</label>
 									<select
 										value={Number(value)}
 										onChange={e => onChange(Boolean(e.target.value))}
