@@ -11,8 +11,10 @@ import userManager from './store/userManager';
 import SsoLoginPage from './pages/SsoLoginPage';
 import { shareData } from './shareData';
 import { BrowserRouter } from 'react-router-dom';
+import { SnackbarProvider } from 'notistack';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
 const root = createRoot(document.getElementById('root')!);
 const queryClient = new QueryClient();
 const initialState = (window as any).initialReduxState;
@@ -26,8 +28,10 @@ if (window.location.pathname == '/SilentCallback') {
 				<Provider store={store}>
 					{/*@ts-ignore*/}
 					<OidcProvider userManager={userManager} store={store as Store}>
-						{/*if user does not select a sso approach to login in application show a sso login page */}
-						{localStorage.getItem(shareData.CONSTANT.SSO_APPROACH_SELECTED) === 'true' ? <App /> : <SsoLoginPage />}
+						<SnackbarProvider>
+							{/*if user does not select a sso approach to login in application show a sso login page */}
+							{localStorage.getItem(shareData.CONSTANT.SSO_APPROACH_SELECTED) === 'true' ? <App /> : <SsoLoginPage />}
+						</SnackbarProvider>
 					</OidcProvider>
 				</Provider>
 				{/*<ReactQueryDevtools initialIsOpen={false} />*/}

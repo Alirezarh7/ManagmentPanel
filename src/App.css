@@ -4,13 +4,13 @@
 
 @layer base {
 	body {
-		@apply font-normal text-base text-body bg-whiten relative z-1;
+		@apply font-normal text-base text-black bg-whiten relative z-1;
 	}
 	input {
 		@apply block w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg;
 	}
 	select {
-		@apply block w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg
+		@apply block w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg;
 	}
 	textarea {
 		@apply block w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg;
@@ -55,6 +55,19 @@
 	outline: none;
 	color: #fff;
 	border-radius: 10px;
+}
+
+.ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+	left: 0 !important;
+	right: unset !important;
+}
+.ql-snow .ql-editor blockquote {
+	border-left:none !important;
+	border-right: 4px solid #ccc;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	padding-left: 0;
+	padding-right: 16px;
 }
 
 @media screen and (max-width: 580px) {

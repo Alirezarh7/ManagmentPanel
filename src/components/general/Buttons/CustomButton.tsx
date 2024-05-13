@@ -43,16 +43,17 @@ const CustomButton = ({ variant, type, label, icon, onClick, loading, disabled }
 		} else if (variant === 'fullscreen') {
 			finalClassName += SelectFullScreen;
 		}
-		finalClassName += ' disabled:shadow-none disabled:bg-gray-300 disabled:border-gray-300';
+		// finalClassName += ' disabled:shadow-none disabled:bg-gray-300 disabled:border-gray-300';
+		finalClassName += ' disabled:shadow-none';
 		return finalClassName;
 	};
 
 	const loadingIconCreator = () => {
-		return <div className='w-6 h-6 rounded-xl animate-spin border-2 border-gray-400 border-t-gray-800'></div>;
+		return <div className='w-6 h-6 rounded-xl animate-spin border-4 !border-gray-300 !border-t-gray-500 '></div>;
 	};
 
 	return (
-		<button type={type} onClick={onClick} className={classNameCreator()} disabled={disabled}>
+		<button type={type} onClick={onClick} className={classNameCreator()} disabled={disabled || loading}>
 			{loading ? (
 				loadingIconCreator()
 			) : icon ? (
