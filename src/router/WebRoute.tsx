@@ -14,6 +14,7 @@ import SignInCallbackPageTwo from '../pages/PublicPages/Views/User/SignInCallbac
 import ReplaceUser from '../pages/ReplaceUser';
 import AnnouncementsIndexPage from '../pages/announcments/IndexPage';
 import AnnouncementsCreatePage from '../pages/announcments/CreatePage';
+import AnnouncementsShowDetailsPage from '../pages/announcments/ShowDetailsPage';
 
 export interface IProps {}
 
@@ -36,6 +37,7 @@ class WebRoute extends React.Component<IProps, IState> {
 				{/*Announcements*/}
 				<Route path={PATHS.announcements.index} element={<AnnouncementsIndexPage />} />
 				<Route path={PATHS.announcements.create} element={<AnnouncementsCreatePage />} />
+				<Route path={PATHS.announcements.show} element={<AnnouncementsShowDetailsPage />} />
 
 				<Route path={shareData.CONSTANT.SSO_URL_FROM_MY_GOV} element={<Navigate to='/' />} />
 				<Route path='*' element={<NotFoundPage />} />

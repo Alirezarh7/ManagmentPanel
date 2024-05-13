@@ -14,6 +14,20 @@ const useGetAnnouncements = () => {
 		queryFn: getAnnouncementsFn
 	});
 };
+
+const getAnnouncementByIdFn = async (id: string) => {
+	const response = await ManagementAxiosInstance.get<IAnnouncementResponse>(`/Announcement/GetAnnouncementById/${id}`);
+
+	return response.data;
+};
+
+const useGetAnnouncementById = (id: string) => {
+	return useQuery({
+		queryKey: ['getAnnouncementById', id],
+		queryFn: () => getAnnouncementByIdFn(id)
+	});
+};
+
 const createAnnouncementFn = (data: ICreateAnnouncementFnDto) => {
 	return ManagementAxiosInstance.post('/Announcement/CreateAnnouncement', data);
 };
@@ -30,4 +44,4 @@ const useDeleteAnnouncement = () => {
 	return useMutation({ mutationFn: deleteAnnouncementFn });
 };
 
-export { useGetAnnouncements, useCreateAnnouncement, useDeleteAnnouncement };
+export { useGetAnnouncements, useGetAnnouncementById, useCreateAnnouncement, useDeleteAnnouncement };

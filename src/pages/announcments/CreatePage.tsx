@@ -97,7 +97,7 @@ const AnnouncementsCreatePage = () => {
 	};
 
 	return (
-		<>
+		<div className='space-y-4'>
 			<Breadcrumb items={[{ label: 'اطلاعیه ها', url: PATHS.announcements.index }, { label: 'ایجاد' }]} />
 			<h1 className='text-xl mb-3'>ایجاد اطلاعیه جدید</h1>
 
@@ -254,7 +254,7 @@ const AnnouncementsCreatePage = () => {
 					</div>
 				</form>
 			</div>
-		</>
+		</div>
 	);
 };
 

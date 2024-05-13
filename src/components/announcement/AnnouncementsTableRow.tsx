@@ -8,6 +8,8 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { IAnnouncementResponse } from '../../typs/announcement.types';
 import { AnnouncementServiceTypes } from '../../constants/announcement.const';
 import DeleteAnnouncementModal from './DeleteAnnouncementModal';
+import { useNavigate } from 'react-router-dom';
+import { PATHS } from '../../router/paths';
 
 interface IProps {
 	data: IAnnouncementResponse;
@@ -15,6 +17,7 @@ interface IProps {
 
 const AnnouncementsTableRow = ({ data }: IProps) => {
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
+	const navigate = useNavigate();
 
 	const getServiceDetails = (serviceTypeId: number): { label: string; classes: string } => {
 		const service = AnnouncementServiceTypes.find(q => q.id === serviceTypeId);
@@ -71,7 +74,7 @@ const AnnouncementsTableRow = ({ data }: IProps) => {
 				<td className='py-2 px-3 dark:border-strokedark'>
 					<div className='flex justify-between items-center'>
 						<button className='hover:hover:text-primary'>
-							<FiEye className='w-5 h-5' />
+							<FiEye className='w-5 h-5' onClick={() => navigate(PATHS.announcements.showFn(data.id))} />
 						</button>
 						<button className='hover:hover:text-primary'>
 							<FaRegEdit className='w-5 h-5' />
