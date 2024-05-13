@@ -51,7 +51,7 @@ const AnnouncementsTableRow = ({ data }: IProps) => {
 					<p className='text-black dark:text-white'>{data.id}</p>
 				</td>
 				<td className='py-2 px-3 pl-9 dark:border-strokedark'>
-					<img src={data.image} alt='Product' className='w-20 h-20' />
+					<img src={data.image} alt='تصویر آگهی' className='w-20 h-20' />
 				</td>
 				<td className='py-2 px-3 dark:border-strokedark'>
 					<p className='text-black dark:text-white'>{data.subject}</p>
