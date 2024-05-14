@@ -59,7 +59,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 			}`}>
 			{/* <!-- SIDEBAR HEADER --> */}
 			<div className='flex items-center justify-between gap-2 pr-6 py-5.5 lg:py-6.5'>
-				<NavLink to='/'>
+				<NavLink to='/' className='mt-3'>
 					<img src={ZiaratLogo} alt='Logo' className=' cursor-pointer w-14 h-14 mx-2.5' />
 				</NavLink>
 

@@ -16,6 +16,8 @@ import persian_fa from 'react-date-object/locales/persian_fa';
 import CustomTextEditor from '../../components/general/textEditor/CustomTextEditor';
 import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
+import CustomRadioButton from '../../components/general/radioButton/CustomRadioButton';
+import { booleanDefaultValuesArray, booleanIsActiveValuesArray } from '../../constants/general.const';
 
 const AnnouncementsCreatePage = () => {
 	const [image, setImage] = useState<File | undefined>(undefined);
@@ -30,7 +32,7 @@ const AnnouncementsCreatePage = () => {
 		isDisplayMainPage: true,
 		serviceTypeId: 0,
 		showDuration: 0,
-		showFromDate: new Date().toString()
+		showFromDate: new DateObject().convert(persian).toString()
 	};
 
 	const createAnnouncementsSchema = Yup.object().shape({
@@ -160,14 +162,15 @@ const AnnouncementsCreatePage = () => {
 							render={({ field: { value, onChange } }) => (
 								<div>
 									<label>وضعیت فعال بودن اطلاعیه</label>
-									<select
-										value={Number(value)}
-										onChange={e => onChange(Boolean(e.target.value))}
-										className={`${errors.serviceTypeId ? '!border-danger' : ''}`}>
-										<option value={0}>غیرفعال</option>
-										<option value={1}>فعال</option>
-									</select>
-									{errors.serviceTypeId ? <span className='text-danger'>{errors.serviceTypeId.message}</span> : null}
+									<div className='px-4 py-2 text-base border !border-gray-300 rounded-md flex flex-col gap-2'>
+										{booleanIsActiveValuesArray.map(item => (
+											<div className={`flex items-center gap-2 ${value === item.value ? 'text-blue-500' : ''}`}>
+												<CustomRadioButton value={item.value} checked={value === item.value} onClick={onChange} />
+												<span>{item.label}</span>
+											</div>
+										))}
+									</div>
+									{errors.isActive ? <span className='text-danger'>{errors.isActive.message}</span> : null}
 								</div>
 							)}
 						/>
@@ -177,14 +180,15 @@ const AnnouncementsCreatePage = () => {
 							render={({ field: { value, onChange } }) => (
 								<div>
 									<label>آیا اطلاعیه در صفحه اصلی نمایش داده شود؟</label>
-									<select
-										value={Number(value)}
-										onChange={e => onChange(Boolean(e.target.value))}
-										className={`${errors.serviceTypeId ? '!border-danger' : ''}`}>
-										<option value={0}>خیر</option>
-										<option value={1}>بلی</option>
-									</select>
-									{errors.serviceTypeId ? <span className='text-danger'>{errors.serviceTypeId.message}</span> : null}
+									<div className='px-4 py-2 text-base border !border-gray-300 rounded-md flex flex-col gap-2'>
+										{booleanDefaultValuesArray.map(item => (
+											<div className={`flex items-center gap-2 ${value === item.value ? 'text-blue-500' : ''}`}>
+												<CustomRadioButton value={item.value} checked={value === item.value} onClick={onChange} />
+												<span>{item.label}</span>
+											</div>
+										))}
+									</div>
+									{errors.isDisplayMainPage ? <span className='text-danger'>{errors.isDisplayMainPage.message}</span> : null}
 								</div>
 							)}
 						/>

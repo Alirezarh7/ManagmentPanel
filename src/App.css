@@ -6,7 +6,7 @@
 	body {
 		@apply font-normal text-base text-black bg-whiten relative z-1;
 	}
-	input {
+	input[type='text'], input[type='number'] {
 		@apply block w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg;
 	}
 	select {

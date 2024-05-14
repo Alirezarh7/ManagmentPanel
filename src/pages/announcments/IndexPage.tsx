@@ -15,7 +15,7 @@ const AnnouncementsIndexPage = () => {
 
 	useEffect(() => {
 		if (isError) {
-			enqueueSnackbar('مشکل در دریافت لیست اطلاعیه ها', { variant: 'error' });
+			enqueueSnackbar('مشکل در بروزرسانی لیست اطلاعیه ها', { variant: 'error' });
 		}
 	}, [isError]);
 
