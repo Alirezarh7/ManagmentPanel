@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Breadcrumb from '../../components/Layout/Breadcrumb';
 import { PATHS } from '../../router/paths';
 import { Controller, useForm } from 'react-hook-form';
@@ -9,22 +9,35 @@ import CustomButton from '../../components/general/Buttons/CustomButton';
 import { convertToBase64, isValidUploadedImageType } from '../../utils/fileUtils';
 import { AnnouncementServiceTypes } from '../../constants/announcement.const';
 import CustomInput from '../../components/general/inputs/CustomInput';
-import { useCreateAnnouncement } from '../../services/announcement.service';
+import { useEditAnnouncement, useGetAnnouncementById } from '../../services/announcement.service';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import CustomTextEditor from '../../components/general/textEditor/CustomTextEditor';
 import { enqueueSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
-import CustomRadioButton from '../../components/general/radioButton/CustomRadioButton';
+import { useNavigate, useParams } from 'react-router-dom';
+import CustomLineSpinner from '../../components/general/spinners/CustomLineSpinner';
+import { useQueryClient } from '@tanstack/react-query';
 import { booleanDefaultValuesArray, booleanIsActiveValuesArray } from '../../constants/general.const';
+import CustomRadioButton from '../../components/general/radioButton/CustomRadioButton';
 
-const AnnouncementsCreatePage = () => {
+const AnnouncementsEditPage = () => {
 	const [image, setImage] = useState<File | undefined>(undefined);
 	const [isDateUpdated, setIsDateUpdated] = useState<boolean>(false);
-	const { mutate, isPending } = useCreateAnnouncement();
+	const { id } = useParams();
+	const queryClient = useQueryClient();
+	const { data: announcementData, isLoading, isFetching, isError: isErrorForGetById } = useGetAnnouncementById(id ?? '');
+
+	const { mutate, isPending } = useEditAnnouncement();
 
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (isErrorForGetById && !isLoading) {
+			enqueueSnackbar('خطا در دریافت اطلاعیه ', { variant: 'error' });
+			navigate(PATHS.announcements.index);
+		}
+	}, [isErrorForGetById]);
 
 	const defaultFormValues: ICreateAnnouncementDto = {
 		subject: '',
@@ -36,7 +49,7 @@ const AnnouncementsCreatePage = () => {
 		showFromDate: new DateObject().convert(persian).toString()
 	};
 
-	const createAnnouncementsSchema = Yup.object().shape({
+	const editAnnouncementsSchema = Yup.object().shape({
 		subject: Yup.string().required('این فیلد اجباری است'),
 		body: Yup.string().required('این فیلد اجباری است'),
 		isActive: Yup.boolean().required('این فیلد اجباری است'),
@@ -49,32 +62,55 @@ const AnnouncementsCreatePage = () => {
 	const {
 		control,
 		handleSubmit,
-		formState: { errors }
+		formState: { errors },
+		setValue
 	} = useForm<ICreateAnnouncementDto>({
 		defaultValues: defaultFormValues,
-		resolver: yupResolver(createAnnouncementsSchema)
+		resolver: yupResolver(editAnnouncementsSchema)
 	});
 
+	useEffect(() => {
+		if (announcementData) {
+			setValue('subject', announcementData.subject);
+			setValue('body', announcementData.body);
+			setValue('isActive', announcementData.isActive);
+			setValue('isDisplayMainPage', announcementData.isDisplayMainPage);
+			setValue('serviceTypeId', announcementData.serviceTypeId);
+			setValue('showDuration', announcementData.showDuration);
+			setValue('showFromDate', new DateObject(announcementData.showFromDate).convert(persian).toString());
+		}
+	}, [announcementData]);
+
 	const onSubmitFormHandler = async (submittedData: ICreateAnnouncementDto) => {
-		if (!image) {
+		// validation ****************************************************************************************
+		if (!announcementData) {
+			return;
+		}
+		if (!image && !announcementData?.image) {
 			enqueueSnackbar('آپلود عکس اجباری است', { variant: 'error' });
 			return;
 		}
+		// validation ****************************************************************************************
 
-		const base64: any = await convertToBase64(image);
+		const imageString: any = image !== undefined ? await convertToBase64(image) : announcementData.image;
+
 		const data = {
 			...submittedData,
-			showFromDate: isDateUpdated ? submittedData.showFromDate : new Date().toISOString(),
-			image: base64
+			showFromDate: isDateUpdated ? submittedData.showFromDate : announcementData.showFromDate,
+			id: announcementData.id,
+			image: imageString
 		};
 		console.log(data);
 		mutate(data, {
 			onSuccess: () => {
-				enqueueSnackbar('اطلاعیه با موفقیت ایجاد شد', { variant: 'success' });
+				enqueueSnackbar('اطلاعیه با موفقیت ویرایش شد', { variant: 'success' });
+				queryClient.invalidateQueries({
+					queryKey: ['getAnnouncements']
+				});
 				navigate(PATHS.announcements.index);
 			},
 			onError: error => {
-				enqueueSnackbar('خطا در ایجاد اطلاعیه جدید', { variant: 'error' });
+				enqueueSnackbar('خطا در ویرایش اطلاعیه', { variant: 'error' });
 			}
 		});
 	};
@@ -105,11 +141,15 @@ const AnnouncementsCreatePage = () => {
 
 	return (
 		<div className='space-y-4'>
-			<Breadcrumb items={[{ label: 'اطلاعیه ها', url: PATHS.announcements.index }, { label: 'ایجاد' }]} />
-			<h1 className='text-xl mb-3'>ایجاد اطلاعیه جدید</h1>
+			<Breadcrumb items={[{ label: 'اطلاعیه ها', url: PATHS.announcements.index }, { label: 'ویرایش' }]} />
+			<h1 className='text-xl mb-3'>ویرایش اطلاعیه </h1>
 
-			<div className='max-w-screen-xl w-full mx-auto flex flex-col'>
-				<form className='flex flex-col gap-6' onSubmit={handleSubmit(onSubmitFormHandler)}>
+			{isLoading || isFetching ? <CustomLineSpinner /> : null}
+
+			<div className='max-w-screen-xl w-full mx-auto flex flex-col '>
+				<form
+					className={`flex flex-col gap-6 ${isLoading || isFetching ? 'blur-sm pointer-events-none' : ''}`}
+					onSubmit={handleSubmit(onSubmitFormHandler)}>
 					<div className='grid md:grid-cols-3 gap-6'>
 						<Controller
 							name='subject'
@@ -224,10 +264,9 @@ const AnnouncementsCreatePage = () => {
 										inputClass=' w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg'
 										calendar={persian}
 										locale={persian_fa}
-										minDate={new DateObject()}
+										minDate={new Date()}
 										value={value}
 										onChange={date => {
-											console.log({ date });
 											if (date instanceof DateObject) {
 												onChange(date.toDate().toISOString());
 												setIsDateUpdated(true);
@@ -260,6 +299,9 @@ const AnnouncementsCreatePage = () => {
 							/>
 						</label>
 						{image ? <img src={URL.createObjectURL(image)} alt='پیش نمایش موقت' className='max-w-96' /> : null}
+						{!image && announcementData?.image ? (
+							<img src={announcementData.image} alt='پیش نمایش موقت' className='max-w-96' />
+						) : null}
 					</div>
 
 					<div>
@@ -271,4 +313,4 @@ const AnnouncementsCreatePage = () => {
 	);
 };
 
-export default AnnouncementsCreatePage;
+export default AnnouncementsEditPage;

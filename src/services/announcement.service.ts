@@ -1,4 +1,4 @@
-import { IAnnouncementResponse, ICreateAnnouncementFnDto } from '../typs/announcement.types';
+import { IAnnouncementResponse, ICreateAnnouncementFnDto, IEditAnnouncementFnDto } from '../typs/announcement.types';
 import ManagementAxiosInstance from '../configs/managementAxiosInstance';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
@@ -36,6 +36,14 @@ const useCreateAnnouncement = () => {
 	return useMutation({ mutationFn: createAnnouncementFn });
 };
 
+const editAnnouncementFn = (data: IEditAnnouncementFnDto) => {
+	return ManagementAxiosInstance.put('/Announcement/UpdateAnnouncement', data);
+};
+
+const useEditAnnouncement = () => {
+	return useMutation({ mutationFn: editAnnouncementFn });
+};
+
 const deleteAnnouncementFn = (id: string) => {
 	return ManagementAxiosInstance.delete(`/Announcement/DeleteAnnouncement/${id}`);
 };
@@ -44,4 +52,4 @@ const useDeleteAnnouncement = () => {
 	return useMutation({ mutationFn: deleteAnnouncementFn });
 };
 
-export { useGetAnnouncements, useGetAnnouncementById, useCreateAnnouncement, useDeleteAnnouncement };
+export { useGetAnnouncements, useGetAnnouncementById, useCreateAnnouncement, useEditAnnouncement, useDeleteAnnouncement };
