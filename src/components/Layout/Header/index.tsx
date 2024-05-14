@@ -22,7 +22,7 @@ const Header = ({ sidebarOpen, setSidebarOpen, isConnected }: IProps) => {
 				</div>
 
 				<div className='flex items-center gap-3 2xsm:gap-7'>
-					<DropdownUser />
+					{/*<DropdownUser />*/}
 					<div className='flex'>{!isConnected ? '' : <LogOut />}</div>
 					<button
 						aria-controls='sidebar'
