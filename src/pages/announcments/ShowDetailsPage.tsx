@@ -4,11 +4,11 @@ import { useGetAnnouncementById } from '../../services/announcement.service';
 import Breadcrumb from '../../components/Layout/Breadcrumb';
 import { PATHS } from '../../router/paths';
 import CustomInput from '../../components/general/inputs/CustomInput';
-import CustomPingSpinner from '../../components/general/spinners/CustomPingSpinner';
 import { AnnouncementServiceTypes } from '../../constants/announcement.const';
 import { DateObject } from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
+import CustomLineSpinner from '../../components/general/spinners/CustomLineSpinner';
 
 const AnnouncementsShowDetailsPage = () => {
 	const { id } = useParams();
@@ -21,7 +21,7 @@ const AnnouncementsShowDetailsPage = () => {
 			<Breadcrumb items={[{ label: 'اطلاعیه ها', url: PATHS.announcements.index }, { label: 'مشاهده' }]} />
 			<h1 className='text-xl mb-3'>مشاهده اطلاعیه </h1>
 
-			{isLoading && <CustomPingSpinner />}
+			{isLoading && <CustomLineSpinner />}
 
 			{!isLoading && data && (
 				<div className='max-w-screen-xl w-full mx-auto flex flex-col'>

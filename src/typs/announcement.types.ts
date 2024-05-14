@@ -18,6 +18,12 @@ export interface ICreateAnnouncementFnDto extends ICreateAnnouncementDto {
 	image: string;
 }
 
-export interface IAnnouncementResponse extends ICreateAnnouncementFnDto {
+export interface IEditAnnouncementFnDto extends ICreateAnnouncementDto {
 	id: string;
+	image: string;
+}
+
+export interface IAnnouncementResponse extends ICreateAnnouncementDto {
+	id: string;
+	image: string;
 }

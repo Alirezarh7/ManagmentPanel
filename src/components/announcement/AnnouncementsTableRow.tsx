@@ -49,7 +49,7 @@ const AnnouncementsTableRow = ({ data }: IProps) => {
 
 	return (
 		<>
-			<tr className='border-b !border-danger'>
+			<tr className='border-b'>
 				<td className='py-2 px-3 dark:border-strokedark'>
 					<p className='text-black dark:text-white'>{data.id}</p>
 				</td>
@@ -77,7 +77,7 @@ const AnnouncementsTableRow = ({ data }: IProps) => {
 							<FiEye className='w-5 h-5' onClick={() => navigate(PATHS.announcements.showFn(data.id))} />
 						</button>
 						<button className='hover:hover:text-primary'>
-							<FaRegEdit className='w-5 h-5' />
+							<FaRegEdit className='w-5 h-5' onClick={() => navigate(PATHS.announcements.editFn(data.id))} />
 						</button>
 						<button className='hover:hover:text-primary'>
 							<AiOutlineDelete className='w-5 h-5' onClick={() => setShowDeleteModal(true)} />
