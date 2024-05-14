@@ -164,7 +164,7 @@ const AnnouncementsCreatePage = () => {
 									<label>وضعیت فعال بودن اطلاعیه</label>
 									<div className='px-4 py-2 text-base border !border-gray-300 rounded-md flex flex-col gap-2'>
 										{booleanIsActiveValuesArray.map(item => (
-											<div className={`flex items-center gap-2 ${value === item.value ? 'text-blue-500' : ''}`}>
+											<div key={item.label} className={`flex items-center gap-2 ${value === item.value ? 'text-blue-500' : ''}`}>
 												<CustomRadioButton value={item.value} checked={value === item.value} onClick={onChange} />
 												<span>{item.label}</span>
 											</div>
@@ -182,7 +182,7 @@ const AnnouncementsCreatePage = () => {
 									<label>آیا اطلاعیه در صفحه اصلی نمایش داده شود؟</label>
 									<div className='px-4 py-2 text-base border !border-gray-300 rounded-md flex flex-col gap-2'>
 										{booleanDefaultValuesArray.map(item => (
-											<div className={`flex items-center gap-2 ${value === item.value ? 'text-blue-500' : ''}`}>
+											<div key={item.label} className={`flex items-center gap-2 ${value === item.value ? 'text-blue-500' : ''}`}>
 												<CustomRadioButton value={item.value} checked={value === item.value} onClick={onChange} />
 												<span>{item.label}</span>
 											</div>
