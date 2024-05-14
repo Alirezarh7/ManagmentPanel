@@ -13,10 +13,11 @@ import { shareData } from './shareData';
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { defaultOptions } from './configs/reactQueryt';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const root = createRoot(document.getElementById('root')!);
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({ defaultOptions });
 const initialState = (window as any).initialReduxState;
 const store = configureStore(initialState);
 if (window.location.pathname == '/SilentCallback') {

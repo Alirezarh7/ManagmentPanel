@@ -49,7 +49,7 @@ const AnnouncementsTableRow = ({ data }: IProps) => {
 
 	return (
 		<>
-			<tr className='border-b !border-danger'>
+			<tr className='border-b'>
 				<td className='py-2 px-3 dark:border-strokedark'>
 					<p className='text-black dark:text-white'>{data.id}</p>
 				</td>

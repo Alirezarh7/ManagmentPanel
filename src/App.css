@@ -62,12 +62,31 @@
 	right: unset !important;
 }
 .ql-snow .ql-editor blockquote {
-	border-left:none !important;
+	border-left: none !important;
 	border-right: 4px solid #ccc;
 	margin-bottom: 5px;
 	margin-top: 5px;
 	padding-left: 0;
 	padding-right: 16px;
+}
+
+.progress {
+	animation: progress 1s infinite linear;
+}
+
+.left-right {
+	transform-origin: 0% 50%;
+}
+@keyframes progress {
+	0% {
+		transform: translateX(0) scaleX(0);
+	}
+	40% {
+		transform: translateX(0) scaleX(0.4);
+	}
+	100% {
+		transform: translateX(100%) scaleX(0.5);
+	}
 }
 
 @media screen and (max-width: 580px) {

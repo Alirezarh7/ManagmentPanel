@@ -61,6 +61,19 @@
 						700: '#374151',
 						800: '#1f2937',
 						900: '#111827'
+					},
+					blue: {
+						50: '#eff6ff',
+						100: '#dbeafe',
+						200: '#bfdbfe',
+						300: '#93c5fd',
+						400: '#60a5fa',
+						500: '#3b82f6',
+						600: '#2563eb',
+						700: '#1d4ed8',
+						800: '#1e40af',
+						900: '#1e3a8a',
+						950: '#172554'
 					}
 				},
 				zIndex: {
@@ -71,6 +84,19 @@
 					99: '99',
 					9: '9',
 					1: '1'
+				},
+				animation: {
+					progress: 'progress 1s infinite linear'
+				},
+				keyframes: {
+					progress: {
+						'0%': { transform: ' translateX(0) scaleX(0)' },
+						'40%': { transform: 'translateX(0) scaleX(0.4)' },
+						'100%': { transform: 'translateX(100%) scaleX(0.5)' }
+					}
+				},
+				transformOrigin: {
+					'left-right': '0% 50%'
 				}
 			}
 		},
