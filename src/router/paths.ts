@@ -7,5 +7,6 @@ export const PATHS = {
 		showFn: (id: string) => `/announcements/${id}`,
 		edit: '/announcements/:id/edit',
 		editFn: (id: string) => `/announcements/${id}/edit`
-	}
+	},
+	calender: '/calender'
 };

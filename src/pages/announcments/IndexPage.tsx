@@ -7,9 +7,11 @@ import AnnouncementsTable from '../../components/announcement/AnnouncementsTable
 import { useGetAnnouncements } from '../../services/announcement.service';
 import CustomLineSpinner from '../../components/general/spinners/CustomLineSpinner';
 import { enqueueSnackbar } from 'notistack';
+import useTitle from '../../hooks/useTitle';
 
 const AnnouncementsIndexPage = () => {
 	const navigate = useNavigate();
+	useTitle('announcements', 'ناوشگران');
 
 	const { data, isLoading, isFetching, isError } = useGetAnnouncements();
 

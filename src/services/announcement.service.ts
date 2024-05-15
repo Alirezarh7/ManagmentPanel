@@ -1,4 +1,9 @@
-import { IAnnouncementResponse, ICreateAnnouncementFnDto, IEditAnnouncementFnDto } from '../typs/announcement.types';
+import {
+	IAnnouncementResponse,
+	IAnnouncementsStatistics,
+	ICreateAnnouncementFnDto,
+	IEditAnnouncementFnDto
+} from '../typs/announcement.types';
 import ManagementAxiosInstance from '../configs/managementAxiosInstance';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
@@ -12,6 +17,19 @@ const useGetAnnouncements = () => {
 	return useQuery({
 		queryKey: ['getAnnouncements'],
 		queryFn: getAnnouncementsFn
+	});
+};
+
+const getAnnouncementsStatisticsFn = async () => {
+	const { data } = await ManagementAxiosInstance.get<IAnnouncementsStatistics>('/Announcement/GetAnnouncementsStatistics');
+
+	return data;
+};
+
+const useGetAnnouncementsStatistics = () => {
+	return useQuery({
+		queryKey: ['getAnnouncementsStatistics'],
+		queryFn: getAnnouncementsStatisticsFn
 	});
 };
 
@@ -52,4 +70,11 @@ const useDeleteAnnouncement = () => {
 	return useMutation({ mutationFn: deleteAnnouncementFn });
 };
 
-export { useGetAnnouncements, useGetAnnouncementById, useCreateAnnouncement, useEditAnnouncement, useDeleteAnnouncement };
+export {
+	useGetAnnouncements,
+	useGetAnnouncementsStatistics,
+	useGetAnnouncementById,
+	useCreateAnnouncement,
+	useEditAnnouncement,
+	useDeleteAnnouncement
+};
