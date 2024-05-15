@@ -22,6 +22,7 @@ import { booleanDefaultValuesArray, booleanIsActiveValuesArray, oneKB, UPLOAD_FI
 import CustomRadioButton from '../../components/general/radioButton/CustomRadioButton';
 import CustomAlert from '../../components/general/alerts/CustomAlert';
 import { MdOutlineCloudUpload } from 'react-icons/md';
+import TimePicker from 'react-multi-date-picker/plugins/time_picker';
 
 const AnnouncementsEditPage = () => {
 	const [image, setImage] = useState<File | undefined>(undefined);
@@ -63,7 +64,13 @@ const AnnouncementsEditPage = () => {
 			.required('این فیلد اجباری است')
 			.min(1, 'لطفا یک گزینه انتخاب کنید')
 			.max(255, 'حداکثر عدد 255 قابل قبول است'),
-		showFromDate: Yup.string().required('این فیلد اجباری است')
+		showFromDate: Yup.string()
+			.required('این فیلد اجباری است')
+			.test('validDate', 'زمان شروع نمایش باید بعد از لحظه جاری باشد', function (value) {
+				if (!isDateUpdated) return true;
+				const newDate = new Date().toISOString();
+				return value > newDate;
+			})
 	});
 
 	const {
@@ -278,11 +285,16 @@ const AnnouncementsEditPage = () => {
 								<div>
 									<label>زمان شروع نمایش</label>
 									<DatePicker
+										monthYearSeparator='|'
+										format='YYYY/MM/DD --- HH:mm:ss'
+										editable={false}
+										disableYearPicker
 										containerClassName='!block'
 										inputClass=' w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg'
 										calendar={persian}
 										locale={persian_fa}
 										minDate={new Date()}
+										plugins={[<TimePicker position='bottom' />]}
 										value={value}
 										onChange={date => {
 											if (date instanceof DateObject) {

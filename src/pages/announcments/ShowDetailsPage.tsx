@@ -59,7 +59,9 @@ const AnnouncementsShowDetailsPage = () => {
 							<CustomInput
 								label='زمان شروع نمایش'
 								type={'text'}
-								value={new DateObject(data.showFromDate).convert(persian, persian_fa).format('DD MMMM سال YYYY')}
+								value={new DateObject(new Date(data.showFromDate + 'Z'))
+									.convert(persian, persian_fa)
+									.format('DD MMMM سال YYYY -  ساعت HH:mm')}
 								onChange={() => {}}
 								disabled={true}
 							/>

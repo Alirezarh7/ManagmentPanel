@@ -68,7 +68,7 @@ const AnnouncementsTableRow = ({ data }: IProps) => {
 					</span>
 				</td>
 				<td className='py-2 px-3 dark:border-strokedark'>
-					{new DateObject(data.showFromDate).convert(persian, persian_fa).format('DD MMMM سال YYYY')}
+					{new DateObject(new Date(data.showFromDate + 'Z')).convert(persian, persian_fa).format('DD_MM_YYYY   ساعت HH:mm')}
 				</td>
 
 				<td className='py-2 px-3 dark:border-strokedark'>

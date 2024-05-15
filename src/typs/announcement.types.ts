@@ -27,3 +27,13 @@ export interface IAnnouncementResponse extends ICreateAnnouncementDto {
 	id: string;
 	image: string;
 }
+
+export interface IAnnouncementsStatistics {
+	all: string;
+	allActive: string;
+	tamato: string;
+	omreh: string;
+	atabat: string;
+	arbaein: string;
+	soria: string;
+}
