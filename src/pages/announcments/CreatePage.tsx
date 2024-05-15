@@ -17,12 +17,16 @@ import CustomTextEditor from '../../components/general/textEditor/CustomTextEdit
 import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 import CustomRadioButton from '../../components/general/radioButton/CustomRadioButton';
-import { booleanDefaultValuesArray, booleanIsActiveValuesArray } from '../../constants/general.const';
+import { booleanDefaultValuesArray, booleanIsActiveValuesArray, oneKB, UPLOAD_FILE_SIZES } from '../../constants/general.const';
+import { MdOutlineCloudUpload } from 'react-icons/md';
+import CustomAlert from '../../components/general/alerts/CustomAlert';
 
 const AnnouncementsCreatePage = () => {
 	const [image, setImage] = useState<File | undefined>(undefined);
 	const [isDateUpdated, setIsDateUpdated] = useState<boolean>(false);
 	const { mutate, isPending } = useCreateAnnouncement();
+
+	const maxImageSizeMessage = 'حداکثر حجم تصویر بایستی ' + UPLOAD_FILE_SIZES.announcementMaxImageSize / oneKB + ' کیلوبایت باشد.';
 
 	const navigate = useNavigate();
 
@@ -42,7 +46,10 @@ const AnnouncementsCreatePage = () => {
 		isActive: Yup.boolean().required('این فیلد اجباری است'),
 		isDisplayMainPage: Yup.boolean().required('این فیلد اجباری است'),
 		serviceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
-		showDuration: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
+		showDuration: Yup.number()
+			.required('این فیلد اجباری است')
+			.min(1, 'لطفا یک گزینه انتخاب کنید')
+			.max(255, 'حداکثر عدد 255 قابل قبول است'),
 		showFromDate: Yup.string().required('این فیلد اجباری است')
 	});
 
@@ -92,7 +99,17 @@ const AnnouncementsCreatePage = () => {
 		if (files?.length === 0 || !files?.length) return;
 		const file = files[0];
 		if (!file || !isValidUploadedImageType(file)) {
-			alert('فایل نامعتبر');
+			enqueueSnackbar('فایل نامعتبر', { variant: 'error' });
+			if (isChangeEvent) {
+				event.target.value = '';
+			}
+			return;
+		}
+		if (file.size > UPLOAD_FILE_SIZES.announcementMaxImageSize) {
+			enqueueSnackbar(maxImageSizeMessage, { variant: 'error' });
+			if (isChangeEvent) {
+				event.target.value = '';
+			}
 			return;
 		}
 		// Validations *******************************************************
@@ -240,14 +257,18 @@ const AnnouncementsCreatePage = () => {
 						/>
 					</div>
 
-					<div className='flex flex-col justify-center items-center gap-4 py-2'>
+					<div className='py-2 grid md:grid-cols-2 justify-center items-start gap-4 border rounded-md'>
 						<label
 							htmlFor='image-uploader'
-							className={`w-full cursor-pointer flex flex-col justify-center items-center gap-4 border ${image ? '!border-gray-300 text-black' : '!border-red-300 text-red-300'} rounded-md`}
+							className={`w-full flex flex-col justify-center items-center gap-4 border-2 !border-dashed 
+							${image ? '!border-gray-300 text-black' : '!border-red-300 text-red-300'} cursor-pointer rounded-md overflow-hidden`}
 							onDrop={event => uploadOrDropFileHandler(event)}
 							onDragOver={event => event.preventDefault()}>
-							<span>جهت آپلود کلیک کنید</span>
-							<span>یا عکس را اینجا رها کنید</span>
+							<CustomAlert variant={'alert'} shouldHaveIcon={true} message={maxImageSizeMessage} />
+							<div className='flex flex-col justify-center items-center '>
+								<MdOutlineCloudUpload className='w-20 h-20' />
+								<span>جهت آپلود کلیک کنید یا عکس را اینجا رها کنید</span>
+							</div>
 							<input
 								className='relative z-10'
 								type='file'
@@ -259,7 +280,9 @@ const AnnouncementsCreatePage = () => {
 								onChange={event => uploadOrDropFileHandler(event)}
 							/>
 						</label>
-						{image ? <img src={URL.createObjectURL(image)} alt='پیش نمایش موقت' className='max-w-96' /> : null}
+						<div className='flex justify-center items-center'>
+							{image ? <img src={URL.createObjectURL(image)} alt='پیش نمایش موقت' className='max-w-96 rounded-md' /> : null}
+						</div>
 					</div>
 
 					<div>

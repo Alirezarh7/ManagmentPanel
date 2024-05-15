@@ -25,8 +25,8 @@ const AnnouncementsShowDetailsPage = () => {
 
 			{!isLoading && data && (
 				<div className='max-w-screen-xl w-full mx-auto flex flex-col'>
-					<div className='grid grid-cols-2 gap-4'>
-						<div>
+					<div className='grid grid-cols-3 gap-4'>
+						<div className='col-span-2'>
 							<CustomInput label='آی دی' type={'text'} value={data.id} onChange={() => {}} disabled={true} />
 							<CustomInput
 								label='سرویس اطلاعیه'
@@ -35,11 +35,41 @@ const AnnouncementsShowDetailsPage = () => {
 								onChange={() => {}}
 								disabled={true}
 							/>
+							<CustomInput
+								label='وضعیت فعال بودن اطلاعیه'
+								type={'text'}
+								value={data.isActive ? 'فعال' : 'غیر فعال'}
+								onChange={() => {}}
+								disabled={true}
+							/>
+							<CustomInput
+								label='آیا اطلاعیه در صفحه اصلی نمایش داده شود؟'
+								type={'text'}
+								value={data.isActive ? 'بلی' : 'خیر'}
+								onChange={() => {}}
+								disabled={true}
+							/>
+							<CustomInput
+								label='مدت نمایش (به روز)'
+								type={'text'}
+								value={data.showDuration?.toString() || 'نامشخص'}
+								onChange={() => {}}
+								disabled={true}
+							/>
+							<CustomInput
+								label='زمان شروع نمایش'
+								type={'text'}
+								value={new DateObject(data.showFromDate).convert(persian, persian_fa).format('DD MMMM سال YYYY')}
+								onChange={() => {}}
+								disabled={true}
+							/>
 						</div>
 						<div>
 							<label className='form-label'>تصویر اطلاعیه</label>
-							<img src={data.image} alt='تصویر آگهی' className='w-28 h-28' />
+							<img src={data.image} alt='تصویر آگهی' className='max-w-96 rounded-md' />
 						</div>
+					</div>
+					<div>
 						<CustomInput
 							className='col-span-2'
 							label='موضوع اطلاعیه'
@@ -54,34 +84,6 @@ const AnnouncementsShowDetailsPage = () => {
 								dangerouslySetInnerHTML={{ __html: data.body }}
 								className='w-full px-3 py-3 text-base border border-gray-300 rounded-md'></div>
 						</div>
-						<CustomInput
-							label='وضعیت فعال بودن اطلاعیه'
-							type={'text'}
-							value={data.isActive ? 'فعال' : 'غیر فعال'}
-							onChange={() => {}}
-							disabled={true}
-						/>
-						<CustomInput
-							label='آیا اطلاعیه در صفحه اصلی نمایش داده شود؟'
-							type={'text'}
-							value={data.isActive ? 'بلی' : 'خیر'}
-							onChange={() => {}}
-							disabled={true}
-						/>
-						<CustomInput
-							label='مدت نمایش (به روز)'
-							type={'text'}
-							value={data.showDuration?.toString() || 'نامشخص'}
-							onChange={() => {}}
-							disabled={true}
-						/>
-						<CustomInput
-							label='زمان شروع نمایش'
-							type={'text'}
-							value={new DateObject(data.showFromDate).convert(persian, persian_fa).format('DD MMMM سال YYYY')}
-							onChange={() => {}}
-							disabled={true}
-						/>
 					</div>
 				</div>
 			)}
