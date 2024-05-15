@@ -16,6 +16,7 @@ import AnnouncementsIndexPage from '../pages/announcments/IndexPage';
 import AnnouncementsShowDetailsPage from '../pages/announcments/ShowDetailsPage';
 import AnnouncementsCreatePage from '../pages/announcments/CreatePage';
 import AnnouncementsEditPage from '../pages/announcments/EditPage';
+import CalenderPage from '../pages/CalenderPage';
 
 export interface IProps {}
 
@@ -26,6 +27,9 @@ class WebRoute extends React.Component<IProps, IState> {
 		return (
 			<Routes>
 				<Route path='/' element={<Dashboard />} />
+				<Route path={PATHS.calender} element={<CalenderPage />} />
+
+				{/*user related*/}
 				<Route path='/user-roles/:userid/:title' element={<UserRoleManageIndex />} />
 				<Route path='/user-claims/:userid/:title' element={<UserClaims />} />
 				<Route path='/Users/GenderAuthorization/:userid/:title' element={<GenderAuthorization />} />

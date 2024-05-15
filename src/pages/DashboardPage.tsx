@@ -8,7 +8,6 @@ import AnnouncementsPieChart from '../components/dashbord/AnnouncementsPieChart'
 import { useGetAnnouncementsStatistics } from '../services/announcement.service';
 import CustomLineSpinner from '../components/general/spinners/CustomLineSpinner';
 import { DateObject } from 'react-multi-date-picker';
-import { Calendar } from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 
@@ -24,16 +23,18 @@ const DashboardPage = (props: IProps) => {
 	}, []);
 
 	return (
-		<div className='w-full max-w-screen-xl mx-auto flex flex-col gap-10 '>
-			<h1 className='sm:text-lg'>به داشبورد مدیریتی سامانه حج و زیارت ناوشگران خوش آمدید</h1>
+		<div className='space-y-4'>
+			<div className='flex justify-between items-center'>
+				<h1 className='sm:text-lg'>به داشبورد مدیریتی سامانه حج و زیارت ناوشگران خوش آمدید</h1>
+				<span className='py-2 px-3 bg-gray-200 rounded-3xl'>
+					{new DateObject(new Date()).convert(persian, persian_fa).format('DD MMMM سال YYYY')}
+				</span>
+			</div>
+
 			{isLoading || isFetching ? <CustomLineSpinner /> : null}
 			<div className='p-2 grid sm:grid-cols-2 md:grid-cols-3'>
 				<div>
 					<AnnouncementsPieChart statistics={data} />
-				</div>
-				<div></div>
-				<div className='flex justify-center items-start'>
-					<Calendar value={new DateObject()} calendar={persian} locale={persian_fa} />
 				</div>
 			</div>
 		</div>
