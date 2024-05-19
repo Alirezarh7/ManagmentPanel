@@ -1,5 +1,5 @@
 const baseUrls = {
-	// Interanl : 'http://192.168.2.29:8089/api',
+	// Interanl: 'http://192.168.2.29:8089/api',
 	Interanl: 'https://localhost:7120/api',
 	Sadad: 'https://mybeta.haj.ir/api',
 	Haj: 'http://mytest.haj.ir:8089/api',
@@ -12,4 +12,9 @@ const baseUrls = {
 export const currentBaseUrl: string = baseUrls.Interanl;
 export const currentPaymentBaseUrl: string = baseUrls.PaymentInternal;
 
-export const managementPanelBaseUrl: string = 'https://localhost:7219/api';
+const managementBaseUrls = {
+	mamadLocal: 'https://localhost:7219/api',
+	napLocal: 'http://192.168.2.29:7219/api'
+};
+
+export const managementPanelBaseUrl: string = managementBaseUrls.mamadLocal;

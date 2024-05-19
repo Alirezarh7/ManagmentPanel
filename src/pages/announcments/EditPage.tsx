@@ -49,7 +49,7 @@ const AnnouncementsEditPage = () => {
 		body: '',
 		isActive: true,
 		isDisplayMainPage: true,
-		serviceTypeId: 0,
+		serviceType: 0,
 		showDuration: 0,
 		showFromDate: new DateObject().convert(persian).toString()
 	};
@@ -59,7 +59,7 @@ const AnnouncementsEditPage = () => {
 		body: Yup.string().required('این فیلد اجباری است'),
 		isActive: Yup.boolean().required('این فیلد اجباری است'),
 		isDisplayMainPage: Yup.boolean().required('این فیلد اجباری است'),
-		serviceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
+		serviceType: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
 		showDuration: Yup.number()
 			.required('این فیلد اجباری است')
 			.min(1, 'لطفا یک گزینه انتخاب کنید')
@@ -89,7 +89,7 @@ const AnnouncementsEditPage = () => {
 			setValue('body', announcementData.body);
 			setValue('isActive', announcementData.isActive);
 			setValue('isDisplayMainPage', announcementData.isDisplayMainPage);
-			setValue('serviceTypeId', announcementData.serviceTypeId);
+			setValue('serviceType', announcementData.serviceType);
 			setValue('showDuration', announcementData.showDuration);
 			setValue('showFromDate', new DateObject(announcementData.showFromDate).convert(persian).toString());
 		}
@@ -100,19 +100,19 @@ const AnnouncementsEditPage = () => {
 		if (!announcementData) {
 			return;
 		}
-		if (!image && !announcementData?.image) {
+		if (!image && !announcementData?.base64Image) {
 			enqueueSnackbar('آپلود عکس اجباری است', { variant: 'error' });
 			return;
 		}
 		// validation ****************************************************************************************
 
-		const imageString: any = image !== undefined ? await convertToBase64(image) : announcementData.image;
+		const imageString: any = image !== undefined ? await convertToBase64(image) : announcementData.base64Image;
 
 		const data = {
 			...submittedData,
 			showFromDate: isDateUpdated ? submittedData.showFromDate : announcementData.showFromDate,
 			id: announcementData.id,
-			image: imageString
+			base64Image: imageString
 		};
 		console.log(data);
 		mutate(data, {
@@ -191,7 +191,7 @@ const AnnouncementsEditPage = () => {
 							)}
 						/>
 						<Controller
-							name='serviceTypeId'
+							name='serviceType'
 							control={control}
 							render={({ field: { value, onChange } }) => (
 								<div>
@@ -199,7 +199,7 @@ const AnnouncementsEditPage = () => {
 									<select
 										value={value}
 										onChange={e => onChange(e.target.value)}
-										className={`${errors.serviceTypeId ? '!border-danger' : ''}`}>
+										className={`${errors.serviceType ? '!border-danger' : ''}`}>
 										<option value={0}>انتخاب کنید</option>
 										{AnnouncementServiceTypes.map(item => (
 											<option key={item.id} value={item.id}>
@@ -207,7 +207,7 @@ const AnnouncementsEditPage = () => {
 											</option>
 										))}
 									</select>
-									{errors.serviceTypeId ? <span className='text-danger'>{errors.serviceTypeId.message}</span> : null}
+									{errors.serviceType ? <span className='text-danger'>{errors.serviceType.message}</span> : null}
 								</div>
 							)}
 						/>
@@ -334,8 +334,8 @@ const AnnouncementsEditPage = () => {
 						</label>
 						<div className='flex justify-center items-center'>
 							{image ? <img src={URL.createObjectURL(image)} alt='پیش نمایش موقت' className='max-w-96 rounded-md' /> : null}
-							{!image && announcementData?.image ? (
-								<img src={announcementData.image} alt='پیش نمایش موقت' className='max-w-96 rounded-md' />
+							{!image && announcementData?.base64Image ? (
+								<img src={announcementData.base64Image} alt='پیش نمایش موقت' className='max-w-96 rounded-md' />
 							) : null}
 						</div>
 					</div>

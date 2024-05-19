@@ -36,7 +36,7 @@ const AnnouncementsCreatePage = () => {
 		body: '',
 		isActive: true,
 		isDisplayMainPage: true,
-		serviceTypeId: 0,
+		serviceType: 0,
 		showDuration: 0,
 		showFromDate: new DateObject().convert(persian).toString()
 	};
@@ -46,7 +46,7 @@ const AnnouncementsCreatePage = () => {
 		body: Yup.string().required('این فیلد اجباری است'),
 		isActive: Yup.boolean().required('این فیلد اجباری است'),
 		isDisplayMainPage: Yup.boolean().required('این فیلد اجباری است'),
-		serviceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
+		serviceType: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
 		showDuration: Yup.number()
 			.required('این فیلد اجباری است')
 			.min(1, 'لطفا یک گزینه انتخاب کنید')
@@ -79,7 +79,7 @@ const AnnouncementsCreatePage = () => {
 		const data = {
 			...submittedData,
 			showFromDate: isDateUpdated ? submittedData.showFromDate : new Date().toISOString(),
-			image: base64
+			base64Image: base64
 		};
 		console.log(data);
 		mutate(data, {
@@ -150,7 +150,7 @@ const AnnouncementsCreatePage = () => {
 							)}
 						/>
 						<Controller
-							name='serviceTypeId'
+							name='serviceType'
 							control={control}
 							render={({ field: { value, onChange } }) => (
 								<div>
@@ -158,7 +158,7 @@ const AnnouncementsCreatePage = () => {
 									<select
 										value={value}
 										onChange={e => onChange(e.target.value)}
-										className={`${errors.serviceTypeId ? '!border-danger' : ''}`}>
+										className={`${errors.serviceType ? '!border-danger' : ''}`}>
 										<option value={0}>انتخاب کنید</option>
 										{AnnouncementServiceTypes.map(item => (
 											<option key={item.id} value={item.id}>
@@ -166,7 +166,7 @@ const AnnouncementsCreatePage = () => {
 											</option>
 										))}
 									</select>
-									{errors.serviceTypeId ? <span className='text-danger'>{errors.serviceTypeId.message}</span> : null}
+									{errors.serviceType ? <span className='text-danger'>{errors.serviceType.message}</span> : null}
 								</div>
 							)}
 						/>

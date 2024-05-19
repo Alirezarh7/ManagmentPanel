@@ -9,23 +9,23 @@ export interface ICreateAnnouncementDto {
 	body: string;
 	isActive: boolean;
 	isDisplayMainPage: boolean;
-	serviceTypeId: number;
+	serviceType: number;
 	showDuration: number;
 	showFromDate: string;
 }
 
 export interface ICreateAnnouncementFnDto extends ICreateAnnouncementDto {
-	image: string;
+	base64Image: string;
 }
 
 export interface IEditAnnouncementFnDto extends ICreateAnnouncementDto {
 	id: string;
-	image: string;
+	base64Image: string;
 }
 
 export interface IAnnouncementResponse extends ICreateAnnouncementDto {
 	id: string;
-	image: string;
+	base64Image: string;
 }
 
 export interface IAnnouncementsStatistics {
