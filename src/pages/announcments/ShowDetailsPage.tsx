@@ -31,7 +31,7 @@ const AnnouncementsShowDetailsPage = () => {
 							<CustomInput
 								label='سرویس اطلاعیه'
 								type={'text'}
-								value={AnnouncementServiceTypes.find(q => q.id === data.serviceType)?.nameFa ?? 'نامشخص'}
+								value={AnnouncementServiceTypes.find(q => q.id === data.serviceTypeId)?.nameFa ?? 'نامشخص'}
 								onChange={() => {}}
 								disabled={true}
 							/>

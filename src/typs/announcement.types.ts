@@ -9,7 +9,8 @@ export interface ICreateAnnouncementDto {
 	body: string;
 	isActive: boolean;
 	isDisplayMainPage: boolean;
-	serviceType: number;
+	serviceType: string;
+	serviceTypeId: number;
 	showDuration: number;
 	showFromDate: string;
 }

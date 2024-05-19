@@ -49,7 +49,8 @@ const AnnouncementsEditPage = () => {
 		body: '',
 		isActive: true,
 		isDisplayMainPage: true,
-		serviceType: 0,
+		serviceType: '',
+		serviceTypeId: 0,
 		showDuration: 0,
 		showFromDate: new DateObject().convert(persian).toString()
 	};
@@ -59,7 +60,8 @@ const AnnouncementsEditPage = () => {
 		body: Yup.string().required('این فیلد اجباری است'),
 		isActive: Yup.boolean().required('این فیلد اجباری است'),
 		isDisplayMainPage: Yup.boolean().required('این فیلد اجباری است'),
-		serviceType: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
+		serviceType: Yup.string().required('این فیلد اجباری است'),
+		serviceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
 		showDuration: Yup.number()
 			.required('این فیلد اجباری است')
 			.min(1, 'لطفا یک گزینه انتخاب کنید')
@@ -191,7 +193,7 @@ const AnnouncementsEditPage = () => {
 							)}
 						/>
 						<Controller
-							name='serviceType'
+							name='serviceTypeId'
 							control={control}
 							render={({ field: { value, onChange } }) => (
 								<div>
@@ -207,7 +209,7 @@ const AnnouncementsEditPage = () => {
 											</option>
 										))}
 									</select>
-									{errors.serviceType ? <span className='text-danger'>{errors.serviceType.message}</span> : null}
+									{errors.serviceTypeId ? <span className='text-danger'>{errors.serviceTypeId.message}</span> : null}
 								</div>
 							)}
 						/>

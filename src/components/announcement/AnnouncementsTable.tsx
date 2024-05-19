@@ -14,12 +14,12 @@ const AnnouncementsTable = ({ data }: IProps) => {
 					<thead>
 						<tr className='bg-gray-100 text-right dark:bg-meta-4'>
 							<th className='py-3 px-3 font-medium text-black dark:text-white'>آی دی</th>
-							<th className='py-3 px-3 font-medium text-black dark:text-white'>تصویر</th>
+							<th className='py-3 px-3 min-w-[120px] font-medium text-black dark:text-white'>تصویر</th>
 							<th className='min-w-[150px] py-3 px-3 font-medium text-black dark:text-white'>موضوع اطلاعیه</th>
-							<th className='min-w-[120px] py-3 px-3 font-medium text-black dark:text-white'>اطلاعیه فعال</th>
-							<th className='min-w-[120px] py-3 px-3 font-medium text-black dark:text-white'>اطلاعیه صفحه اصلی</th>
+							<th className='max-md:hidden min-w-[120px] py-3 px-3 font-medium text-black dark:text-white'>اطلاعیه فعال</th>
+							<th className='max-md:hidden min-w-[120px] py-3 px-3 font-medium text-black dark:text-white'>اطلاعیه صفحه اصلی</th>
 							<th className='min-w-[120px] py-3 px-3 font-medium text-black dark:text-white'>سرویس اطلاعیه</th>
-							<th className='min-w-[120px] py-3 px-3 font-medium text-black dark:text-white'>زمان شروع نمایش</th>
+							<th className='max-sm:hidden min-w-[120px] py-3 px-3 font-medium text-black dark:text-white'>زمان شروع نمایش</th>
 							<th className='py-3 px-3 font-medium text-black dark:text-white'>عملیات</th>
 						</tr>
 					</thead>
