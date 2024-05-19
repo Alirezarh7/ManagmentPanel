@@ -92,6 +92,7 @@ const AnnouncementsEditPage = () => {
 			setValue('isActive', announcementData.isActive);
 			setValue('isDisplayMainPage', announcementData.isDisplayMainPage);
 			setValue('serviceType', announcementData.serviceType);
+			setValue('serviceTypeId', announcementData.serviceTypeId);
 			setValue('showDuration', announcementData.showDuration);
 			setValue('showFromDate', new DateObject(announcementData.showFromDate).convert(persian).toString());
 		}
@@ -200,8 +201,13 @@ const AnnouncementsEditPage = () => {
 									<label>نوع سرویس</label>
 									<select
 										value={value}
-										onChange={e => onChange(e.target.value)}
-										className={`${errors.serviceType ? '!border-danger' : ''}`}>
+										onChange={e => {
+											const newValue = e.target.value;
+											const stringServiceType = AnnouncementServiceTypes.find(q => q.id === Number(newValue));
+											setValue('serviceType', stringServiceType?.name ?? 'unknown');
+											onChange(newValue);
+										}}
+										className={`${errors.serviceType || errors.serviceTypeId ? '!border-danger' : ''}`}>
 										<option value={0}>انتخاب کنید</option>
 										{AnnouncementServiceTypes.map(item => (
 											<option key={item.id} value={item.id}>
@@ -209,6 +215,7 @@ const AnnouncementsEditPage = () => {
 											</option>
 										))}
 									</select>
+									{errors.serviceType ? <span className='text-danger'>{errors.serviceType.message}</span> : null}
 									{errors.serviceTypeId ? <span className='text-danger'>{errors.serviceTypeId.message}</span> : null}
 								</div>
 							)}
