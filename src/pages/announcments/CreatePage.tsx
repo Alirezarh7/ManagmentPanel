@@ -20,7 +20,6 @@ import CustomRadioButton from '../../components/general/radioButton/CustomRadioB
 import { booleanDefaultValuesArray, booleanIsActiveValuesArray, oneKB, UPLOAD_FILE_SIZES } from '../../constants/general.const';
 import { MdOutlineCloudUpload } from 'react-icons/md';
 import CustomAlert from '../../components/general/alerts/CustomAlert';
-import TimePicker from 'react-multi-date-picker/plugins/time_picker';
 
 const AnnouncementsCreatePage = () => {
 	const [image, setImage] = useState<File | undefined>(undefined);
