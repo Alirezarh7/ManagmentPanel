@@ -20,7 +20,6 @@ const AnnouncementsTableRow = ({ data }: IProps) => {
 	const navigate = useNavigate();
 
 	const getServiceDetails = (serviceType: string): { label: string; classes: string } => {
-		console.log({ serviceType });
 		const service = AnnouncementServiceTypes.find(q => q.name === serviceType);
 		let classes: string = '';
 		if (!service) return { label: 'نامشخص', classes: '' };
@@ -51,7 +50,7 @@ const AnnouncementsTableRow = ({ data }: IProps) => {
 	return (
 		<>
 			<tr className='border-b'>
-				<td className='py-2 px-3 dark:border-strokedark'>
+				<td className='py-2 px-1 dark:border-strokedark'>
 					<p className='text-black dark:text-white'>{data.id}</p>
 				</td>
 				<td className='py-2 px-3 pl-9 dark:border-strokedark'>
@@ -69,7 +68,7 @@ const AnnouncementsTableRow = ({ data }: IProps) => {
 					</span>
 				</td>
 				<td className='max-sm:hidden py-2 px-3 dark:border-strokedark'>
-					{new DateObject(new Date(data.showFromDate + 'Z')).convert(persian, persian_fa).format('DD_MM_YYYY   ساعت HH:mm')}
+					{new DateObject(new Date(data.showFromDate + 'Z')).convert(persian, persian_fa).format('DD_MM_YYYY')}
 				</td>
 
 				<td className='py-2 px-3 dark:border-strokedark'>

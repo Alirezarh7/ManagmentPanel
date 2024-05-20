@@ -13,7 +13,7 @@ const AnnouncementsTable = ({ data }: IProps) => {
 				<table className='w-full table-auto'>
 					<thead>
 						<tr className='bg-gray-100 text-right dark:bg-meta-4'>
-							<th className='py-3 px-3 font-medium text-black dark:text-white'>آی دی</th>
+							<th className='min-w-[50px] py-3 px-1 font-medium text-black dark:text-white'>آی دی</th>
 							<th className='py-3 px-3 min-w-[120px] font-medium text-black dark:text-white'>تصویر</th>
 							<th className='min-w-[150px] py-3 px-3 font-medium text-black dark:text-white'>موضوع اطلاعیه</th>
 							<th className='max-md:hidden min-w-[120px] py-3 px-3 font-medium text-black dark:text-white'>اطلاعیه فعال</th>

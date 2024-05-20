@@ -53,13 +53,12 @@ const AnnouncementsCreatePage = () => {
 			.required('این فیلد اجباری است')
 			.min(1, 'لطفا یک گزینه انتخاب کنید')
 			.max(255, 'حداکثر عدد 255 قابل قبول است'),
-		showFromDate: Yup.string()
-			.required('این فیلد اجباری است')
-			.test('validDate', 'زمان شروع نمایش باید بعد از لحظه جاری باشد', function (value) {
-				if (!isDateUpdated) return true;
-				const newDate = new Date().toISOString();
-				return value > newDate;
-			})
+		showFromDate: Yup.string().required('این فیلد اجباری است')
+		// .test('validDate', 'زمان شروع نمایش باید بعد از لحظه جاری باشد', function (value) {
+		// 	if (!isDateUpdated) return true;
+		// 	const newDate = new Date().toISOString();
+		// 	return value > newDate;
+		// })
 	});
 
 	const {
@@ -254,7 +253,7 @@ const AnnouncementsCreatePage = () => {
 									<label>زمان شروع نمایش</label>
 									<DatePicker
 										monthYearSeparator='|'
-										format='YYYY/MM/DD --- HH:mm:ss'
+										format='YYYY/MM/DD'
 										editable={false}
 										disableYearPicker
 										containerClassName='!block'
@@ -262,7 +261,6 @@ const AnnouncementsCreatePage = () => {
 										calendar={persian}
 										locale={persian_fa}
 										minDate={new DateObject()}
-										plugins={[<TimePicker position='bottom' />]}
 										value={value}
 										onChange={date => {
 											if (date instanceof DateObject) {
