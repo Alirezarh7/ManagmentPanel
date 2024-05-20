@@ -6,7 +6,7 @@ import { dashboardActions } from '../../pages/PublicPages/Actions/Dashboard/acti
 import { IApplicationState } from '../../store/state';
 import { connect } from 'react-redux';
 import NapAlerts from '../general/NapAlerts/NapAlerts';
-import Sidebar from './Sidebar';
+import Sidebar from './SideBar';
 import Header from './Header';
 
 type IProps = typeof dashboardActions & IDashboardState & { isConnected: boolean };
