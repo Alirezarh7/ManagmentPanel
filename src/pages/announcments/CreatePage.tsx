@@ -20,7 +20,6 @@ import CustomRadioButton from '../../components/general/radioButton/CustomRadioB
 import { booleanDefaultValuesArray, booleanIsActiveValuesArray, oneKB, UPLOAD_FILE_SIZES } from '../../constants/general.const';
 import { MdOutlineCloudUpload } from 'react-icons/md';
 import CustomAlert from '../../components/general/alerts/CustomAlert';
-import TimePicker from 'react-multi-date-picker/plugins/time_picker';
 
 const AnnouncementsCreatePage = () => {
 	const [image, setImage] = useState<File | undefined>(undefined);
@@ -36,6 +35,7 @@ const AnnouncementsCreatePage = () => {
 		body: '',
 		isActive: true,
 		isDisplayMainPage: true,
+		serviceType: '',
 		serviceTypeId: 0,
 		showDuration: 0,
 		showFromDate: new DateObject().convert(persian).toString()
@@ -46,24 +46,25 @@ const AnnouncementsCreatePage = () => {
 		body: Yup.string().required('این فیلد اجباری است'),
 		isActive: Yup.boolean().required('این فیلد اجباری است'),
 		isDisplayMainPage: Yup.boolean().required('این فیلد اجباری است'),
+		serviceType: Yup.string().required('این فیلد اجباری است'),
 		serviceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
 		showDuration: Yup.number()
 			.required('این فیلد اجباری است')
 			.min(1, 'لطفا یک گزینه انتخاب کنید')
 			.max(255, 'حداکثر عدد 255 قابل قبول است'),
-		showFromDate: Yup.string()
-			.required('این فیلد اجباری است')
-			.test('validDate', 'زمان شروع نمایش باید بعد از لحظه جاری باشد', function (value) {
-				if (!isDateUpdated) return true;
-				const newDate = new Date().toISOString();
-				return value > newDate;
-			})
+		showFromDate: Yup.string().required('این فیلد اجباری است')
+		// .test('validDate', 'زمان شروع نمایش باید بعد از لحظه جاری باشد', function (value) {
+		// 	if (!isDateUpdated) return true;
+		// 	const newDate = new Date().toISOString();
+		// 	return value > newDate;
+		// })
 	});
 
 	const {
 		control,
 		handleSubmit,
-		formState: { errors }
+		formState: { errors },
+		setValue
 	} = useForm<ICreateAnnouncementDto>({
 		defaultValues: defaultFormValues,
 		resolver: yupResolver(createAnnouncementsSchema)
@@ -79,7 +80,7 @@ const AnnouncementsCreatePage = () => {
 		const data = {
 			...submittedData,
 			showFromDate: isDateUpdated ? submittedData.showFromDate : new Date().toISOString(),
-			image: base64
+			base64Image: base64
 		};
 		console.log(data);
 		mutate(data, {
@@ -157,8 +158,13 @@ const AnnouncementsCreatePage = () => {
 									<label>نوع سرویس</label>
 									<select
 										value={value}
-										onChange={e => onChange(e.target.value)}
-										className={`${errors.serviceTypeId ? '!border-danger' : ''}`}>
+										onChange={e => {
+											const newValue = e.target.value;
+											const stringServiceType = AnnouncementServiceTypes.find(q => q.id === Number(newValue));
+											setValue('serviceType', stringServiceType?.name ?? 'unknown');
+											onChange(newValue);
+										}}
+										className={`${errors.serviceType || errors.serviceTypeId ? '!border-danger' : ''}`}>
 										<option value={0}>انتخاب کنید</option>
 										{AnnouncementServiceTypes.map(item => (
 											<option key={item.id} value={item.id}>
@@ -166,6 +172,7 @@ const AnnouncementsCreatePage = () => {
 											</option>
 										))}
 									</select>
+									{errors.serviceType ? <span className='text-danger'>{errors.serviceType.message}</span> : null}
 									{errors.serviceTypeId ? <span className='text-danger'>{errors.serviceTypeId.message}</span> : null}
 								</div>
 							)}
@@ -245,7 +252,7 @@ const AnnouncementsCreatePage = () => {
 									<label>زمان شروع نمایش</label>
 									<DatePicker
 										monthYearSeparator='|'
-										format='YYYY/MM/DD --- HH:mm:ss'
+										format='YYYY/MM/DD'
 										editable={false}
 										disableYearPicker
 										containerClassName='!block'
@@ -253,7 +260,6 @@ const AnnouncementsCreatePage = () => {
 										calendar={persian}
 										locale={persian_fa}
 										minDate={new DateObject()}
-										plugins={[<TimePicker position='bottom' />]}
 										value={value}
 										onChange={date => {
 											if (date instanceof DateObject) {

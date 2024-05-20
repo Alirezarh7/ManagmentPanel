@@ -68,7 +68,7 @@ const AnnouncementsShowDetailsPage = () => {
 						</div>
 						<div>
 							<label className='form-label'>تصویر اطلاعیه</label>
-							<img src={data.image} alt='تصویر آگهی' className='max-w-96 rounded-md' />
+							<img src={data.base64Image} alt='تصویر آگهی' className='max-w-96 rounded-md' />
 						</div>
 					</div>
 					<div>

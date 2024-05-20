@@ -53,7 +53,8 @@ const AnnouncementsPieChart = ({ statistics }: IProps) => {
 	});
 
 	const calculatePercentage = (count: string) => {
-		if (!statistics) return 0;
+		if (!statistics || !statistics.all || !statistics.allActive) return 0;
+		if (isNaN(Number(count))) return 0;
 		return round((Number(count) / Number(statistics.allActive)) * 100);
 	};
 

@@ -22,7 +22,6 @@ import { booleanDefaultValuesArray, booleanIsActiveValuesArray, oneKB, UPLOAD_FI
 import CustomRadioButton from '../../components/general/radioButton/CustomRadioButton';
 import CustomAlert from '../../components/general/alerts/CustomAlert';
 import { MdOutlineCloudUpload } from 'react-icons/md';
-import TimePicker from 'react-multi-date-picker/plugins/time_picker';
 
 const AnnouncementsEditPage = () => {
 	const [image, setImage] = useState<File | undefined>(undefined);
@@ -49,6 +48,7 @@ const AnnouncementsEditPage = () => {
 		body: '',
 		isActive: true,
 		isDisplayMainPage: true,
+		serviceType: '',
 		serviceTypeId: 0,
 		showDuration: 0,
 		showFromDate: new DateObject().convert(persian).toString()
@@ -59,18 +59,18 @@ const AnnouncementsEditPage = () => {
 		body: Yup.string().required('این فیلد اجباری است'),
 		isActive: Yup.boolean().required('این فیلد اجباری است'),
 		isDisplayMainPage: Yup.boolean().required('این فیلد اجباری است'),
+		serviceType: Yup.string().required('این فیلد اجباری است'),
 		serviceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
 		showDuration: Yup.number()
 			.required('این فیلد اجباری است')
 			.min(1, 'لطفا یک گزینه انتخاب کنید')
 			.max(255, 'حداکثر عدد 255 قابل قبول است'),
-		showFromDate: Yup.string()
-			.required('این فیلد اجباری است')
-			.test('validDate', 'زمان شروع نمایش باید بعد از لحظه جاری باشد', function (value) {
-				if (!isDateUpdated) return true;
-				const newDate = new Date().toISOString();
-				return value > newDate;
-			})
+		showFromDate: Yup.string().required('این فیلد اجباری است')
+		// .test('validDate', 'زمان شروع نمایش باید بعد از لحظه جاری باشد', function (value) {
+		// 	if (!isDateUpdated) return true;
+		// 	const newDate = new Date().toISOString();
+		// 	return value > newDate;
+		// })
 	});
 
 	const {
@@ -89,6 +89,7 @@ const AnnouncementsEditPage = () => {
 			setValue('body', announcementData.body);
 			setValue('isActive', announcementData.isActive);
 			setValue('isDisplayMainPage', announcementData.isDisplayMainPage);
+			setValue('serviceType', announcementData.serviceType);
 			setValue('serviceTypeId', announcementData.serviceTypeId);
 			setValue('showDuration', announcementData.showDuration);
 			setValue('showFromDate', new DateObject(announcementData.showFromDate).convert(persian).toString());
@@ -100,19 +101,19 @@ const AnnouncementsEditPage = () => {
 		if (!announcementData) {
 			return;
 		}
-		if (!image && !announcementData?.image) {
+		if (!image && !announcementData?.base64Image) {
 			enqueueSnackbar('آپلود عکس اجباری است', { variant: 'error' });
 			return;
 		}
 		// validation ****************************************************************************************
 
-		const imageString: any = image !== undefined ? await convertToBase64(image) : announcementData.image;
+		const imageString: any = image !== undefined ? await convertToBase64(image) : announcementData.base64Image;
 
 		const data = {
 			...submittedData,
 			showFromDate: isDateUpdated ? submittedData.showFromDate : announcementData.showFromDate,
 			id: announcementData.id,
-			image: imageString
+			base64Image: imageString
 		};
 		console.log(data);
 		mutate(data, {
@@ -198,8 +199,13 @@ const AnnouncementsEditPage = () => {
 									<label>نوع سرویس</label>
 									<select
 										value={value}
-										onChange={e => onChange(e.target.value)}
-										className={`${errors.serviceTypeId ? '!border-danger' : ''}`}>
+										onChange={e => {
+											const newValue = e.target.value;
+											const stringServiceType = AnnouncementServiceTypes.find(q => q.id === Number(newValue));
+											setValue('serviceType', stringServiceType?.name ?? 'unknown');
+											onChange(newValue);
+										}}
+										className={`${errors.serviceType || errors.serviceTypeId ? '!border-danger' : ''}`}>
 										<option value={0}>انتخاب کنید</option>
 										{AnnouncementServiceTypes.map(item => (
 											<option key={item.id} value={item.id}>
@@ -207,6 +213,7 @@ const AnnouncementsEditPage = () => {
 											</option>
 										))}
 									</select>
+									{errors.serviceType ? <span className='text-danger'>{errors.serviceType.message}</span> : null}
 									{errors.serviceTypeId ? <span className='text-danger'>{errors.serviceTypeId.message}</span> : null}
 								</div>
 							)}
@@ -286,15 +293,14 @@ const AnnouncementsEditPage = () => {
 									<label>زمان شروع نمایش</label>
 									<DatePicker
 										monthYearSeparator='|'
-										format='YYYY/MM/DD --- HH:mm:ss'
+										format='YYYY/MM/DD'
 										editable={false}
 										disableYearPicker
 										containerClassName='!block'
 										inputClass=' w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg'
 										calendar={persian}
 										locale={persian_fa}
-										minDate={new Date()}
-										plugins={[<TimePicker position='bottom' />]}
+										minDate={new DateObject()}
 										value={value}
 										onChange={date => {
 											if (date instanceof DateObject) {
@@ -334,8 +340,8 @@ const AnnouncementsEditPage = () => {
 						</label>
 						<div className='flex justify-center items-center'>
 							{image ? <img src={URL.createObjectURL(image)} alt='پیش نمایش موقت' className='max-w-96 rounded-md' /> : null}
-							{!image && announcementData?.image ? (
-								<img src={announcementData.image} alt='پیش نمایش موقت' className='max-w-96 rounded-md' />
+							{!image && announcementData?.base64Image ? (
+								<img src={announcementData.base64Image} alt='پیش نمایش موقت' className='max-w-96 rounded-md' />
 							) : null}
 						</div>
 					</div>

@@ -39,7 +39,7 @@ const DeleteAnnouncementModal = ({ data, isOpen, onSuccess, onCancel }: IProps) 
 			<div className='m-3 flex flex-col gap-4'>
 				<p className='text-lg'>آیا از حذف این آیتم اطمینان دارید؟</p>
 				<div className='flex items-center gap-4'>
-					<img src={data.image} alt='تصویر آگهی' className='w-20 h-20' />
+					<img src={data.base64Image} alt='تصویر آگهی' className='w-20 h-20' />
 					<p>{data.subject}</p>
 				</div>
 			</div>

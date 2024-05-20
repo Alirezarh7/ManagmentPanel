@@ -19,8 +19,8 @@ const AnnouncementsTableRow = ({ data }: IProps) => {
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const navigate = useNavigate();
 
-	const getServiceDetails = (serviceTypeId: number): { label: string; classes: string } => {
-		const service = AnnouncementServiceTypes.find(q => q.id === serviceTypeId);
+	const getServiceDetails = (serviceType: string): { label: string; classes: string } => {
+		const service = AnnouncementServiceTypes.find(q => q.name === serviceType);
 		let classes: string = '';
 		if (!service) return { label: 'نامشخص', classes: '' };
 		switch (service.id) {
@@ -50,25 +50,25 @@ const AnnouncementsTableRow = ({ data }: IProps) => {
 	return (
 		<>
 			<tr className='border-b'>
-				<td className='py-2 px-3 dark:border-strokedark'>
+				<td className='py-2 px-1 dark:border-strokedark'>
 					<p className='text-black dark:text-white'>{data.id}</p>
 				</td>
 				<td className='py-2 px-3 pl-9 dark:border-strokedark'>
-					<img src={data.image} alt='تصویر آگهی' className='w-20 h-20' />
+					<img src={data.base64Image} alt='تصویر آگهی' className='shrink-0 w-20 h-20' />
 				</td>
 				<td className='py-2 px-3 dark:border-strokedark'>
 					<p className='text-black dark:text-white'>{data.subject}</p>
 				</td>
-				<td className='py-2 px-3 dark:border-strokedark'>{data.isActive ? 'بلی' : 'خیر'}</td>
-				<td className='py-2 px-3 dark:border-strokedark'>{data.isDisplayMainPage ? 'بلی' : 'خیر'}</td>
+				<td className='max-md:hidden py-2 px-3 dark:border-strokedark'>{data.isActive ? 'بلی' : 'خیر'}</td>
+				<td className='max-md:hidden py-2 px-3 dark:border-strokedark'>{data.isDisplayMainPage ? 'بلی' : 'خیر'}</td>
 				<td className='py-2 px-3 dark:border-strokedark'>
 					<span
-						className={`bg-opacity-10 py-1 px-3 text-sm font-medium rounded-2xl ${getServiceDetails(data.serviceTypeId).classes}`}>
-						{getServiceDetails(data.serviceTypeId).label}
+						className={`bg-opacity-10 py-1 px-3 text-sm font-medium rounded-2xl ${getServiceDetails(data.serviceType).classes}`}>
+						{getServiceDetails(data.serviceType).label}
 					</span>
 				</td>
-				<td className='py-2 px-3 dark:border-strokedark'>
-					{new DateObject(new Date(data.showFromDate + 'Z')).convert(persian, persian_fa).format('DD_MM_YYYY   ساعت HH:mm')}
+				<td className='max-sm:hidden py-2 px-3 dark:border-strokedark'>
+					{new DateObject(new Date(data.showFromDate + 'Z')).convert(persian, persian_fa).format('DD_MM_YYYY')}
 				</td>
 
 				<td className='py-2 px-3 dark:border-strokedark'>
