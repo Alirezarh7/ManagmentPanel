@@ -50,18 +50,16 @@ const AnnouncementsShowDetailsPage = () => {
 								disabled={true}
 							/>
 							<CustomInput
-								label='مدت نمایش (به روز)'
+								label='زمان شروع نمایش'
 								type={'text'}
-								value={data.showDuration?.toString() || 'نامشخص'}
+								value={new DateObject(new Date(data.showFromDate + 'Z')).convert(persian, persian_fa).format('DD MMMM سال YYYY')}
 								onChange={() => {}}
 								disabled={true}
 							/>
 							<CustomInput
-								label='زمان شروع نمایش'
+								label='مدت نمایش (به روز)'
 								type={'text'}
-								value={new DateObject(new Date(data.showFromDate + 'Z'))
-									.convert(persian, persian_fa)
-									.format('DD MMMM سال YYYY -  ساعت HH:mm')}
+								value={data.showDuration?.toString() || 'نامشخص'}
 								onChange={() => {}}
 								disabled={true}
 							/>

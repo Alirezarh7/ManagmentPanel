@@ -12,11 +12,22 @@ const getAnnouncementsFn = async () => {
 
 	return response.data;
 };
-
 const useGetAnnouncements = () => {
 	return useQuery({
 		queryKey: ['getAnnouncements'],
 		queryFn: getAnnouncementsFn
+	});
+};
+
+const getAnnouncementsByMainPageFn = async () => {
+	const response = await ManagementAxiosInstance.get<IAnnouncementResponse[]>('/Announcement/GetAnnouncementByMainPage');
+
+	return response.data;
+};
+const useGetAnnouncementsByMainPage = () => {
+	return useQuery({
+		queryKey: ['getAnnouncementsByMainPage'],
+		queryFn: getAnnouncementsByMainPageFn
 	});
 };
 
@@ -25,7 +36,6 @@ const getAnnouncementsStatisticsFn = async () => {
 
 	return data;
 };
-
 const useGetAnnouncementsStatistics = () => {
 	return useQuery({
 		queryKey: ['getAnnouncementsStatistics'],
@@ -38,7 +48,6 @@ const getAnnouncementByIdFn = async (id: string) => {
 
 	return response.data;
 };
-
 const useGetAnnouncementById = (id: string) => {
 	return useQuery({
 		queryKey: ['getAnnouncementById', id],
@@ -49,7 +58,6 @@ const useGetAnnouncementById = (id: string) => {
 const createAnnouncementFn = (data: ICreateAnnouncementFnDto) => {
 	return ManagementAxiosInstance.post('/Announcement/CreateAnnouncement', data);
 };
-
 const useCreateAnnouncement = () => {
 	return useMutation({ mutationFn: createAnnouncementFn });
 };
@@ -57,7 +65,6 @@ const useCreateAnnouncement = () => {
 const editAnnouncementFn = (data: IEditAnnouncementFnDto) => {
 	return ManagementAxiosInstance.put('/Announcement/UpdateAnnouncement', data);
 };
-
 const useEditAnnouncement = () => {
 	return useMutation({ mutationFn: editAnnouncementFn });
 };
@@ -65,13 +72,13 @@ const useEditAnnouncement = () => {
 const deleteAnnouncementFn = (id: string) => {
 	return ManagementAxiosInstance.delete(`/Announcement/DeleteAnnouncement/${id}`);
 };
-
 const useDeleteAnnouncement = () => {
 	return useMutation({ mutationFn: deleteAnnouncementFn });
 };
 
 export {
 	useGetAnnouncements,
+	useGetAnnouncementsByMainPage,
 	useGetAnnouncementsStatistics,
 	useGetAnnouncementById,
 	useCreateAnnouncement,

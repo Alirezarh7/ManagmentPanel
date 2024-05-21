@@ -27,6 +27,7 @@ export interface IEditAnnouncementFnDto extends ICreateAnnouncementDto {
 export interface IAnnouncementResponse extends ICreateAnnouncementDto {
 	id: string;
 	base64Image: string;
+	endShowDate: string;
 }
 
 export interface IAnnouncementsStatistics {
@@ -38,3 +39,5 @@ export interface IAnnouncementsStatistics {
 	arbaein: string;
 	soria: string;
 }
+
+export type TAnnouncementShowType = 'all' | 'mainPage';

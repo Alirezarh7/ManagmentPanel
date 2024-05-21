@@ -5,7 +5,7 @@ import persian_fa from 'react-date-object/locales/persian_fa';
 import { FiEye } from 'react-icons/fi';
 import { FaRegEdit } from 'react-icons/fa';
 import { AiOutlineDelete } from 'react-icons/ai';
-import { IAnnouncementResponse } from '../../typs/announcement.types';
+import { IAnnouncementResponse, TAnnouncementShowType } from '../../typs/announcement.types';
 import { AnnouncementServiceTypes } from '../../constants/announcement.const';
 import DeleteAnnouncementModal from './DeleteAnnouncementModal';
 import { useNavigate } from 'react-router-dom';
@@ -13,9 +13,10 @@ import { PATHS } from '../../router/paths';
 
 interface IProps {
 	data: IAnnouncementResponse;
+	showType: TAnnouncementShowType;
 }
 
-const AnnouncementsTableRow = ({ data }: IProps) => {
+const AnnouncementsTableRow = ({ data, showType }: IProps) => {
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const navigate = useNavigate();
 
@@ -50,26 +51,43 @@ const AnnouncementsTableRow = ({ data }: IProps) => {
 	return (
 		<>
 			<tr className='border-b'>
-				<td className='py-2 px-1 dark:border-strokedark'>
+				<td className='py-2 px-1 text-center dark:border-strokedark'>
 					<p className='text-black dark:text-white'>{data.id}</p>
 				</td>
-				<td className='py-2 px-3 pl-9 dark:border-strokedark'>
-					<img src={data.base64Image} alt='تصویر آگهی' className='shrink-0 w-20 h-20' />
+				<td className='py-2 px-1  text-center dark:border-strokedark'>
+					<img src={data.base64Image} alt='تصویر آگهی' className='flex-1 w-20 h-20' />
 				</td>
 				<td className='py-2 px-3 dark:border-strokedark'>
-					<p className='text-black dark:text-white'>{data.subject}</p>
+					<p className='text-black dark:text-white'>
+						{data.subject.substring(0, 50)}
+						{data.subject.length > 50 ? '...' : ''}
+					</p>
 				</td>
-				<td className='max-md:hidden py-2 px-3 dark:border-strokedark'>{data.isActive ? 'بلی' : 'خیر'}</td>
-				<td className='max-md:hidden py-2 px-3 dark:border-strokedark'>{data.isDisplayMainPage ? 'بلی' : 'خیر'}</td>
-				<td className='py-2 px-3 dark:border-strokedark'>
+				{showType === 'all' ? (
+					<td className='max-md:hidden py-2 px-1 text-center  dark:border-strokedark'>{data.isActive ? 'بلی' : 'خیر'}</td>
+				) : null}
+				{showType === 'all' ? (
+					<td className='max-md:hidden py-2 px-1 text-center  dark:border-strokedark'>
+						{data.isDisplayMainPage ? 'بلی' : 'خیر'}
+					</td>
+				) : null}
+
+				<td className='py-2 px-1 text-center dark:border-strokedark'>
 					<span
-						className={`bg-opacity-10 py-1 px-3 text-sm font-medium rounded-2xl ${getServiceDetails(data.serviceType).classes}`}>
+						className={`bg-opacity-10 py-1 px-3  text-sm font-medium rounded-2xl ${getServiceDetails(data.serviceType).classes}`}>
 						{getServiceDetails(data.serviceType).label}
 					</span>
 				</td>
-				<td className='max-sm:hidden py-2 px-3 dark:border-strokedark'>
-					{new DateObject(new Date(data.showFromDate + 'Z')).convert(persian, persian_fa).format('DD_MM_YYYY')}
-				</td>
+				{showType === 'all' ? (
+					<td className='max-sm:hidden py-2 px-1 text-center dark:border-strokedark'>
+						{new DateObject(new Date(data.showFromDate + 'Z')).convert(persian, persian_fa).format('DD_MM_YYYY')}
+					</td>
+				) : null}
+				{showType === 'all' ? (
+					<td className='max-sm:hidden py-2 px-1 text-center dark:border-strokedark'>
+						{new DateObject(new Date(data.endShowDate + 'Z')).convert(persian, persian_fa).format('DD_MM_YYYY')}
+					</td>
+				) : null}
 
 				<td className='py-2 px-3 dark:border-strokedark'>
 					<div className='flex justify-between items-center'>

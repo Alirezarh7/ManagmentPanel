@@ -4,7 +4,7 @@ import CustomButton from '../../components/general/Buttons/CustomButton';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '../../router/paths';
 import AnnouncementsTable from '../../components/announcement/AnnouncementsTable';
-import { useGetAnnouncements } from '../../services/announcement.service';
+import { useGetAnnouncements, useGetAnnouncementsByMainPage } from '../../services/announcement.service';
 import CustomLineSpinner from '../../components/general/spinners/CustomLineSpinner';
 import { enqueueSnackbar } from 'notistack';
 import useTitle from '../../hooks/useTitle';
@@ -13,13 +13,21 @@ const AnnouncementsIndexPage = () => {
 	const navigate = useNavigate();
 	useTitle('announcements', 'ناوشگران');
 
-	const { data, isLoading, isFetching, isError } = useGetAnnouncements();
+	const { data: announcements, isLoading, isFetching, isError } = useGetAnnouncements();
+	const {
+		data: announcementsByMainPage,
+		isLoading: isByMainPageLoading,
+		isFetching: isByMainPageFetching,
+		isError: byMainPageError
+	} = useGetAnnouncementsByMainPage();
+
+	const isPageLoading: boolean = isLoading || isFetching || isByMainPageLoading || isByMainPageFetching;
 
 	useEffect(() => {
-		if (isError) {
+		if (isError || byMainPageError) {
 			enqueueSnackbar('مشکل در بروزرسانی لیست اطلاعیه ها', { variant: 'error' });
 		}
-	}, [isError]);
+	}, [isError, byMainPageError]);
 
 	const redirectToCreatePage = () => {
 		navigate(PATHS.announcements.create);
@@ -40,8 +48,8 @@ const AnnouncementsIndexPage = () => {
 				<h1 className='text-xl'>مدیریت اطلاعیه ها</h1>
 				<CustomButton variant={'primary'} type={'button'} label={'ایجاد'} onClick={redirectToCreatePage} />
 			</div>
-			{isLoading || isFetching ? <CustomLineSpinner /> : null}
-			<AnnouncementsTable data={data} />
+			{isPageLoading ? <CustomLineSpinner /> : null}
+			<AnnouncementsTable announcements={announcements} announcementsByMainPage={announcementsByMainPage} />
 		</div>
 	);
 };
