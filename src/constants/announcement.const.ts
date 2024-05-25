@@ -1,6 +1,6 @@
-import { AnnouncementServiceType } from '../typs/announcement.types';
+import { IGeneralEnumWithFaTitle } from '../typs/general.types';
 
-export const AnnouncementServiceTypes: AnnouncementServiceType[] = [
+export const announcementServiceTypes: IGeneralEnumWithFaTitle[] = [
 	{ name: 'Tamato', nameFa: 'تمتع', id: 1 },
 	{ name: 'Omreh', nameFa: 'عمره', id: 2 },
 	{ name: 'Atabat', nameFa: 'عتبات', id: 3 },

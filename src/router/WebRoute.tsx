@@ -12,11 +12,15 @@ import NotFoundPage from '../pages/NotFoundPage';
 import GenderAuthorization from '../pages/PublicPages/Views/UserManage/GenderAuthorization';
 import SignInCallbackPageTwo from '../pages/PublicPages/Views/User/SignInCallbackPageTwo';
 import ReplaceUser from '../pages/ReplaceUser';
-import AnnouncementsIndexPage from '../pages/announcments/IndexPage';
-import AnnouncementsShowDetailsPage from '../pages/announcments/ShowDetailsPage';
-import AnnouncementsCreatePage from '../pages/announcments/CreatePage';
-import AnnouncementsEditPage from '../pages/announcments/EditPage';
 import CalenderPage from '../pages/CalenderPage';
+import AnnouncementsIndexPage from '../pages/announcments/IndexPage';
+import AnnouncementsCreatePage from '../pages/announcments/CreatePage';
+import AnnouncementsShowDetailsPage from '../pages/announcments/ShowDetailsPage';
+import AnnouncementsEditPage from '../pages/announcments/EditPage';
+import ContentsIndexPage from '../pages/contents/IndexPage';
+import ContentsCreatePage from '../pages/contents/CreatePage';
+import ContentsShowDetailsPage from '../pages/contents/ShowDetailsPage';
+import ContentsEditPage from '../pages/contents/EditPage';
 
 export interface IProps {}
 
@@ -41,9 +45,15 @@ class WebRoute extends React.Component<IProps, IState> {
 
 				{/*Announcements*/}
 				<Route path={PATHS.announcements.index} element={<AnnouncementsIndexPage />} />
-				<Route path={PATHS.announcements.show} element={<AnnouncementsShowDetailsPage />} />
 				<Route path={PATHS.announcements.create} element={<AnnouncementsCreatePage />} />
+				<Route path={PATHS.announcements.show} element={<AnnouncementsShowDetailsPage />} />
 				<Route path={PATHS.announcements.edit} element={<AnnouncementsEditPage />} />
+
+				{/*Contents*/}
+				<Route path={PATHS.contents.index} element={<ContentsIndexPage />} />
+				<Route path={PATHS.contents.create} element={<ContentsCreatePage />} />
+				<Route path={PATHS.contents.show} element={<ContentsShowDetailsPage />} />
+				<Route path={PATHS.contents.edit} element={<ContentsEditPage />} />
 
 				<Route path={shareData.CONSTANT.SSO_URL_FROM_MY_GOV} element={<Navigate to='/' />} />
 				<Route path='*' element={<NotFoundPage />} />

@@ -70,7 +70,7 @@ const useEditAnnouncement = () => {
 };
 
 const deleteAnnouncementFn = (id: string) => {
-	return ManagementAxiosInstance.delete(`/Announcement/DeleteAnnouncement/${id}`);
+	return ManagementAxiosInstance.delete(`/Announcement/DeleteAnnouncement?id=${id}`);
 };
 const useDeleteAnnouncement = () => {
 	return useMutation({ mutationFn: deleteAnnouncementFn });
