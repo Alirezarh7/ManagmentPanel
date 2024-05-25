@@ -43,7 +43,7 @@ const DeleteAnnouncementModal = ({ data, isOpen, onSuccess, onCancel }: IProps) 
 					<p>{data.subject}</p>
 				</div>
 			</div>
-			<div className='flex flex-col md:flex-row gap-4'>
+			<div className='flex flex-col md:flex-row gap-4 mt-10'>
 				<CustomButton
 					variant={'primary'}
 					type={'button'}

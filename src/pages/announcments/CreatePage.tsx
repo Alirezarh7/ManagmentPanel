@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ICreateAnnouncementDto } from '../../typs/announcement.types';
 import CustomButton from '../../components/general/Buttons/CustomButton';
 import { convertToBase64, isValidUploadedImageType } from '../../utils/fileUtils';
-import { AnnouncementServiceTypes } from '../../constants/announcement.const';
+import { announcementServiceTypes } from '../../constants/announcement.const';
 import CustomInput from '../../components/general/inputs/CustomInput';
 import { useCreateAnnouncement } from '../../services/announcement.service';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
@@ -160,19 +160,19 @@ const AnnouncementsCreatePage = () => {
 										value={value}
 										onChange={e => {
 											const newValue = e.target.value;
-											const stringServiceType = AnnouncementServiceTypes.find(q => q.id === Number(newValue));
+											const stringServiceType = announcementServiceTypes.find(q => q.id === Number(newValue));
 											setValue('serviceType', stringServiceType?.name ?? 'unknown');
 											onChange(newValue);
 										}}
 										className={`${errors.serviceType || errors.serviceTypeId ? '!border-danger' : ''}`}>
 										<option value={0}>انتخاب کنید</option>
-										{AnnouncementServiceTypes.map(item => (
+										{announcementServiceTypes.map(item => (
 											<option key={item.id} value={item.id}>
 												{item.nameFa}
 											</option>
 										))}
 									</select>
-									{errors.serviceType ? <span className='text-danger'>{errors.serviceType.message}</span> : null}
+									{errors.serviceType ? <span className='text-danger'>{errors.serviceType.message + ' '}</span> : null}
 									{errors.serviceTypeId ? <span className='text-danger'>{errors.serviceTypeId.message}</span> : null}
 								</div>
 							)}
