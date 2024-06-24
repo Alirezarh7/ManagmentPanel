@@ -33,7 +33,6 @@ const useGetAnnouncementsByMainPage = () => {
 
 const getAnnouncementsStatisticsFn = async () => {
 	const { data } = await ManagementAxiosInstance.get<IAnnouncementsStatistics>('/Announcement/GetAnnouncementsStatistics');
-
 	return data;
 };
 const useGetAnnouncementsStatistics = () => {
