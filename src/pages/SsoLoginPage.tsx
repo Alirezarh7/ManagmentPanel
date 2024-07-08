@@ -57,9 +57,9 @@ function SsoLoginPage(): React.JSX.Element {
 						ورود از طریق درگاه سازمان
 					</button>
 					{/*onClick={() => selectSso('organization')}*/}
-					<button onClick={() => selectSso('mygov')} className='m-3 sso-login-btns' style={{ background: 'rgb(189, 161, 87)' }}>
-						ورود از طریق درگاه دولت من
-					</button>
+					{/*<button onClick={() => selectSso('mygov')} className='m-3 sso-login-btns' style={{ background: 'rgb(189, 161, 87)' }}>*/}
+					{/*	ورود از طریق درگاه دولت من*/}
+					{/*</button>*/}
 				</div>
 				<a
 					href={'https://tamatoreserve.haj.ir/'}

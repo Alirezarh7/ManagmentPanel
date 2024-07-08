@@ -6,7 +6,7 @@ import {shareData} from "../shareData";
 // Log.level = Log.DEBUG;
 
 const ssoURLGov = "https://sso.my.gov.ir/oauth2";
-const ssoURLOrganization = "http://ssohaj.haj.ir:8090/";
+const ssoURLOrganization = "https://ssohaj.navoshgaran.com/";
 // const ssoURLOrganization = "http://192.168.2.29:8090/";
 // const ssoURLOrganization = "https://auth.haj.ir";
 
