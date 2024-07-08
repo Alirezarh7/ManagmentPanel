@@ -211,7 +211,7 @@ const validDataReplaceSsn = (user: any) => {
 
 enum CONSTANT {
 	GOV_STORAGE_KEY = 'oidc.user:https://sso.my.gov.ir/oauth2:my.haj',
-	ORGANIZATION_STORAGE_KEY = 'oidc.user:http://ssohaj.haj.ir:8090/:IntegratedWindow',
+	ORGANIZATION_STORAGE_KEY = 'oidc.user:https://ssohaj.navoshgaran.com/:IntegratedWindow',
 	// ORGANIZATION_STORAGE_KEY = 'oidc.user:http://192.168.2.29:8090:IntegratedWindow',
 
 	SSO_USERINFO_URL = 'https://sso.my.gov.ir/api/v1/user/userinfo',

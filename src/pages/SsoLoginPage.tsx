@@ -52,7 +52,7 @@ function SsoLoginPage(): React.JSX.Element {
 				<div className='flex items-center justify-center flex-md-row flex-col'>
 					<button
 						onClick={() => selectSso('organization')}
-						className='m-3 sso-login-btns disabled'
+						className='m-3 sso-login-btns'
 						style={{ background: 'rgb(189, 161, 87)' }}>
 						ورود از طریق درگاه سازمان
 					</button>
