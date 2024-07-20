@@ -15,7 +15,7 @@ const MainLayout = (props: IProps) => {
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
 
 	return (
-		<div className='dark:bg-boxdark-2 dark:text-bodydark'>
+		<div className='bg-boxdark-2 text-black dark:text-bodydark  '>
 			<div className='flex h-screen overflow-hidden'>
 				<Sidebar sidebarOpen={isOpenSidebar} setSidebarOpen={setIsOpenSidebar} />
 				<div className='relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden'>

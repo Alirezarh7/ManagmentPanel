@@ -29,7 +29,7 @@ const CustomButton = ({ variant, type, label, icon, onClick, loading, disabled }
 	const SelectFullScreen =
 		'text-black bg-white border !border-black rounded-sm  hover:!bg-[#F1F3D0]  hover:shadow-[0_0_5px_5px_#d1d5db w-full md:min-w-[170px] mx-2';
 	const classNameCreator = (): string => {
-		let finalClassName = ' outline-none duration-300 h-10  se:text-lg text-sm font-semibold border-2';
+		let finalClassName = ' outline-none duration-300 h-10  se:text-lg text-sm font-semibold border-2 ';
 		if (variant === 'primary') {
 			finalClassName += primaryClasses;
 		} else if (variant === 'secondary') {

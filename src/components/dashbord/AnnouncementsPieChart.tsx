@@ -102,28 +102,28 @@ const AnnouncementsPieChart = ({ statistics }: IProps) => {
 			<div className='p-2 grid lg:grid-cols-2 gap-3'>
 				<div className='px-2 flex justify-between items-center gap-2 text-sm font-medium'>
 					<FaCircle className='w-4 h-4 text-[#7235b8]' />
-					<span className='flex-1'>تمتع</span>
-					<span>{calculatePercentage(statistics.tamato)} % </span>
+					<span className='flex-1 text-black'>تمتع</span>
+					<span className='text-black'>{calculatePercentage(statistics.tamato)} % </span>
 				</div>
 				<div className='px-2 flex justify-between items-center gap-2 text-sm font-medium'>
 					<FaCircle className='w-4 h-4 text-[#6577F3]' />
-					<span className='flex-1'>عمره</span>
-					<span>{calculatePercentage(statistics.omreh)} % </span>
+					<span className='flex-1 text-black'>عمره</span>
+					<span className='text-black'>{calculatePercentage(statistics.omreh)} % </span>
 				</div>
 				<div className='px-2 flex justify-between items-center gap-2 text-sm font-medium'>
 					<FaCircle className='w-4 h-4 text-[#2a23de]' />
-					<span className='flex-1'>عتبات</span>
-					<span>{calculatePercentage(statistics.atabat)} % </span>
+					<span className='flex-1 text-black'>عتبات</span>
+					<span className='text-black'>{calculatePercentage(statistics.atabat)} % </span>
 				</div>
 				<div className='px-2 flex justify-between items-center gap-2 text-sm font-medium'>
 					<FaCircle className='w-4 h-4 text-[#485d6e]' />
-					<span className='flex-1'>اربعین</span>
-					<span>{calculatePercentage(statistics.arbaein)} % </span>
+					<span className='flex-1 text-black'>اربعین</span>
+					<span className='text-black'>{calculatePercentage(statistics.arbaein)} % </span>
 				</div>
 				<div className='px-2 flex justify-between items-center gap-2 text-sm font-medium'>
 					<FaCircle className='w-4 h-4 text-[#7b8041]' />
-					<span className='flex-1'>سوریه</span>
-					<span>{calculatePercentage(statistics.soria)} % </span>
+					<span className='flex-1 text-black'>سوریه</span>
+					<span className='text-black'>{calculatePercentage(statistics.soria)} % </span>
 				</div>
 			</div>
 		</div>

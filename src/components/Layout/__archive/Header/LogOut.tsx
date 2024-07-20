@@ -45,7 +45,7 @@ const LogOut = (props: IProps) => {
 
 	return (
 		<React.Fragment>
-			<div className='dropdown inline'>
+			<div className='dropdown inline mx-2 '>
 				<span
 					className='dropdown-toggle cup'
 					id='dropdownMenuButton'
