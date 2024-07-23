@@ -1,24 +1,31 @@
-echo '🏗️👷 Styling, testing and building your project before committing'
+echo '🟢'
+echo '🟢'
+echo '🟢'
+echo '🟢 Pre-Commit Operations'
 
 # Check ESLint Standards
+echo '🟢 Step 01 -> Check ESLint Standards'
 npm run check-lint ||
 (
         echo '❌❌❌ ESLint Check Failed ❌❌❌
                 Make the required changes listed above, add changes and try to commit again.'
         false;
 )
+echo '✅ Step 01 -> Done'
 
-# Check tsconfig standards
+# Check tsconfig Standards
+echo '🟢 Step 02 -> Check tsconfig Standards'
 npm run check-types ||
 (
     echo '❌❌❌ Failed Type check. ❌❌❌
             Are you seriously trying to write that? Make the changes required above.'
     false;
 )
+echo '✅ Step 02 -> Done'
 
 # If everything passes... Now we can commit
-echo '👍 ... Alright.... Code looks good to me... Trying to build now. 👍'
-
+echo '👍 ... Alright.... Code looks good ... Trying to build now. 👍'
+echo '🟢 Step 03 -> Build Project'
 npm run build ||
 (
     echo '❌👷🔨❌ Your build failed ❌👷🔨❌
@@ -26,6 +33,7 @@ npm run build ||
     '
     false;
 )
+echo '✅ Step 03 -> Done'
 
 # If everything passes... Now we can commit
 echo '✅✅✅✅ Everything is fine... I am committing this now. ✅✅✅✅'
