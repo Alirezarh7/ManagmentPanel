@@ -4,23 +4,22 @@ import { PATHS } from '../../router/paths';
 import CustomInput from '../../components/general/inputs/CustomInput';
 import { serviceTypes, subServiceTypes } from '../../constants/general.const';
 import CustomLineSpinner from '../../components/general/spinners/CustomLineSpinner';
-import { useGetContentById } from '../../services/content.service';
-import { contentLocations } from '../../constants/content.const';
+import { useGetFaqContentById } from '../../services/faqContent.service';
 
-const ContentsShowDetailsPage = () => {
+const FaqContentsShowDetailsPage = () => {
 	const { id } = useParams();
-	const { data, isLoading, isFetching } = useGetContentById(id ?? '');
+	const { data, isLoading, isFetching } = useGetFaqContentById(id ?? '');
 
 	return (
 		<div className='space-y-4'>
-			<Breadcrumb items={[{ label: 'محتویات', url: PATHS.contents.index }, { label: 'مشاهده' }]} />
-			<h1 className='text-xl mb-3'>مشاهده جزئیات محتوا </h1>
+			<Breadcrumb items={[{ label: 'سوالات پرتکرار', url: PATHS.faqContents.index }, { label: 'مشاهده' }]} />
+			<h1 className='text-xl mb-3'>مشاهده سوال پرتکرار </h1>
 
 			{isLoading || isFetching ? <CustomLineSpinner /> : null}
 
 			{!isLoading && data && (
 				<div className='max-w-screen-xl w-full mx-auto flex flex-col'>
-					<div className='grid grid-cols-4 gap-4'>
+					<div className='grid grid-cols-3 gap-4'>
 						<CustomInput label='آی دی' type={'text'} value={data.id} onChange={() => {}} disabled={true} />
 						<CustomInput
 							label='نوع خدمت'
@@ -36,27 +35,20 @@ const ContentsShowDetailsPage = () => {
 							onChange={() => {}}
 							disabled={true}
 						/>
-						<CustomInput
-							label='مکان محتوا'
-							type={'text'}
-							value={contentLocations.find(q => q.id === data.contentLocationId)?.nameFa ?? 'نامشخص'}
-							onChange={() => {}}
-							disabled={true}
-						/>
 					</div>
 					<div>
 						<CustomInput
 							className='col-span-2'
-							label='موضوع محتوا'
+							label='سوال'
 							type={'text'}
-							value={data.subject}
+							value={data.question}
 							onChange={() => {}}
 							disabled={true}
 						/>
 						<div className='col-span-2'>
-							<label className='form-label'>متن محتوا</label>
+							<label className='form-label'>جواب</label>
 							<div
-								dangerouslySetInnerHTML={{ __html: data.body }}
+								dangerouslySetInnerHTML={{ __html: data.answer }}
 								className='w-full px-3 py-3 text-base border border-gray-300 rounded-md'></div>
 						</div>
 					</div>
@@ -66,4 +58,4 @@ const ContentsShowDetailsPage = () => {
 	);
 };
 
-export default ContentsShowDetailsPage;
+export default FaqContentsShowDetailsPage;

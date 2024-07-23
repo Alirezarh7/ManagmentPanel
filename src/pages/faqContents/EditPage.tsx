@@ -12,44 +12,39 @@ import { enqueueSnackbar } from 'notistack';
 import { useNavigate, useParams } from 'react-router-dom';
 import CustomLineSpinner from '../../components/general/spinners/CustomLineSpinner';
 import { useQueryClient } from '@tanstack/react-query';
-import { useEditContent, useGetContentById } from '../../services/content.service';
-import { ICreateContentDto, IEditContentDto } from '../../typs/content.types';
-import { contentLocations } from '../../constants/content.const';
+import { useEditFaqContent, useGetFaqContentById } from '../../services/faqContent.service';
+import { ICreateFaqContentDto, IEditFaqContentDto } from '../../typs/faqContent.types';
 
-const ContentsEditPage = () => {
+const FaqContentsEditPage = () => {
 	const { id } = useParams();
 	const queryClient = useQueryClient();
-	const { data: contentData, isLoading, isFetching, isError: isErrorForGetById } = useGetContentById(id ?? '');
-	const { mutate, isPending } = useEditContent();
+	const { data: faqContentData, isLoading, isFetching, isError: isErrorForGetById } = useGetFaqContentById(id ?? '');
+	const { mutate, isPending } = useEditFaqContent();
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (isErrorForGetById && !isLoading) {
-			enqueueSnackbar('خطا در دریافت محتوا ', { variant: 'error' });
-			navigate(PATHS.contents.index);
+			enqueueSnackbar('خطا در دریافت سوال ', { variant: 'error' });
+			navigate(PATHS.faqContents.index);
 		}
 	}, [isErrorForGetById]);
 
-	const defaultFormValues: ICreateContentDto = {
-		subject: '',
-		body: '',
+	const defaultFormValues: ICreateFaqContentDto = {
+		question: '',
+		answer: '',
 		serviceType: '',
 		serviceTypeId: 0,
 		subServiceType: '',
-		subServiceTypeId: 0,
-		contentLocation: '',
-		contentLocationId: 0
+		subServiceTypeId: 0
 	};
 
-	const editContentSchema = Yup.object().shape({
-		subject: Yup.string().required('این فیلد اجباری است'),
-		body: Yup.string().required('این فیلد اجباری است'),
+	const editFaqContentSchema = Yup.object().shape({
+		question: Yup.string().required('این فیلد اجباری است'),
+		answer: Yup.string().required('این فیلد اجباری است'),
 		serviceType: Yup.string().required('این فیلد اجباری است'),
 		serviceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
 		subServiceType: Yup.string().required('این فیلد اجباری است'),
-		subServiceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
-		contentLocation: Yup.string().required('این فیلد اجباری است'),
-		contentLocationId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید')
+		subServiceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید')
 	});
 
 	const {
@@ -57,53 +52,51 @@ const ContentsEditPage = () => {
 		handleSubmit,
 		formState: { errors },
 		setValue
-	} = useForm<ICreateContentDto>({
+	} = useForm<ICreateFaqContentDto>({
 		defaultValues: defaultFormValues,
-		resolver: yupResolver(editContentSchema)
+		resolver: yupResolver(editFaqContentSchema)
 	});
 
 	useEffect(() => {
-		if (contentData) {
-			setValue('subject', contentData.subject);
-			setValue('body', contentData.body);
-			setValue('serviceType', contentData.serviceType);
-			setValue('serviceTypeId', contentData.serviceTypeId);
-			setValue('subServiceType', contentData.subServiceType);
-			setValue('subServiceTypeId', contentData.subServiceTypeId);
-			setValue('contentLocation', contentData.contentLocation);
-			setValue('contentLocationId', contentData.contentLocationId);
+		if (faqContentData) {
+			setValue('question', faqContentData.question);
+			setValue('answer', faqContentData.answer);
+			setValue('serviceType', faqContentData.serviceType);
+			setValue('serviceTypeId', faqContentData.serviceTypeId);
+			setValue('subServiceType', faqContentData.subServiceType);
+			setValue('subServiceTypeId', faqContentData.subServiceTypeId);
 		}
-	}, [contentData]);
+	}, [faqContentData]);
 
-	const onSubmitFormHandler = async (submittedData: ICreateContentDto) => {
+	const onSubmitFormHandler = async (submittedData: ICreateFaqContentDto) => {
 		// validation ****************************************************************************************
-		if (!contentData) {
+		if (!faqContentData) {
 			return;
 		}
 		// validation ****************************************************************************************
-		const data: IEditContentDto = {
+		const data: IEditFaqContentDto = {
 			...submittedData,
-			id: contentData.id
+			id: faqContentData.id
 		};
 
 		mutate(data, {
 			onSuccess: () => {
-				enqueueSnackbar('محتوا با موفقیت ویرایش شد', { variant: 'success' });
+				enqueueSnackbar('سوال با موفقیت ویرایش شد', { variant: 'success' });
 				queryClient.invalidateQueries({
-					queryKey: ['getContents']
+					queryKey: ['getFaqContents']
 				});
-				navigate(PATHS.contents.index);
+				navigate(PATHS.faqContents.index);
 			},
 			onError: error => {
-				enqueueSnackbar('خطا در ویرایش محتوا', { variant: 'error' });
+				enqueueSnackbar('خطا در ویرایش سوال', { variant: 'error' });
 			}
 		});
 	};
 
 	return (
 		<div className='space-y-4'>
-			<Breadcrumb items={[{ label: 'محتویات', url: PATHS.contents.index }, { label: 'ویرایش' }]} />
-			<h1 className='text-xl mb-3'>ویرایش محتوا </h1>
+			<Breadcrumb items={[{ label: 'سوالات پرتکرار', url: PATHS.faqContents.index }, { label: 'ویرایش' }]} />
+			<h1 className='text-xl mb-3'>ویرایش سوال پرتکرار </h1>
 
 			{isLoading || isFetching ? <CustomLineSpinner /> : null}
 
@@ -166,58 +159,31 @@ const ContentsEditPage = () => {
 								</div>
 							)}
 						/>
-						<Controller
-							name='contentLocationId'
-							control={control}
-							render={({ field: { value, onChange } }) => (
-								<div>
-									<label>مکان محتوا</label>
-									<select
-										value={value}
-										onChange={e => {
-											const newValue = e.target.value;
-											const stringContentLocation = contentLocations.find(q => q.id === Number(newValue));
-											setValue('contentLocation', stringContentLocation?.name ?? 'unknown');
-											onChange(newValue);
-										}}
-										className={`${errors.contentLocation || errors.contentLocationId ? '!border-danger' : ''}`}>
-										<option value={0}>انتخاب کنید</option>
-										{contentLocations.map(item => (
-											<option key={item.id} value={item.id}>
-												{item.nameFa}
-											</option>
-										))}
-									</select>
-									{errors.contentLocation ? <span className='text-danger'>{errors.contentLocation.message + ' '}</span> : null}
-									{errors.contentLocationId ? <span className='text-danger'>{errors.contentLocationId.message}</span> : null}
-								</div>
-							)}
-						/>
 					</div>
 					<Controller
-						name='subject'
+						name='question'
 						control={control}
 						render={({ field: { value, onChange } }) => (
 							<CustomInput
 								type={'text'}
-								label='موضوع محتوا'
+								label='سوال'
 								className='md:col-span-2'
 								value={value}
 								onChange={onChange}
-								error={errors.subject && errors.subject.message}
+								error={errors.question?.message}
 							/>
 						)}
 					/>
 					<Controller
-						name='body'
+						name='answer'
 						control={control}
 						render={({ field: { value, onChange } }) => (
 							<CustomTextEditor
 								showPreview={true}
-								label='متن محتوا'
+								label='جواب'
 								value={value}
 								onChange={onChange}
-								error={errors.body && errors.body.message}
+								error={errors.answer && errors.answer.message}
 							/>
 						)}
 					/>
@@ -230,4 +196,4 @@ const ContentsEditPage = () => {
 	);
 };
 
-export default ContentsEditPage;
+export default FaqContentsEditPage;

@@ -4,12 +4,13 @@ import { dashboardActions } from './PublicPages/Actions/Dashboard/action';
 import { IApplicationState } from '../store/state';
 import { connect } from 'react-redux';
 import useTitle from '../hooks/useTitle';
-import AnnouncementsPieChart from '../components/dashbord/AnnouncementsPieChart';
+import AnnouncementsPieChartAll from '../components/dashbord/AnnouncementsPieChartAll';
 import { useGetAnnouncementsStatistics } from '../services/announcement.service';
 import CustomLineSpinner from '../components/general/spinners/CustomLineSpinner';
 import { DateObject } from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
+import AnnouncementsPieChartActive from '../components/dashbord/AnnouncementsPieChartActive';
 
 type IProps = typeof dashboardActions & IDashboardState;
 
@@ -33,10 +34,9 @@ const DashboardPage = (props: IProps) => {
 			</div>
 
 			{isLoading || isFetching ? <CustomLineSpinner /> : null}
-			<div className='p-2 grid sm:grid-cols-2 md:grid-cols-3'>
-				<div>
-					<AnnouncementsPieChart statistics={data} />
-				</div>
+			<div className='p-2 grid sm:grid-cols-2 md:grid-cols-3 md:gap-4'>
+				<AnnouncementsPieChartAll statistics={data} />
+				<AnnouncementsPieChartActive statistics={data} />
 			</div>
 		</div>
 	);
