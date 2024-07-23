@@ -16,5 +16,13 @@ export const PATHS = {
 		edit: '/contents/:id/edit',
 		editFn: (id: string) => `/contents/${id}/edit`
 	},
+	faqContents: {
+		index: '/faq-contents',
+		create: '/faq-contents/create',
+		show: '/faq-contents/:id',
+		showFn: (id: string) => `/faq-contents/${id}`,
+		edit: '/faq-contents/:id/edit',
+		editFn: (id: string) => `/faq-contents/${id}/edit`
+	},
 	calender: '/calender'
 };

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Breadcrumb from '../../components/Layout/Breadcrumb';
 import { PATHS } from '../../router/paths';
 import CustomInput from '../../components/general/inputs/CustomInput';
-import { announcementServiceTypes } from '../../constants/announcement.const';
+import { serviceTypes } from '../../constants/general.const';
 import CustomLineSpinner from '../../components/general/spinners/CustomLineSpinner';
 import { useGetContentById } from '../../services/content.service';
 import { contentLocations } from '../../constants/content.const';
@@ -28,7 +28,7 @@ const ContentsShowDetailsPage = () => {
 						<CustomInput
 							label='سرویس محتوا'
 							type={'text'}
-							value={announcementServiceTypes.find(q => q.id === data.serviceTypeId)?.nameFa ?? 'نامشخص'}
+							value={serviceTypes.find(q => q.id === data.serviceTypeId)?.nameFa ?? 'نامشخص'}
 							onChange={() => {}}
 							disabled={true}
 						/>

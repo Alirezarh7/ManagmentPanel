@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomButton from '../../components/general/Buttons/CustomButton';
-import { announcementServiceTypes } from '../../constants/announcement.const';
+import { serviceTypes } from '../../constants/general.const';
 import CustomInput from '../../components/general/inputs/CustomInput';
 import CustomTextEditor from '../../components/general/textEditor/CustomTextEditor';
 import { enqueueSnackbar } from 'notistack';
@@ -23,6 +23,8 @@ const ContentsCreatePage = () => {
 		body: '',
 		serviceType: '',
 		serviceTypeId: 0,
+		subServiceType: '',
+		subServiceTypeId: 0,
 		contentLocation: '',
 		contentLocationId: 0
 	};
@@ -32,6 +34,8 @@ const ContentsCreatePage = () => {
 		body: Yup.string().required('این فیلد اجباری است'),
 		serviceType: Yup.string().required('این فیلد اجباری است'),
 		serviceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
+		subServiceType: Yup.string().required('این فیلد اجباری است'),
+		subServiceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
 		contentLocation: Yup.string().required('این فیلد اجباری است'),
 		contentLocationId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید')
 	});
@@ -76,13 +80,13 @@ const ContentsCreatePage = () => {
 										value={value}
 										onChange={e => {
 											const newValue = e.target.value;
-											const stringServiceType = announcementServiceTypes.find(q => q.id === Number(newValue));
+											const stringServiceType = serviceTypes.find(q => q.id === Number(newValue));
 											setValue('serviceType', stringServiceType?.name ?? 'unknown');
 											onChange(newValue);
 										}}
 										className={`${errors.serviceType || errors.serviceTypeId ? '!border-danger' : ''}`}>
 										<option value={0}>انتخاب کنید</option>
-										{announcementServiceTypes.map(item => (
+										{serviceTypes.map(item => (
 											<option key={item.id} value={item.id}>
 												{item.nameFa}
 											</option>

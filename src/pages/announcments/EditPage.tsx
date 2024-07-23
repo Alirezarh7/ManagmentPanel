@@ -7,7 +7,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ICreateAnnouncementDto } from '../../typs/announcement.types';
 import CustomButton from '../../components/general/Buttons/CustomButton';
 import { convertToBase64, isValidUploadedImageType } from '../../utils/fileUtils';
-import { announcementServiceTypes } from '../../constants/announcement.const';
+import {
+	serviceTypes,
+	booleanDefaultValuesArray,
+	booleanIsActiveValuesArray,
+	oneKB,
+	UPLOAD_FILE_SIZES
+} from '../../constants/general.const';
 import CustomInput from '../../components/general/inputs/CustomInput';
 import { useEditAnnouncement, useGetAnnouncementById } from '../../services/announcement.service';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
@@ -18,7 +24,6 @@ import { enqueueSnackbar } from 'notistack';
 import { useNavigate, useParams } from 'react-router-dom';
 import CustomLineSpinner from '../../components/general/spinners/CustomLineSpinner';
 import { useQueryClient } from '@tanstack/react-query';
-import { booleanDefaultValuesArray, booleanIsActiveValuesArray, oneKB, UPLOAD_FILE_SIZES } from '../../constants/general.const';
 import CustomRadioButton from '../../components/general/radioButton/CustomRadioButton';
 import CustomAlert from '../../components/general/alerts/CustomAlert';
 import { MdOutlineCloudUpload } from 'react-icons/md';
@@ -201,13 +206,13 @@ const AnnouncementsEditPage = () => {
 										value={value}
 										onChange={e => {
 											const newValue = e.target.value;
-											const stringServiceType = announcementServiceTypes.find(q => q.id === Number(newValue));
+											const stringServiceType = serviceTypes.find(q => q.id === Number(newValue));
 											setValue('serviceType', stringServiceType?.name ?? 'unknown');
 											onChange(newValue);
 										}}
 										className={`${errors.serviceType || errors.serviceTypeId ? '!border-danger' : ''}`}>
 										<option value={0}>انتخاب کنید</option>
-										{announcementServiceTypes.map(item => (
+										{serviceTypes.map(item => (
 											<option key={item.id} value={item.id}>
 												{item.nameFa}
 											</option>

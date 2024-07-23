@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FiEye } from 'react-icons/fi';
 import { FaRegEdit } from 'react-icons/fa';
 import { AiOutlineDelete } from 'react-icons/ai';
-import { announcementServiceTypes } from '../../constants/announcement.const';
+import { serviceTypes, subServiceTypes } from '../../constants/general.const';
 import DeleteContentModal from './DeleteContentModal';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '../../router/paths';
@@ -18,7 +18,7 @@ const ContentsTableRow = ({ data }: IProps) => {
 	const navigate = useNavigate();
 
 	const getServiceDetails = (serviceType: string): { label: string; classes: string } => {
-		const service = announcementServiceTypes.find(q => q.name === serviceType);
+		const service = serviceTypes.find(q => q.name === serviceType);
 		let classes: string = '';
 		if (!service) return { label: 'نامشخص', classes: '' };
 		switch (service.id) {
@@ -61,6 +61,12 @@ const ContentsTableRow = ({ data }: IProps) => {
 					<span
 						className={`bg-opacity-10 py-1 px-3  text-sm font-medium rounded-2xl ${getServiceDetails(data.serviceType).classes}`}>
 						{getServiceDetails(data.serviceType).label}
+					</span>
+				</td>
+
+				<td className='py-2 px-1 text-center dark:border-strokedark'>
+					<span className='bg-opacity-10 py-1 px-3  text-sm font-medium rounded-2xl'>
+						{subServiceTypes.find(q => q.name === data.subServiceType)?.nameFa}
 					</span>
 				</td>
 				<td className='py-2 px-1 text-center dark:border-strokedark'>
