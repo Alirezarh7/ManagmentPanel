@@ -3,6 +3,8 @@ export interface ICreateContentDto {
 	body: string;
 	serviceType: string;
 	serviceTypeId: number;
+	subServiceType: string;
+	subServiceTypeId: number;
 	contentLocation: string;
 	contentLocationId: number;
 }

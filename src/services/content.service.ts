@@ -1,5 +1,5 @@
-import { IContentResponse, ICreateContentDto, IEditContentDto } from '../typs/content.types';
 import ManagementAxiosInstance from '../configs/managementAxiosInstance';
+import { IContentResponse, ICreateContentDto, IEditContentDto } from '../typs/content.types';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 const getContentsFn = async () => {

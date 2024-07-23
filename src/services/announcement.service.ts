@@ -1,10 +1,10 @@
+import ManagementAxiosInstance from '../configs/managementAxiosInstance';
 import {
 	IAnnouncementResponse,
 	IAnnouncementsStatistics,
 	ICreateAnnouncementFnDto,
 	IEditAnnouncementFnDto
 } from '../typs/announcement.types';
-import ManagementAxiosInstance from '../configs/managementAxiosInstance';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 const getAnnouncementsFn = async () => {

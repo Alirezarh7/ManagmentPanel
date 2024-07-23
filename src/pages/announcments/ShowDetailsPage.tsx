@@ -4,7 +4,7 @@ import { useGetAnnouncementById } from '../../services/announcement.service';
 import Breadcrumb from '../../components/Layout/Breadcrumb';
 import { PATHS } from '../../router/paths';
 import CustomInput from '../../components/general/inputs/CustomInput';
-import { announcementServiceTypes } from '../../constants/announcement.const';
+import { serviceTypes } from '../../constants/general.const';
 import { DateObject } from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
@@ -31,7 +31,7 @@ const AnnouncementsShowDetailsPage = () => {
 							<CustomInput
 								label='سرویس اطلاعیه'
 								type={'text'}
-								value={announcementServiceTypes.find(q => q.id === data.serviceTypeId)?.nameFa ?? 'نامشخص'}
+								value={serviceTypes.find(q => q.id === data.serviceTypeId)?.nameFa ?? 'نامشخص'}
 								onChange={() => {}}
 								disabled={true}
 							/>

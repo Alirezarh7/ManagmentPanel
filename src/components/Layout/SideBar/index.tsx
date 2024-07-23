@@ -7,12 +7,20 @@ import { TfiAnnouncement } from 'react-icons/tfi';
 import { IoHomeOutline } from 'react-icons/io5';
 import { SlCalender } from 'react-icons/sl';
 
-interface SidebarProps {
+const menuItems = [
+	{ id: 1, label: 'خانه', route: PATHS.home, icon: <IoHomeOutline className='w-4 h-4' /> },
+	{ id: 2, label: 'اطلاعیه ها', route: PATHS.announcements.index, icon: <TfiAnnouncement className='w-4 h-4' /> },
+	{ id: 3, label: 'محتواهای سایت', route: PATHS.contents.index, icon: <TfiAnnouncement className='w-4 h-4' /> },
+	{ id: 4, label: 'سوالات پرتکرار', route: PATHS.faqContents.index, icon: <TfiAnnouncement className='w-4 h-4' /> },
+	{ id: 5, label: 'تقویم', route: PATHS.calender, icon: <SlCalender className='w-4 h-4' /> }
+];
+
+interface IProps {
 	sidebarOpen: boolean;
 	setSidebarOpen: (arg: boolean) => void;
 }
 
-const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
+const Sidebar = ({ sidebarOpen, setSidebarOpen }: IProps) => {
 	const location = useLocation();
 	const { pathname } = location;
 
@@ -83,37 +91,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 					{/* <!-- Menu Group --> */}
 					<div>
 						<h3 className='mb-4 ml-4 text-sm font-semibold text-bodydark2'>فهرست</h3>
-
-						<ul className='mb-6 flex flex-col gap-1.5'>
+						<div className='mb-6 flex flex-col gap-1.5'>
 							{/* <!-- Menu Item Calendar --> */}
-							<li>
+							{menuItems.map(item => (
 								<NavLink
-									to={PATHS.home}
+									key={item.id}
+									to={item.route}
 									className='group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4'>
-									<IoHomeOutline className='w-4 h-4' />
-									<span>خانه</span>
+									{item.icon}
+									<span>{item.label}</span>
 								</NavLink>
-								<NavLink
-									to={PATHS.announcements.index}
-									className='group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4'>
-									<TfiAnnouncement className='w-4 h-4' />
-									<span>اطلاعیه ها</span>
-								</NavLink>
-								<NavLink
-									to={PATHS.contents.index}
-									className='group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4'>
-									<TfiAnnouncement className='w-4 h-4' />
-									<span>محتویات</span>
-								</NavLink>
-								<NavLink
-									to={PATHS.calender}
-									className='group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4'>
-									<SlCalender className='w-4 h-4' />
-									<span>تقویم</span>
-								</NavLink>
-							</li>
-							{/* <!-- Menu Item Calendar --> */}
-						</ul>
+							))}
+						</div>
 					</div>
 				</nav>
 				{/* <!-- Sidebar Menu --> */}

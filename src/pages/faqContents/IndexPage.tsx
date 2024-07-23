@@ -6,38 +6,38 @@ import { PATHS } from '../../router/paths';
 import CustomLineSpinner from '../../components/general/spinners/CustomLineSpinner';
 import { enqueueSnackbar } from 'notistack';
 import useTitle from '../../hooks/useTitle';
-import ContentsTable from '../../components/content/ContentsTable';
-import { useGetContents } from '../../services/content.service';
+import { useGetFaqContents } from '../../services/faqContent.service';
+import FaqContentsTable from '../../components/faqContent/FaqContentsTable';
 
-const ContentsIndexPage = () => {
+const FaqContentsIndexPage = () => {
 	const navigate = useNavigate();
-	useTitle('contents', 'ناوشگران');
+	useTitle('faqContents', 'ناوشگران');
 
-	const { data: contents, isLoading, isFetching, isError } = useGetContents();
+	const { data: faqContents, isLoading, isFetching, isError } = useGetFaqContents();
 
 	const isPageLoading: boolean = isLoading || isFetching;
 
 	useEffect(() => {
 		if (isError) {
-			enqueueSnackbar('مشکل در بروزرسانی لیست محتواهای سایت', { variant: 'error' });
+			enqueueSnackbar('مشکل در بروزرسانی لیست سوالات پرتکرار', { variant: 'error' });
 		}
 	}, [isError]);
 
 	const redirectToCreatePage = () => {
-		navigate(PATHS.contents.create);
+		navigate(PATHS.faqContents.create);
 	};
 
 	return (
 		<div className='space-y-4'>
-			<Breadcrumb items={[{ label: 'محتواهای سایت' }]} />
+			<Breadcrumb items={[{ label: 'سوالات پرتکرار' }]} />
 			<div className='flex justify-between items-center'>
-				<h1 className='text-xl'>مدیریت محتواهای سایت</h1>
+				<h1 className='text-xl'>سوالات پرتکرار</h1>
 				<CustomButton variant={'primary'} type={'button'} label={'ایجاد'} onClick={redirectToCreatePage} />
 			</div>
 			{isPageLoading ? <CustomLineSpinner /> : null}
-			<ContentsTable contents={contents} />
+			<FaqContentsTable faqContents={faqContents} />
 		</div>
 	);
 };
 
-export default ContentsIndexPage;
+export default FaqContentsIndexPage;

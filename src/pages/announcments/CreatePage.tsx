@@ -7,7 +7,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ICreateAnnouncementDto } from '../../typs/announcement.types';
 import CustomButton from '../../components/general/Buttons/CustomButton';
 import { convertToBase64, isValidUploadedImageType } from '../../utils/fileUtils';
-import { announcementServiceTypes } from '../../constants/announcement.const';
+import {
+	serviceTypes,
+	booleanDefaultValuesArray,
+	booleanIsActiveValuesArray,
+	oneKB,
+	UPLOAD_FILE_SIZES
+} from '../../constants/general.const';
 import CustomInput from '../../components/general/inputs/CustomInput';
 import { useCreateAnnouncement } from '../../services/announcement.service';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
@@ -17,7 +23,6 @@ import CustomTextEditor from '../../components/general/textEditor/CustomTextEdit
 import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 import CustomRadioButton from '../../components/general/radioButton/CustomRadioButton';
-import { booleanDefaultValuesArray, booleanIsActiveValuesArray, oneKB, UPLOAD_FILE_SIZES } from '../../constants/general.const';
 import { MdOutlineCloudUpload } from 'react-icons/md';
 import CustomAlert from '../../components/general/alerts/CustomAlert';
 
@@ -160,13 +165,13 @@ const AnnouncementsCreatePage = () => {
 										value={value}
 										onChange={e => {
 											const newValue = e.target.value;
-											const stringServiceType = announcementServiceTypes.find(q => q.id === Number(newValue));
+											const stringServiceType = serviceTypes.find(q => q.id === Number(newValue));
 											setValue('serviceType', stringServiceType?.name ?? 'unknown');
 											onChange(newValue);
 										}}
 										className={`${errors.serviceType || errors.serviceTypeId ? '!border-danger' : ''}`}>
 										<option value={0}>انتخاب کنید</option>
-										{announcementServiceTypes.map(item => (
+										{serviceTypes.map(item => (
 											<option key={item.id} value={item.id}>
 												{item.nameFa}
 											</option>
