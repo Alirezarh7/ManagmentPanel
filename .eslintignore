@@ -1,0 +1,17 @@
+/.git
+/.hg
+/.idea
+/.next
+/.svn
+
+/dist
+/node_modules
+/public
+
+.env
+.eslintrc.json
+
+package.json
+package-lock.json
+postcss.config.js
+tailwind.config.js
