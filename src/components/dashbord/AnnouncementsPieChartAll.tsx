@@ -47,7 +47,7 @@ const options: ApexOptions = {
 interface IProps {
 	statistics: IAnnouncementsStatistics | undefined;
 }
-const AnnouncementsPieChart = ({ statistics }: IProps) => {
+const AnnouncementsPieChartAll = ({ statistics }: IProps) => {
 	const [seriesData, setSeriesData] = useState<ChartThreeState>({
 		series: []
 	});
@@ -55,7 +55,7 @@ const AnnouncementsPieChart = ({ statistics }: IProps) => {
 	const calculatePercentage = (count: string) => {
 		if (!statistics || !statistics.all || !statistics.allActive) return 0;
 		if (isNaN(Number(count))) return 0;
-		return round((Number(count) / Number(statistics.allActive)) * 100);
+		return round((Number(count) / Number(statistics.all)) * 100);
 	};
 
 	useEffect(() => {
@@ -78,16 +78,11 @@ const AnnouncementsPieChart = ({ statistics }: IProps) => {
 	return (
 		<div className='md:p-3 rounded-md border border-stroke bg-white dark:border-strokedark dark:bg-boxdark'>
 			<div className='p-2 flex flex-col items-start gap-4'>
-				<h5 className='text-xl font-semibold text-black dark:text-white'>آمار اطلاعیه ها</h5>
+				<h5 className='text-xl font-semibold text-black dark:text-white'>همه اطلاعیه ها</h5>
 				<div>
 					<h5 className='text-base font-semibold text-gray-400 dark:text-white'>
-						<span> مجموع :</span>
+						<span> تعداد :</span>
 						<span> ({statistics.all}) </span>
-						<span>عدد</span>
-					</h5>
-					<h5 className='text-base font-semibold text-gray-400 dark:text-white'>
-						<span> فعال :</span>
-						<span> ({statistics.allActive}) </span>
 						<span>عدد</span>
 					</h5>
 				</div>
@@ -130,4 +125,4 @@ const AnnouncementsPieChart = ({ statistics }: IProps) => {
 	);
 };
 
-export default AnnouncementsPieChart;
+export default AnnouncementsPieChartAll;

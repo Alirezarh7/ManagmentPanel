@@ -28,10 +28,15 @@ export interface IAnnouncementsStatistics {
 	all: string;
 	allActive: string;
 	tamato: string;
+	tamatoActive: string;
 	omreh: string;
+	omrehActive: string;
 	atabat: string;
+	atabatActive: string;
 	arbaein: string;
+	arbaeinActive: string;
 	soria: string;
+	soriaActive: string;
 }
 
 export type TAnnouncementShowType = 'all' | 'mainPage';

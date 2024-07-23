@@ -22,6 +22,9 @@ import ContentsCreatePage from '../pages/contents/CreatePage';
 import ContentsShowDetailsPage from '../pages/contents/ShowDetailsPage';
 import ContentsEditPage from '../pages/contents/EditPage';
 import FaqContentsIndexPage from '../pages/faqContents/IndexPage';
+import FaqContentsCreatePage from '../pages/faqContents/CreatePage';
+import FaqContentsShowDetailsPage from '../pages/faqContents/ShowDetailsPage';
+import FaqContentsEditPage from '../pages/faqContents/EditPage';
 
 export interface IProps {}
 
@@ -58,6 +61,9 @@ class WebRoute extends React.Component<IProps, IState> {
 
 				{/*FaqContents*/}
 				<Route path={PATHS.faqContents.index} element={<FaqContentsIndexPage />} />
+				<Route path={PATHS.faqContents.create} element={<FaqContentsCreatePage />} />
+				<Route path={PATHS.faqContents.show} element={<FaqContentsShowDetailsPage />} />
+				<Route path={PATHS.faqContents.edit} element={<FaqContentsEditPage />} />
 
 				<Route path={shareData.CONSTANT.SSO_URL_FROM_MY_GOV} element={<Navigate to='/' />} />
 				<Route path='*' element={<NotFoundPage />} />

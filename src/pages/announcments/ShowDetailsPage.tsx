@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetAnnouncementById } from '../../services/announcement.service';
 import Breadcrumb from '../../components/Layout/Breadcrumb';
@@ -12,16 +11,14 @@ import CustomLineSpinner from '../../components/general/spinners/CustomLineSpinn
 
 const AnnouncementsShowDetailsPage = () => {
 	const { id } = useParams();
-	const { data, isLoading } = useGetAnnouncementById(id ?? '');
-
-	console.log(data);
+	const { data, isLoading, isFetching } = useGetAnnouncementById(id ?? '');
 
 	return (
 		<div className='space-y-4'>
 			<Breadcrumb items={[{ label: 'اطلاعیه ها', url: PATHS.announcements.index }, { label: 'مشاهده' }]} />
 			<h1 className='text-xl mb-3'>مشاهده اطلاعیه </h1>
 
-			{isLoading && <CustomLineSpinner />}
+			{isLoading || isFetching ? <CustomLineSpinner /> : null}
 
 			{!isLoading && data && (
 				<div className='max-w-screen-xl w-full mx-auto flex flex-col'>

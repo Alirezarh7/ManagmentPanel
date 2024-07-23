@@ -9,35 +9,30 @@ import CustomInput from '../../components/general/inputs/CustomInput';
 import CustomTextEditor from '../../components/general/textEditor/CustomTextEditor';
 import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
-import { useCreateContent } from '../../services/content.service';
-import { ICreateContentDto } from '../../typs/content.types';
-import { contentLocations } from '../../constants/content.const';
+import { useCreateFaqContent } from '../../services/faqContent.service';
+import { ICreateFaqContentDto } from '../../typs/faqContent.types';
 
-const ContentsCreatePage = () => {
-	const { mutate, isPending } = useCreateContent();
+const FaqContentsCreatePage = () => {
+	const { mutate, isPending } = useCreateFaqContent();
 
 	const navigate = useNavigate();
 
-	const defaultFormValues: ICreateContentDto = {
-		subject: '',
-		body: '',
+	const defaultFormValues: ICreateFaqContentDto = {
+		question: '',
+		answer: '',
 		serviceType: '',
 		serviceTypeId: 0,
 		subServiceType: '',
-		subServiceTypeId: 0,
-		contentLocation: '',
-		contentLocationId: 0
+		subServiceTypeId: 0
 	};
 
-	const createContentSchema = Yup.object().shape({
-		subject: Yup.string().required('این فیلد اجباری است'),
-		body: Yup.string().required('این فیلد اجباری است'),
+	const createFaqContentSchema = Yup.object().shape({
+		question: Yup.string().required('این فیلد اجباری است'),
+		answer: Yup.string().required('این فیلد اجباری است'),
 		serviceType: Yup.string().required('این فیلد اجباری است'),
 		serviceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
 		subServiceType: Yup.string().required('این فیلد اجباری است'),
-		subServiceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید'),
-		contentLocation: Yup.string().required('این فیلد اجباری است'),
-		contentLocationId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید')
+		subServiceTypeId: Yup.number().required('این فیلد اجباری است').min(1, 'لطفا یک گزینه انتخاب کنید')
 	});
 
 	const {
@@ -45,27 +40,27 @@ const ContentsCreatePage = () => {
 		handleSubmit,
 		formState: { errors },
 		setValue
-	} = useForm<ICreateContentDto>({
+	} = useForm<ICreateFaqContentDto>({
 		defaultValues: defaultFormValues,
-		resolver: yupResolver(createContentSchema)
+		resolver: yupResolver(createFaqContentSchema)
 	});
 
-	const onSubmitFormHandler = async (submittedData: ICreateContentDto) => {
+	const onSubmitFormHandler = async (submittedData: ICreateFaqContentDto) => {
 		mutate(submittedData, {
 			onSuccess: () => {
-				enqueueSnackbar('محتوا با موفقیت ایجاد شد', { variant: 'success' });
-				navigate(PATHS.contents.index);
+				enqueueSnackbar('سوال جدید با موفقیت ایجاد شد', { variant: 'success' });
+				navigate(PATHS.faqContents.index);
 			},
 			onError: error => {
-				enqueueSnackbar('خطا در ایجاد محتوای جدید', { variant: 'error' });
+				enqueueSnackbar('خطا در ایجاد سوال جدید', { variant: 'error' });
 			}
 		});
 	};
 
 	return (
 		<div className='space-y-4'>
-			<Breadcrumb items={[{ label: 'محتویات', url: PATHS.contents.index }, { label: 'ایجاد' }]} />
-			<h1 className='text-xl mb-3'>ایجاد محتوای جدید</h1>
+			<Breadcrumb items={[{ label: 'سوالات پرتکرار', url: PATHS.faqContents.index }, { label: 'ایجاد' }]} />
+			<h1 className='text-xl mb-3'>ایجاد سوال پرتکرار جدید</h1>
 
 			<div className='max-w-screen-xl w-full mx-auto flex flex-col'>
 				<form className='flex flex-col gap-6' onSubmit={handleSubmit(onSubmitFormHandler)}>
@@ -124,58 +119,31 @@ const ContentsCreatePage = () => {
 								</div>
 							)}
 						/>
-						<Controller
-							name='contentLocationId'
-							control={control}
-							render={({ field: { value, onChange } }) => (
-								<div>
-									<label>مکان محتوا</label>
-									<select
-										value={value}
-										onChange={e => {
-											const newValue = e.target.value;
-											const stringContentLocation = contentLocations.find(q => q.id === Number(newValue));
-											setValue('contentLocation', stringContentLocation?.name ?? 'unknown');
-											onChange(newValue);
-										}}
-										className={`${errors.contentLocation || errors.contentLocationId ? '!border-danger' : ''}`}>
-										<option value={0}>انتخاب کنید</option>
-										{contentLocations.map(item => (
-											<option key={item.id} value={item.id}>
-												{item.nameFa}
-											</option>
-										))}
-									</select>
-									{errors.contentLocation ? <span className='text-danger'>{errors.contentLocation.message + ' '}</span> : null}
-									{errors.contentLocationId ? <span className='text-danger'>{errors.contentLocationId.message}</span> : null}
-								</div>
-							)}
-						/>
 					</div>
 					<Controller
-						name='subject'
+						name='question'
 						control={control}
 						render={({ field: { value, onChange } }) => (
 							<CustomInput
 								type={'text'}
-								label='موضوع محتوا'
+								label='سوال'
 								className='md:col-span-2'
 								value={value}
 								onChange={onChange}
-								error={errors.subject && errors.subject.message}
+								error={errors.question?.message}
 							/>
 						)}
 					/>
 					<Controller
-						name='body'
+						name='answer'
 						control={control}
 						render={({ field: { value, onChange } }) => (
 							<CustomTextEditor
 								showPreview={true}
-								label='متن محتوا'
+								label='جواب'
 								value={value}
 								onChange={onChange}
-								error={errors.body && errors.body.message}
+								error={errors.answer && errors.answer.message}
 							/>
 						)}
 					/>
@@ -188,4 +156,4 @@ const ContentsCreatePage = () => {
 	);
 };
 
-export default ContentsCreatePage;
+export default FaqContentsCreatePage;
