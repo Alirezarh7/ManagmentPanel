@@ -4,9 +4,10 @@
 /.next
 /.svn
 
-/dist
 /node_modules
 /public
+/build
+/dist
 
 .env
 .eslintrc.json
