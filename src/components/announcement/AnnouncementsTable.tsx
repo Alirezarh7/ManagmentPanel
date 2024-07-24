@@ -24,7 +24,7 @@ const AnnouncementsTable = ({ announcements, announcementsByMainPage }: IProps) 
 					<thead>
 						<tr className='bg-gray-100 text-right dark:bg-meta-4'>
 							<th className='w-[50px] py-3 px-1 text-center font-medium text-black dark:text-white'>آی دی</th>
-							<th className='py-3 px-1 min-w-[90px] text-center font-medium text-black dark:text-white'>تصویر</th>
+							<th className='py-3 px-1 w-[110px] text-center font-medium text-black dark:text-white'>تصویر</th>
 							<th className='min-w-[200px] max-w-[200px] py-3 px-3 font-medium text-black dark:text-white'>موضوع اطلاعیه</th>
 							{showType === 'all' ? (
 								<th className='max-md:hidden w-[60px] py-3 px-1 text-center font-medium text-black dark:text-white'> فعال</th>

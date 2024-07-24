@@ -46,7 +46,7 @@ const FaqContentsTableRow = ({ data }: IProps) => {
 
 	return (
 		<>
-			<tr className='border-b'>
+			<tr className='border-b hover:bg-gray-100'>
 				<td className='py-2 px-1 text-center dark:border-strokedark'>
 					<p className='text-black dark:text-white'>{data.id}</p>
 				</td>
