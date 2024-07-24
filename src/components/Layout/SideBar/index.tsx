@@ -6,12 +6,14 @@ import { PATHS } from '../../../router/paths';
 import { TfiAnnouncement } from 'react-icons/tfi';
 import { IoHomeOutline } from 'react-icons/io5';
 import { SlCalender } from 'react-icons/sl';
+import { BsFileEarmarkText } from 'react-icons/bs';
+import { PiQuestion } from 'react-icons/pi';
 
 const menuItems = [
 	{ id: 1, label: 'خانه', route: PATHS.home, icon: <IoHomeOutline className='w-4 h-4' /> },
 	{ id: 2, label: 'اطلاعیه ها', route: PATHS.announcements.index, icon: <TfiAnnouncement className='w-4 h-4' /> },
-	{ id: 3, label: 'محتواهای سایت', route: PATHS.contents.index, icon: <TfiAnnouncement className='w-4 h-4' /> },
-	{ id: 4, label: 'سوالات پرتکرار', route: PATHS.faqContents.index, icon: <TfiAnnouncement className='w-4 h-4' /> },
+	{ id: 3, label: 'محتواهای سایت', route: PATHS.contents.index, icon: <BsFileEarmarkText className='w-4 h-4' /> },
+	{ id: 4, label: 'سوالات پرتکرار', route: PATHS.faqContents.index, icon: <PiQuestion className='w-4 h-4' /> },
 	{ id: 5, label: 'تقویم', route: PATHS.calender, icon: <SlCalender className='w-4 h-4' /> }
 ];
 
@@ -97,7 +99,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: IProps) => {
 								<NavLink
 									key={item.id}
 									to={item.route}
-									className='group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4'>
+									className='group relative flex items-center gap-2.5 rounded-sm py-2 px-4 md:px-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4'>
 									{item.icon}
 									<span>{item.label}</span>
 								</NavLink>

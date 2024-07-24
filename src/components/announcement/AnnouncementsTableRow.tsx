@@ -50,12 +50,12 @@ const AnnouncementsTableRow = ({ data, showType }: IProps) => {
 
 	return (
 		<>
-			<tr className='border-b'>
+			<tr className='border-b hover:bg-gray-100'>
 				<td className='py-2 px-1 text-center dark:border-strokedark'>
 					<p className='text-black dark:text-white'>{data.id}</p>
 				</td>
-				<td className='py-2 px-1  text-center dark:border-strokedark'>
-					<img src={data.base64Image} alt='تصویر آگهی' className='flex-1 w-20 h-20' />
+				<td className='py-2 px-1 flex justify-center items-center dark:border-strokedark'>
+					<img src={data.base64Image} alt='تصویر آگهی' className='w-24 h-16 object-cover rounded-md' />
 				</td>
 				<td className='py-2 px-3 dark:border-strokedark'>
 					<p className='text-black dark:text-white'>
