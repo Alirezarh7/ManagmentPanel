@@ -9,8 +9,8 @@ const baseUrls = {
 	PaymentHaj: 'http://mytest.haj.ir:8089'
 };
 
-export const currentBaseUrl: string = baseUrls.Interanl;
-export const currentPaymentBaseUrl: string = baseUrls.PaymentInternal;
+export const currentBaseUrl: string = baseUrls.Sadad;
+export const currentPaymentBaseUrl: string = baseUrls.PaymentSadad;
 
 const managementBaseUrls = {
 	mamadLocal: 'https://localhost:7219/api',
