@@ -13,13 +13,14 @@ export const currentBaseUrl: string = baseUrls.Sadad;
 export const currentPaymentBaseUrl: string = baseUrls.PaymentSadad;
 
 const managementBaseUrls = {
-	mamadLocal: 'https://localhost:7219/api',
-	napLocal: 'https://apigateway.navoshgaran.com/ManagementPanel/api'
+	// mamadLocal: 'https://localhost:7219/api',
+	napLocal: 'https://apigateway.navoshgaran.com/ManagementPanel/api',
+	myHajIr: 'my.haj.ir/api/ManagementPanel/api'
 };
 
-export const managementPanelBaseUrl: string = managementBaseUrls.napLocal;
+export const managementPanelBaseUrl: string = managementBaseUrls.myHajIr;
 
 const creatPersonToken = {
 	creatPesron: 'https://apigateway.navoshgaran.com/BasicInfo/api/People/CreatePerson'
 };
-export const managementPanelCreatPerson : string = creatPersonToken.creatPesron
+export const managementPanelCreatPerson: string = creatPersonToken.creatPesron;

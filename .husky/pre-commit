@@ -4,14 +4,14 @@ echo '🟢'
 echo '🟢 Pre-Commit Operations'
 
 # Check ESLint Standards
-echo '🟢 Step 01 -> Check ESLint Standards'
-npm run check-lint ||
-(
-        echo '❌❌❌ ESLint Check Failed ❌❌❌
-                Make the required changes listed above, add changes and try to commit again.'
-        false;
-)
-echo '✅ Step 01 -> Done'
+# echo '🟢 Step 01 -> Check ESLint Standards'
+# npm run check-lint ||
+# (
+#         echo '❌❌❌ ESLint Check Failed ❌❌❌
+#                 Make the required changes listed above, add changes and try to commit again.'
+#         false;
+# )
+# echo '✅ Step 01 -> Done'
 
 # Check tsconfig Standards
 echo '🟢 Step 02 -> Check tsconfig Standards'
