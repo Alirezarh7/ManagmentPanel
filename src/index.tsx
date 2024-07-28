@@ -24,7 +24,7 @@ if (window.location.pathname == '/SilentCallback') {
 } else {
 	root.render(
 		<QueryClientProvider client={queryClient}>
-			<BrowserRouter>
+			<BrowserRouter basename='/admin'>
 				<Provider store={store}>
 					{/*@ts-ignore*/}
 					<OidcProvider userManager={userManager} store={store as Store}>
