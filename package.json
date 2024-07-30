@@ -2,7 +2,7 @@
   "name": "management-panel-ui",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://my.haj.ir/admin",
+  "homepage": "https://apigateway.navoshgaran.com/admin",
   "scripts": {
     "start": "set PORT=5119 && react-scripts start",
     "build": "react-scripts build",

@@ -34,18 +34,18 @@ class WebRoute extends React.Component<IProps, IState> {
 	render() {
 		return (
 			<Routes>
-				<Route path='/' element={<Dashboard />} />
+				<Route path='/admin' element={<Dashboard />} />
 				<Route path={PATHS.calender} element={<CalenderPage />} />
 
 				{/*user related*/}
-				<Route path='/user-roles/:userid/:title' element={<UserRoleManageIndex />} />
-				<Route path='/user-claims/:userid/:title' element={<UserClaims />} />
-				<Route path='/Users/GenderAuthorization/:userid/:title' element={<GenderAuthorization />} />
-				<Route path='/user-information' element={<User />} />
-				<Route path='/SignIncallback' element={<SignInCallbackPageTwo />} />
-				<Route path='/Pilgrom/DowlatAuthLand' element={<SignInCallbackPage />} />
-				<Route path='/SignOutCallbackPage' element={<SignOutCallbackPage />} />
-				<Route path='/replace-user' element={<ReplaceUser />} />
+				<Route path='/admin/user-roles/:userid/:title' element={<UserRoleManageIndex />} />
+				<Route path='/admin/user-claims/:userid/:title' element={<UserClaims />} />
+				<Route path='/admin/Users/GenderAuthorization/:userid/:title' element={<GenderAuthorization />} />
+				<Route path='/admin/user-information' element={<User />} />
+				<Route path='/admin/SignIncallback' element={<SignInCallbackPageTwo />} />
+				<Route path='/admin/Pilgrom/DowlatAuthLand' element={<SignInCallbackPage />} />
+				<Route path='/admin/SignOutCallbackPage' element={<SignOutCallbackPage />} />
+				<Route path='/admin/replace-user' element={<ReplaceUser />} />
 
 				{/*Announcements*/}
 				<Route path={PATHS.announcements.index} element={<AnnouncementsIndexPage />} />
@@ -65,7 +65,7 @@ class WebRoute extends React.Component<IProps, IState> {
 				<Route path={PATHS.faqContents.show} element={<FaqContentsShowDetailsPage />} />
 				<Route path={PATHS.faqContents.edit} element={<FaqContentsEditPage />} />
 
-				<Route path={shareData.CONSTANT.SSO_URL_FROM_MY_GOV} element={<Navigate to='/' />} />
+				<Route path={shareData.CONSTANT.SSO_URL_FROM_MY_GOV} element={<Navigate to='/admin' />} />
 				<Route path='*' element={<NotFoundPage />} />
 			</Routes>
 		);
