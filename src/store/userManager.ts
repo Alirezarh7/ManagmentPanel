@@ -1,6 +1,7 @@
 import { createUserManager } from 'redux-oidc';
 import Oidc, { Log, UserManagerSettings } from 'oidc-client';
 import { shareData } from '../shareData';
+import { PATHS } from '../router/paths';
 
 // Log.logger = console;
 // Log.level = Log.DEBUG;
@@ -12,8 +13,8 @@ const ssoURLOrganization = 'https://ssohaj.navoshgaran.com/';
 
 const userManagerConfigOrganization: UserManagerSettings = {
 	client_id: 'IntegratedWindow',
-	redirect_uri: window.location.origin + '/SignInCallback',
-	silent_redirect_uri: window.location.origin + '/SilentCallback',
+	redirect_uri: window.location.origin + '/admin/SignInCallback',
+	silent_redirect_uri: window.location.origin + PATHS.frameWork.silentCallback,
 	response_type: 'code',
 	scope: 'openid profile roles hajwindowapi',
 	authority: ssoURLOrganization,

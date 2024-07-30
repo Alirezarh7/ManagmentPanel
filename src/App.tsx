@@ -68,7 +68,7 @@ const App = (props: IProps) => {
 			}
 		} else if (localStorage.getItem(shareData.CONSTANT.SSO_APPROACH) === 'organization') {
 			if (
-				window.location.pathname !== '/SignInCallback' &&
+				window.location.pathname !== '/admin/SignInCallback' &&
 				Date.now() > JSON.parse(localStorage.getItem(shareData.CONSTANT.UPDATE_SSO_EXPIRE_TIME) as string)
 			) {
 				userManager.getUser().then(user => {
