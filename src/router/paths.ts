@@ -1,28 +1,31 @@
 export const PATHS = {
-	home: '/',
+	home: '/admin',
+	frameWork: {
+		silentCallback: '/admin/SilentCallback'
+	},
 	announcements: {
-		index: '/announcements',
-		create: '/announcements/create',
-		show: '/announcements/:id',
-		showFn: (id: string) => `/announcements/${id}`,
-		edit: '/announcements/:id/edit',
-		editFn: (id: string) => `/announcements/${id}/edit`
+		index: '/admin/announcements',
+		create: '/admin/announcements/create',
+		show: '/admin/announcements/:id',
+		showFn: (id: string) => `/admin/announcements/${id}`,
+		edit: '/admin/announcements/:id/edit',
+		editFn: (id: string) => `/admin/announcements/${id}/edit`
 	},
 	contents: {
-		index: '/contents',
-		create: '/contents/create',
-		show: '/contents/:id',
-		showFn: (id: string) => `/contents/${id}`,
-		edit: '/contents/:id/edit',
-		editFn: (id: string) => `/contents/${id}/edit`
+		index: '/admin/contents',
+		create: '/admin/contents/create',
+		show: '/admin/contents/:id',
+		showFn: (id: string) => `/admin/contents/${id}`,
+		edit: '/admin/contents/:id/edit',
+		editFn: (id: string) => `/admin/contents/${id}/edit`
 	},
 	faqContents: {
-		index: '/faq-contents',
-		create: '/faq-contents/create',
-		show: '/faq-contents/:id',
-		showFn: (id: string) => `/faq-contents/${id}`,
-		edit: '/faq-contents/:id/edit',
-		editFn: (id: string) => `/faq-contents/${id}/edit`
+		index: '/admin/faq-contents',
+		create: '/admin/faq-contents/create',
+		show: '/admin/faq-contents/:id',
+		showFn: (id: string) => `/admin/faq-contents/${id}`,
+		edit: '/admin/faq-contents/:id/edit',
+		editFn: (id: string) => `/admin/faq-contents/${id}/edit`
 	},
-	calender: '/calender'
+	calender: '/admin/calender'
 };

@@ -26,7 +26,7 @@ const SignInCallbackPage = (props: IProps) => {
 		props.clearUserClaims();
 		localStorage.clear();
 		window.location.reload();
-		window.location.replace('/');
+		window.location.replace('/admin');
 	};
 
 	const successCallback = (user: User) => {
@@ -34,7 +34,8 @@ const SignInCallbackPage = (props: IProps) => {
 		console.log(user, 'user');
 		const validPersonData = user.profile && shareData.validDataForCreatePerson(user.profile);
 		props.setCreateToken(validPersonData, true, automaticlyLogout, user.access_token);
-		var redirectPath = user.state.path as string;
+		let redirectPath = user.state.path as string;
+		console.log(redirectPath, 'redirectPath');
 		history(redirectPath);
 	};
 
