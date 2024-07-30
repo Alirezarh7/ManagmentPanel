@@ -18,7 +18,7 @@ const userManagerConfigOrganization: UserManagerSettings = {
 	response_type: 'code',
 	scope: 'openid profile roles hajwindowapi',
 	authority: ssoURLOrganization,
-	post_logout_redirect_uri: window.location.origin + '/SignOutCallback',
+	post_logout_redirect_uri: window.location.origin + '/admin/SignOutCallback',
 	userStore: new Oidc.WebStorageStateStore({ store: localStorage }),
 	automaticSilentRenew: true,
 	filterProtocolClaims: true,
@@ -30,14 +30,14 @@ const userManagerConfigOrganization: UserManagerSettings = {
 
 const userManagerConfigGov: UserManagerSettings = {
 	client_id: 'my.haj',
-	redirect_uri: window.location.origin + '/Pilgrom/DowlatAuthLand',
+	redirect_uri: window.location.origin + '/admin/Pilgrom/DowlatAuthLand',
 	silent_redirect_uri: window.location.origin + '/Pilgrom/DowlatAuthLand',
 	response_type: 'code',
 	scope: 'openid profile',
 	authority: ssoURLGov,
 	// @ts-ignore
 	client_authentication: 'client_secret_basic',
-	post_logout_redirect_uri: window.location.origin + '/SignOutCallback',
+	post_logout_redirect_uri: window.location.origin + '/admin/SignOutCallback',
 	userStore: new Oidc.WebStorageStateStore({ store: localStorage }),
 	automaticSilentRenew: true,
 	metadata: {

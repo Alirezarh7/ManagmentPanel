@@ -31,7 +31,7 @@ const App = (props: IProps) => {
 		props.clearUserClaims();
 		localStorage.clear();
 		window.location.reload();
-		window.location.replace('/');
+		window.location.replace('/admin');
 	};
 
 	useEffect(() => {
