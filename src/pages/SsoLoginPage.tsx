@@ -39,9 +39,9 @@ function SsoLoginPage(): React.JSX.Element {
 
 	return (
 		<div className='flex flex-col justify-center items-center w-full h-screen relative'>
-			<div className='absolute sso-test-box '>
-				<p className='sso-test-title'>نسخه آزمایشی</p>
-			</div>
+			{/*<div className='absolute sso-test-box '>*/}
+			{/*	<p className='sso-test-title'>نسخه آزمایشی</p>*/}
+			{/*</div>*/}
 			<div className={'flex items-center flex-col justify-center custom-styles-sso'}>
 				<div className='flex flex-col justify-evenly items-center'>
 					<img src={Ziarat} alt={''} style={{ width: '200px', height: '200px' }} />
@@ -61,13 +61,13 @@ function SsoLoginPage(): React.JSX.Element {
 					{/*	ورود از طریق درگاه دولت من*/}
 					{/*</button>*/}
 				</div>
-				<a
-					href={'https://tamatoreserve.haj.ir/'}
-					target={'_blank'}
-					className='my-2 p-2 rounded font-weight-bold reserve-from-old-version'
-					style={{ border: '1px solid rgb(189, 161, 87)' }}>
-					برای رزرو از طریق نسخه قدیمی اینجا کلیک کنید
-				</a>
+				{/*<a*/}
+				{/*	href={'https://tamatoreserve.haj.ir/'}*/}
+				{/*	target={'_blank'}*/}
+				{/*	className='my-2 p-2 rounded font-weight-bold reserve-from-old-version'*/}
+				{/*	style={{ border: '1px solid rgb(189, 161, 87)' }}>*/}
+				{/*	برای رزرو از طریق نسخه قدیمی اینجا کلیک کنید*/}
+				{/*</a>*/}
 			</div>
 			<p className='absolute font-weight-bold sso-version-title' style={{ bottom: 0, fontSize: '16px' }}>
 				نسخه 1 پنجره واحد خدمات حج و زیارت
