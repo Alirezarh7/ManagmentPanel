@@ -1,11 +1,11 @@
 {
   "name": "management-panel-ui",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "set PORT=5119 && react-scripts start",
-    "build:dev": "nv-cmd -f .env react-scripts build",
-    "build:sadad": "nv-cmd -f .env.sadad react-scripts build",
+    "build:dev": "env-cmd -f .env react-scripts build",
+    "build:sadad": "env-cmd -f .env.sadad react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "check-lint": "eslint . --ext ts --ext tsx --ext js --ext jsx",
