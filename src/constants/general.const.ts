@@ -13,6 +13,11 @@ export const subServiceTypes: IGeneralEnumWithFaTitle[] = [
 	{ name: 'Register', nameFa: 'ثبت نام', id: 2 }
 ];
 
+export const configTypes: IGeneralEnumWithFaTitle[] = [
+	{ name: 'Haj', nameFa: 'حج', id: 1 },
+	{ name: 'Omreh', nameFa: 'عمره', id: 2 }
+];
+
 export const booleanDefaultValuesArray = [
 	{ value: false, label: 'خیر' },
 	{ value: true, label: 'بلی' }
