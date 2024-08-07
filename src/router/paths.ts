@@ -28,5 +28,5 @@ export const PATHS = {
 		editFn: (id: string) => `/admin/faq-contents/${id}/edit`
 	},
 	calender: '/admin/calender',
-	configs: '/configs'
+	configs: '/admin/configs'
 };
