@@ -25,6 +25,7 @@ import FaqContentsIndexPage from '../pages/faqContents/IndexPage';
 import FaqContentsCreatePage from '../pages/faqContents/CreatePage';
 import FaqContentsShowDetailsPage from '../pages/faqContents/ShowDetailsPage';
 import FaqContentsEditPage from '../pages/faqContents/EditPage';
+import ConfigsPage from '../pages/ConfigsPage';
 
 export interface IProps {}
 
@@ -35,7 +36,6 @@ class WebRoute extends React.Component<IProps, IState> {
 		return (
 			<Routes>
 				<Route path='/admin' element={<Dashboard />} />
-				<Route path={PATHS.calender} element={<CalenderPage />} />
 
 				{/*user related*/}
 				<Route path='/admin/user-roles/:userid/:title' element={<UserRoleManageIndex />} />
@@ -64,6 +64,9 @@ class WebRoute extends React.Component<IProps, IState> {
 				<Route path={PATHS.faqContents.create} element={<FaqContentsCreatePage />} />
 				<Route path={PATHS.faqContents.show} element={<FaqContentsShowDetailsPage />} />
 				<Route path={PATHS.faqContents.edit} element={<FaqContentsEditPage />} />
+
+				<Route path={PATHS.configs} element={<ConfigsPage />} />
+				<Route path={PATHS.calender} element={<CalenderPage />} />
 
 				<Route path={shareData.CONSTANT.SSO_URL_FROM_MY_GOV} element={<Navigate to='/admin' />} />
 				<Route path='*' element={<NotFoundPage />} />
