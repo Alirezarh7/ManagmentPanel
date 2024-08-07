@@ -56,18 +56,7 @@ function SsoLoginPage(): React.JSX.Element {
 						style={{ background: 'rgb(189, 161, 87)' }}>
 						ورود از طریق درگاه سازمان
 					</button>
-					{/*onClick={() => selectSso('organization')}*/}
-					{/*<button onClick={() => selectSso('mygov')} className='m-3 sso-login-btns' style={{ background: 'rgb(189, 161, 87)' }}>*/}
-					{/*	ورود از طریق درگاه دولت من*/}
-					{/*</button>*/}
 				</div>
-				{/*<a*/}
-				{/*	href={'https://tamatoreserve.haj.ir/'}*/}
-				{/*	target={'_blank'}*/}
-				{/*	className='my-2 p-2 rounded font-weight-bold reserve-from-old-version'*/}
-				{/*	style={{ border: '1px solid rgb(189, 161, 87)' }}>*/}
-				{/*	برای رزرو از طریق نسخه قدیمی اینجا کلیک کنید*/}
-				{/*</a>*/}
 			</div>
 			<p className='absolute font-weight-bold sso-version-title' style={{ bottom: 0, fontSize: '16px' }}>
 				نسخه 1 پنجره واحد خدمات حج و زیارت

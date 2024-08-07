@@ -35,17 +35,17 @@ class WebRoute extends React.Component<IProps, IState> {
 	render() {
 		return (
 			<Routes>
-				<Route path='/admin' element={<Dashboard />} />
+				<Route path={PATHS.home} element={<Dashboard />} />
 
 				{/*user related*/}
-				<Route path='/admin/user-roles/:userid/:title' element={<UserRoleManageIndex />} />
-				<Route path='/admin/user-claims/:userid/:title' element={<UserClaims />} />
-				<Route path='/admin/Users/GenderAuthorization/:userid/:title' element={<GenderAuthorization />} />
-				<Route path='/admin/user-information' element={<User />} />
-				<Route path='/admin/SignIncallback' element={<SignInCallbackPageTwo />} />
-				<Route path='/admin/Pilgrom/DowlatAuthLand' element={<SignInCallbackPage />} />
-				<Route path='/admin/SignOutCallbackPage' element={<SignOutCallbackPage />} />
-				<Route path='/admin/replace-user' element={<ReplaceUser />} />
+				<Route path='/user-roles/:userid/:title' element={<UserRoleManageIndex />} />
+				<Route path='/user-claims/:userid/:title' element={<UserClaims />} />
+				<Route path='/Users/GenderAuthorization/:userid/:title' element={<GenderAuthorization />} />
+				<Route path='/user-information' element={<User />} />
+				<Route path='/SignIncallback' element={<SignInCallbackPageTwo />} />
+				<Route path='/Pilgrom/DowlatAuthLand' element={<SignInCallbackPage />} />
+				<Route path='/SignOutCallbackPage' element={<SignOutCallbackPage />} />
+				<Route path='/replace-user' element={<ReplaceUser />} />
 
 				{/*Announcements*/}
 				<Route path={PATHS.announcements.index} element={<AnnouncementsIndexPage />} />
