@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "set PORT=5119 && react-scripts start",
-    "build": "react-scripts build",
+    "build:dev": "nv-cmd -f .env react-scripts build",
+    "build:sadad": "nv-cmd -f .env.sadad react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "check-lint": "eslint . --ext ts --ext tsx --ext js --ext jsx",
@@ -53,6 +54,7 @@
     "axios": "^1.6.8",
     "clsx": "^2.1.0",
     "echarts": "^5.5.0",
+    "env-cmd": "^10.1.0",
     "i18next": "^23.11.1",
     "i18next-browser-languagedetector": "^7.2.1",
     "jquery": "^3.7.1",
