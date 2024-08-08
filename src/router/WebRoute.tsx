@@ -68,7 +68,7 @@ class WebRoute extends React.Component<IProps, IState> {
 				<Route path={PATHS.configs} element={<ConfigsPage />} />
 				<Route path={PATHS.calender} element={<CalenderPage />} />
 
-				<Route path={shareData.CONSTANT.SSO_URL_FROM_MY_GOV} element={<Navigate to='/admin' />} />
+				<Route path={shareData.CONSTANT.SSO_URL_FROM_MY_GOV} element={<Navigate to='/' />} />
 				<Route path='*' element={<NotFoundPage />} />
 			</Routes>
 		);

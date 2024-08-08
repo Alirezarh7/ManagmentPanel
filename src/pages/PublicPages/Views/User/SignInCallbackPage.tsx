@@ -28,7 +28,7 @@ const SignInCallbackPage = (props: IProps) => {
 		props.clearUserClaims();
 		localStorage.clear();
 		window.location.reload();
-		window.location.replace('/admin');
+		window.location.replace('/');
 	};
 
 	const successCallback = (cuser: User) => {

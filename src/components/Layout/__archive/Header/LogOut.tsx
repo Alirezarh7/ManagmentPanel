@@ -21,7 +21,7 @@ const LogOut = (props: IProps) => {
 		props.clearUserClaims();
 		window.localStorage.getItem(shareData.CONSTANT.SSO_APPROACH) === 'mygov' && window.location.reload();
 		localStorage.clear();
-		window.location.replace('/admin');
+		window.location.replace('/');
 	};
 	const oidcUserString: any = localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY)
 		? localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY)
