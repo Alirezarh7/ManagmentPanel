@@ -6,7 +6,7 @@ import { jwtDecode } from 'jwt-decode';
 import NDate from '@nepo/ndate';
 import { shareData } from '../../../../shareData';
 import axios from 'axios';
-import { currentBaseUrl, managementPanelCreatPerson } from '../../../../shareData/baseUrls';
+import { currentBaseUrl, getTokenUrl, managementPanelCreatPerson } from '../../../../shareData/baseUrls';
 
 export const dashboardActions = {
 	setCrumbs:
@@ -125,7 +125,7 @@ export const dashboardActions = {
 			dispatch({ type: DashboardActionTypes.CreateToken });
 			try {
 				const resultToken = await axios.post(
-					`${currentBaseUrl}/User/Token`,
+					`${getTokenUrl}`,
 					{},
 					{
 						headers: { Authorization: accessToken }
