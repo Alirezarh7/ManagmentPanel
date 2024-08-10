@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "set PORT=5119 && react-scripts start",
+    "start": " set PORT=5119 HOST=nav.haj.ir && react-scripts start",
     "build:dev": "env-cmd -f .env react-scripts build",
     "build:sadad": "env-cmd -f .env.sadad react-scripts build",
     "test": "react-scripts test",
