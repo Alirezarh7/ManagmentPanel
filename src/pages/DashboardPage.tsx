@@ -26,8 +26,8 @@ const DashboardPage = (props: IProps) => {
 	return (
 		<div className='space-y-4'>
 			<div className='flex justify-between items-center'>
-				<h1 className='max-sm:hidden sm:text-lg'>به داشبورد مدیریتی سامانه حج و زیارت ناوشگران خوش آمدید</h1>
-				<h1 className=' sm:hidden text-lg '>داشبورد مدیریتی سامانه حج و زیارت ناوشگران</h1>
+				<h1 className='max-sm:hidden sm:text-lg'>به داشبورد مدیریتی سامانه حج و زیارت خوش آمدید</h1>
+				<h1 className=' sm:hidden text-lg '>داشبورد مدیریتی سامانه حج و زیارت</h1>
 				<span className=' max-sm:hidden py-2 px-3 bg-yellow-500 rounded-3xl'>
 					{new DateObject(new Date()).convert(persian, persian_fa).format('DD MMMM سال YYYY')}
 				</span>
