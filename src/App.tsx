@@ -85,7 +85,7 @@ const App = (props: IProps) => {
 				});
 			} else if (!isLogin) {
 				// code blow should be remove in production
-				if (localStorage.getItem(shareData.CONSTANT.ORGANIZATION_STORAGE_KEY)) {
+				if (localStorage.getItem(shareData.ORGANIZATION_STORAGE_KEY)) {
 					props.setUpdatePerson(automaticlyLogout);
 				}
 				setIsLogin(true);

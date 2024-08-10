@@ -6,6 +6,7 @@ export const managementPanelCreatPerson = process.env.REACT_APP_CREATE_PERSON_UR
 export const ssoURLGov = process.env.REACT_APP_SSO_GOV_URL;
 export const ssoURLOrganization = process.env.REACT_APP_SSO_ORGANIZATION_URL;
 
+export const organizationStorageKey: string = process.env.REACT_APP_ORGANIZATION_STORAGE_KEY ?? '';
 // old ************************************************************************
 // *
 // *

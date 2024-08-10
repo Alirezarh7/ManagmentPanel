@@ -43,7 +43,7 @@ const TransformationInformation = (props: IProps) => {
 
 	const oidcUserString: any = localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY)
 		? localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY)
-		: localStorage.getItem(shareData.CONSTANT.ORGANIZATION_STORAGE_KEY);
+		: localStorage.getItem(shareData.ORGANIZATION_STORAGE_KEY);
 
 	const oidcUser = JSON.parse(oidcUserString);
 	const nationalCode = oidcUser.profile?.nationalCode;

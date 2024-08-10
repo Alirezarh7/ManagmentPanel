@@ -99,7 +99,7 @@ export const dashboardActions = {
 									JSON.parse(localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY) as string).profile
 								)
 							: shareData.validDataReplaceSsn(
-									JSON.parse(localStorage.getItem(shareData.CONSTANT.ORGANIZATION_STORAGE_KEY) as string).profile
+									JSON.parse(localStorage.getItem(shareData.ORGANIZATION_STORAGE_KEY) as string).profile
 								)
 					);
 					dispatch({
@@ -107,12 +107,12 @@ export const dashboardActions = {
 					});
 					const access = localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY)
 						? JSON.parse(localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY) as string)
-						: JSON.parse(localStorage.getItem(shareData.CONSTANT.ORGANIZATION_STORAGE_KEY) as string);
+						: JSON.parse(localStorage.getItem(shareData.ORGANIZATION_STORAGE_KEY) as string);
 					access.profile.nationalCode = JSON.parse(localStorage.getItem(shareData.CONSTANT.REPLACE_SSN) as any);
 					access.profile.birthDate = JSON.parse(localStorage.getItem(shareData.CONSTANT.REPLACE_BIRTH_DATE) as any);
 					localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY)
 						? localStorage.setItem(shareData.CONSTANT.GOV_STORAGE_KEY, JSON.stringify(access))
-						: localStorage.setItem(shareData.CONSTANT.ORGANIZATION_STORAGE_KEY, JSON.stringify(access));
+						: localStorage.setItem(shareData.ORGANIZATION_STORAGE_KEY, JSON.stringify(access));
 				} catch (error) {
 					automaticlyLogout();
 				}

@@ -1,6 +1,6 @@
 {
   "name": "management-panel-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "start": " set PORT=5119 HOST=nav.haj.ir && react-scripts start",

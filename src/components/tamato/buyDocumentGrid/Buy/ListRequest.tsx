@@ -27,7 +27,7 @@ const ListRequestBuy = (props: IProps) => {
 	const handleAction = (shiftSanadSaleManagerId: any, kargozarNo: any) => {
 		const oidcUserString = localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY)
 			? localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY)
-			: localStorage.getItem(shareData.CONSTANT.ORGANIZATION_STORAGE_KEY);
+			: localStorage.getItem(shareData.ORGANIZATION_STORAGE_KEY);
 		if (oidcUserString) {
 			const oidcUser = JSON.parse(oidcUserString);
 			const nationalCode = oidcUser.profile?.nationalCode;

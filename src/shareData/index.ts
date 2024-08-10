@@ -1,3 +1,5 @@
+import { organizationStorageKey } from './baseUrls';
+
 export const sexType = [
 	{ value: 1, label: 'مرد' },
 	{ value: 2, label: 'زن' }
@@ -209,12 +211,9 @@ const validDataReplaceSsn = (user: any) => {
 	};
 };
 
+const ORGANIZATION_STORAGE_KEY = organizationStorageKey;
 enum CONSTANT {
 	GOV_STORAGE_KEY = 'oidc.user:https://sso.my.gov.ir/oauth2:my.haj',
-	ORGANIZATION_STORAGE_KEY = 'oidc.user:https://auth.haj.ir/:IntegratedWindow',
-
-
-
 	SSO_USERINFO_URL = 'https://sso.my.gov.ir/api/v1/user/userinfo',
 	REPLACE_SSN = 'replaceSsn',
 	SSO_APPROACH = 'ssoWith',
@@ -250,7 +249,8 @@ export const shareData = {
 	validDataReplaceSsn,
 	CONSTANT,
 	DOCUMENT_FROM_BANK_STATUS,
-	bloodTypes
+	bloodTypes,
+	ORGANIZATION_STORAGE_KEY
 };
 
 export const madineOptions = [
