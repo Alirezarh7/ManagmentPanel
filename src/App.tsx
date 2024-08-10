@@ -49,7 +49,6 @@ const App = (props: IProps) => {
 						.then(user => {
 							const validPersonData = shareData.validDataForCreatePerson(user);
 							props.setUserClaims(access.access_token);
-							props.setCreateToken(validPersonData, false, automaticlyLogout, access.access_token);
 							if (!isLogin) setIsLogin(true);
 						})
 						.catch(error => automaticlyLogout());
@@ -78,7 +77,7 @@ const App = (props: IProps) => {
 					} else {
 						const validPersonData = shareData.validDataForCreatePerson(user.profile);
 						props.setUserClaims(user.access_token);
-						props.setCreateToken(validPersonData, false, automaticlyLogout, user.access_token);
+
 						if (!isLogin) {
 							setIsLogin(true);
 						}
