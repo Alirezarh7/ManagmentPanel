@@ -41,9 +41,8 @@ const SignInCallbackPage = (props: IProps) => {
 			})
 				.then(user => user.json())
 				.then(user => {
-					const validPersonData = shareData.validDataForCreatePerson(user);
 					props.setUserClaims(cuser.access_token);
-
+					props.setCreateToken(false, automaticlyLogout, user.access_token);
 					var redirectPath = cuser.state.path as string;
 					history(redirectPath);
 					console.log(user.nationalId);

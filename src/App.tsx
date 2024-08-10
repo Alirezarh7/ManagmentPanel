@@ -35,7 +35,7 @@ const App = (props: IProps) => {
 	};
 
 	useEffect(() => {
-		if (localStorage.getItem(shareData.CONSTANT.SSO_APPROACH) === 'mygov') {
+		/*		if (localStorage.getItem(shareData.CONSTANT.SSO_APPROACH) === 'mygov') {
 			if (
 				window.location.pathname !== '/Pilgrom/DowlatAuthLand' &&
 				Date.now() > JSON.parse(localStorage.getItem(shareData.CONSTANT.UPDATE_SSO_EXPIRE_TIME) as string)
@@ -47,7 +47,7 @@ const App = (props: IProps) => {
 					})
 						.then(user => user.json())
 						.then(user => {
-							const validPersonData = shareData.validDataForCreatePerson(user);
+							// const validPersonData = shareData.validDataForCreatePerson(user);
 							props.setUserClaims(access.access_token);
 							if (!isLogin) setIsLogin(true);
 						})
@@ -59,13 +59,10 @@ const App = (props: IProps) => {
 					});
 				}
 			} else if (!isLogin) {
-				// code blow should be remove in production
-				if (localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY)) {
-					props.setUpdatePerson(automaticlyLogout);
-				}
 				setIsLogin(true);
 			}
-		} else if (localStorage.getItem(shareData.CONSTANT.SSO_APPROACH) === 'organization') {
+		} else */
+		if (localStorage.getItem(shareData.CONSTANT.SSO_APPROACH) === 'organization') {
 			if (
 				window.location.pathname !== '/SignInCallback' &&
 				Date.now() > JSON.parse(localStorage.getItem(shareData.CONSTANT.UPDATE_SSO_EXPIRE_TIME) as string)
@@ -75,19 +72,14 @@ const App = (props: IProps) => {
 						userManager.signinRedirect({ data: { path: window.location.pathname } });
 						if (isLogin) setIsLogin(false);
 					} else {
-						const validPersonData = shareData.validDataForCreatePerson(user.profile);
 						props.setUserClaims(user.access_token);
-
+						props.setCreateToken(false, automaticlyLogout, user.access_token);
 						if (!isLogin) {
 							setIsLogin(true);
 						}
 					}
 				});
 			} else if (!isLogin) {
-				// code blow should be remove in production
-				if (localStorage.getItem(shareData.ORGANIZATION_STORAGE_KEY)) {
-					props.setUpdatePerson(automaticlyLogout);
-				}
 				setIsLogin(true);
 			}
 		}
@@ -106,8 +98,13 @@ const App = (props: IProps) => {
 	if (isLogin)
 		return (
 			<>
-				<NapLoading loading={props.oidc.isLoadingUser} />
-				<MainLayout isConnected={isConnected} />
+				{props.dashboard.createToken.loading ? (
+					<NapLoading loading={props.oidc.isLoadingUser || props.dashboard.createToken.loading} />
+				) : (
+					<>
+						<MainLayout isConnected={isConnected} />
+					</>
+				)}
 			</>
 		);
 	else return <NapLoading loading={true} description={t('pleaseWait')} />;

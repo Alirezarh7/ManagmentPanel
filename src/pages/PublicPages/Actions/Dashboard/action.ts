@@ -119,6 +119,67 @@ export const dashboardActions = {
 			}
 		},
 
+	setCreateToken:
+		(callInSuccessCallback: boolean, automaticlyLogout: any, accessToken: string): AppAction<KnownAction> =>
+		async (dispatch, getState) => {
+			dispatch({ type: DashboardActionTypes.CreateToken });
+			try {
+				const resultToken = await axios.post(
+					`${currentBaseUrl}/User/Token`,
+					{},
+					{
+						headers: { Authorization: accessToken }
+					}
+				);
+
+				if (resultToken.status === 200) {
+					dispatch({ type: DashboardActionTypes.CreateTokenSuccess });
+					localStorage.setItem('token', JSON.stringify(resultToken.data[0]));
+
+					/*		if (localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY)) {
+						const updatedTime = new NDate().subDays(-1);
+						updatedTime.date.setHours(new Date().getHours() + 4);
+						const updateExpiredGovSsoTime = new Date(updatedTime.date).getTime();
+
+						const access = JSON.parse(localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY) as any);
+					
+						if (callInSuccessCallback) {
+							delete access.expires_at;
+							localStorage.setItem(shareData.CONSTANT.UPDATE_SSO_EXPIRE_TIME, JSON.stringify(updateExpiredGovSsoTime));
+							access.expires_at = updateExpiredGovSsoTime;
+						} else {
+							delete access.expires_at;
+							access.expires_at = JSON.parse(localStorage.getItem(shareData.CONSTANT.UPDATE_SSO_EXPIRE_TIME) as string);
+						}
+						localStorage.setItem(shareData.CONSTANT.GOV_STORAGE_KEY, JSON.stringify(access));
+						callInSuccessCallback && window.location.reload();
+					} else */
+					if (localStorage.getItem(shareData.ORGANIZATION_STORAGE_KEY)) {
+						const updatedTime = new NDate().subDays(-1);
+						updatedTime.date.setHours(new Date().getHours() + 4);
+						const updateExpiredGovSsoTime = new Date(updatedTime.date).getTime();
+
+						const access = JSON.parse(localStorage.getItem(shareData.ORGANIZATION_STORAGE_KEY) as any);
+						if (callInSuccessCallback) {
+							delete access.expires_at;
+							localStorage.setItem(shareData.CONSTANT.UPDATE_SSO_EXPIRE_TIME, JSON.stringify(updateExpiredGovSsoTime));
+							access.expires_at = updateExpiredGovSsoTime;
+						} else {
+							delete access.expires_at;
+							access.expires_at = JSON.parse(localStorage.getItem(shareData.CONSTANT.UPDATE_SSO_EXPIRE_TIME) as string);
+						}
+						localStorage.setItem(shareData.ORGANIZATION_STORAGE_KEY, JSON.stringify(access));
+						callInSuccessCallback && window.location.reload();
+					}
+				} else {
+					automaticlyLogout();
+				}
+			} catch (error) {
+				automaticlyLogout();
+				dispatch({ type: DashboardActionTypes.CreateTokenFaild });
+				dashboardActions.showRequestErrors(error)(dispatch, getState);
+			}
+		},
 
 	setUserClaims:
 		(token: any): AppAction<KnownAction> =>
