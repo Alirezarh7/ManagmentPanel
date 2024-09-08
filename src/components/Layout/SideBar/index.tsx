@@ -9,14 +9,16 @@ import { SlCalender } from 'react-icons/sl';
 import { BsFileEarmarkText } from 'react-icons/bs';
 import { PiQuestion } from 'react-icons/pi';
 import { MdOutlineSettings } from 'react-icons/md';
+import { SiRedis } from 'react-icons/si';
 
 const menuItems = [
 	{ id: 1, label: 'خانه', route: PATHS.home, icon: <IoHomeOutline className='w-4 h-4' /> },
 	{ id: 2, label: 'اطلاعیه ها', route: PATHS.announcements.index, icon: <TfiAnnouncement className='w-4 h-4' /> },
 	{ id: 3, label: 'محتواهای سایت', route: PATHS.contents.index, icon: <BsFileEarmarkText className='w-4 h-4' /> },
 	{ id: 4, label: 'سوالات پرتکرار', route: PATHS.faqContents.index, icon: <PiQuestion className='w-4 h-4' /> },
-	{ id: 5, label: 'تنظیمات', route: PATHS.configs, icon: <MdOutlineSettings className='w-4 h-4' /> },
-	{ id: 6, label: 'تقویم', route: PATHS.calender, icon: <SlCalender className='w-4 h-4' /> }
+	{ id: 5, label: 'کش ردیس', route: PATHS.redisCache, icon: <SiRedis className='w-4 h-4' /> },
+	{ id: 6, label: 'تنظیمات', route: PATHS.configs, icon: <MdOutlineSettings className='w-4 h-4' /> },
+	{ id: 7, label: 'تقویم', route: PATHS.calender, icon: <SlCalender className='w-4 h-4' /> }
 ];
 
 interface IProps {

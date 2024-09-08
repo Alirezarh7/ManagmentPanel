@@ -32,6 +32,10 @@
 	}
 }
 
+.ltr {
+	direction: ltr;
+}
+
 .link:hover {
 	cursor: pointer;
 }

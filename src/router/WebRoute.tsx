@@ -26,6 +26,7 @@ import FaqContentsCreatePage from '../pages/faqContents/CreatePage';
 import FaqContentsShowDetailsPage from '../pages/faqContents/ShowDetailsPage';
 import FaqContentsEditPage from '../pages/faqContents/EditPage';
 import ConfigsPage from '../pages/ConfigsPage';
+import RedisCachePage from '../pages/RedisCachePage';
 
 export interface IProps {}
 
@@ -65,6 +66,7 @@ class WebRoute extends React.Component<IProps, IState> {
 				<Route path={PATHS.faqContents.show} element={<FaqContentsShowDetailsPage />} />
 				<Route path={PATHS.faqContents.edit} element={<FaqContentsEditPage />} />
 
+				<Route path={PATHS.redisCache} element={<RedisCachePage />} />
 				<Route path={PATHS.configs} element={<ConfigsPage />} />
 				<Route path={PATHS.calender} element={<CalenderPage />} />
 

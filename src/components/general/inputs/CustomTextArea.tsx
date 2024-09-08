@@ -1,9 +1,9 @@
 import React from 'react';
 
 interface IProps {
-	type: 'text' | 'number';
 	value: string;
 	onChange: (value: string) => void;
+	rows?: number;
 	className?: string;
 	inputClassName?: string;
 	label?: string;
@@ -11,21 +11,20 @@ interface IProps {
 	disabled?: boolean;
 }
 
-const CustomInput = ({ type, value, onChange, className, inputClassName, label, disabled = false, error }: IProps) => {
+const CustomTextArea = ({ value, onChange, rows = 5, className, inputClassName, label, disabled = false, error }: IProps) => {
 	return (
 		<div className={`${className ? className : ''}`}>
 			{label ? <label className='form-label'>{label}</label> : null}
-			<input
-				type={type}
+			<textarea
 				autoComplete='off'
 				value={value}
+				rows={rows}
 				onChange={event => onChange(event.target.value)}
 				disabled={disabled}
-				className={`${error ? 'border-danger' : ''} ${inputClassName ? inputClassName : ''}`}
-			/>
+				className={`${error ? 'border-danger' : ''} ${inputClassName ? inputClassName : ''}`}></textarea>
 			{error ? <span className='text-danger'>{error}</span> : null}
 		</div>
 	);
 };
 
-export default CustomInput;
+export default CustomTextArea;
