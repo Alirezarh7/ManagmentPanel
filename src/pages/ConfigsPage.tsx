@@ -21,7 +21,7 @@ const CalenderPage = () => {
 
 	return (
 		<div className='space-y-4'>
-			<Breadcrumb items={[{ label: 'تنظمیات' }]} />
+			<Breadcrumb items={[{ label: 'تنظیمات' }]} />
 			<div className='flex justify-between items-center'>
 				<h1 className='text-xl'>تنظیمات</h1>
 			</div>

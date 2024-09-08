@@ -27,6 +27,7 @@ export const PATHS = {
 		edit: '/faq-contents/:id/edit',
 		editFn: (id: string) => `/faq-contents/${id}/edit`
 	},
-	calender: '/calender',
-	configs: '/configs'
+	configs: '/configs',
+	redisCache: 'redis-cache',
+	calender: '/calender'
 };
