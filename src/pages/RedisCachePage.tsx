@@ -11,8 +11,9 @@ import CustomButton from '../components/general/Buttons/CustomButton';
 const RedisCachePage = () => {
 	useTitle('کش ردیس', 'ناوشگران');
 	const [showDeleteAllModal, setShowDeleteAllModal] = useState(false);
+	const [page, setPage] = useState(1);
 
-	const { data: keys, isLoading, isFetching, isError } = useGetRedisCacheKeys();
+	const { data, isLoading, isFetching, isError } = useGetRedisCacheKeys(page);
 
 	const isPageLoading: boolean = isLoading || isFetching;
 
@@ -36,7 +37,15 @@ const RedisCachePage = () => {
 				/>
 			</div>
 			{isPageLoading ? <CustomLineSpinner /> : null}
-			<RedisCachesTable keys={keys} />
+			{data && (
+				<RedisCachesTable
+					keys={data.keys}
+					currentPage={page}
+					pageCount={data.pageCount}
+					isLoading={isPageLoading}
+					setNewPageHandler={newPage => setPage(newPage)}
+				/>
+			)}
 			{showDeleteAllModal && (
 				<DeleteAllRedisCacheKeysModal
 					isOpen={true}

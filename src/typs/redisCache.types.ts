@@ -6,3 +6,9 @@ export interface IRedisCacheDto {
 export interface IDeleteRedisCacheDto {
 	key: string;
 }
+
+export interface IRedisCacheGetAllResponse {
+	keys: string[];
+	currentPage: number;
+	pageCount: number;
+}

@@ -1,10 +1,15 @@
 import RedisCachesTableRow from './RedisCachesTableRow';
+import Pagination from '../general/Table/Pagination';
 
 interface IProps {
-	keys: string[] | undefined;
+	keys: string[];
+	currentPage: number;
+	pageCount: number;
+	isLoading: boolean;
+	setNewPageHandler: (newPage: number) => void;
 }
 
-const RedisCachesTable = ({ keys }: IProps) => {
+const RedisCachesTable = ({ keys, currentPage, pageCount, isLoading, setNewPageHandler }: IProps) => {
 	return (
 		<div className='rounded-md border !border-stroke bg-white md:px-4 md:py-4 space-y-2 shadow-default dark:border-strokedark dark:bg-boxdark'>
 			<div className='max-w-full overflow-x-auto'>
@@ -16,10 +21,15 @@ const RedisCachesTable = ({ keys }: IProps) => {
 							<th className='w-[200px] py-3 px-1 text-center font-medium text-black dark:text-white'>عملیات</th>
 						</tr>
 					</thead>
-					<tbody>{keys?.map((item, index) => <RedisCachesTableRow key={index} cacheKey={item} index={index + 1} />)}</tbody>
+					<tbody>
+						{keys.map((item, index) => (
+							<RedisCachesTableRow key={index} cacheKey={item} index={index + 1} />
+						))}
+					</tbody>
 				</table>
 			</div>
-			{keys?.length && keys.length > 0 ? null : <h5>هیچ کلیدی ثبت نشده است</h5>}
+			{keys.length > 0 ? null : <h5>هیچ کلیدی ثبت نشده است</h5>}
+			<Pagination currentPage={currentPage} pageCount={pageCount} setNewPageHandler={setNewPageHandler} />
 		</div>
 	);
 };
