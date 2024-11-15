@@ -3,102 +3,129 @@
 @tailwind utilities;
 
 @layer base {
-	body {
-		@apply font-normal text-base text-black bg-whiten relative z-1;
-	}
-	input[type='text'], input[type='number'] {
-		@apply block w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg;
-	}
-	select {
-		@apply block w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg;
-	}
-	textarea {
-		@apply block w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg;
-	}
-	button {
-		@apply outline-none focus:outline-none;
-	}
+    body {
+        @apply font-normal text-base text-black bg-whiten relative z-1;
+    }
+
+    input[type='text'], input[type='number'] {
+        @apply block w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg;
+    }
+
+    select {
+        @apply block w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg;
+    }
+
+    textarea {
+        @apply block w-full px-4 py-2 text-base border border-gray-300 rounded-md outline-none focus:outline-none focus:shadow-lg;
+    }
+
+    button {
+        @apply outline-none focus:outline-none;
+    }
 }
+
 @layer components {
 }
+
 @layer utilities {
-	/* Chrome, Safari and Opera */
-	.no-scrollbar::-webkit-scrollbar {
-		display: none;
-	}
-	.no-scrollbar {
-		-ms-overflow-style: none; /* IE and Edge */
-		scrollbar-width: none; /* Firefox */
-	}
+    /* Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
 }
 
 .ltr {
-	direction: ltr;
+    direction: ltr;
 }
 
 .link:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .bgi-position-center {
-	background-position: center;
+    background-position: center;
 }
 
 .bgi-no-repeat {
-	background-repeat: no-repeat;
+    background-repeat: no-repeat;
 }
 
 .bgi-size-cover {
-	background-size: cover;
+    background-size: cover;
 }
 
 .sso-login-btns {
-	padding: 10px 18px;
-	transition: all 0.3s ease;
-	border: 0;
-	outline: none;
-	color: #fff;
-	border-radius: 10px;
+    padding: 10px 18px;
+    transition: all 0.3s ease;
+    border: 0;
+    outline: none;
+    color: #fff;
+    border-radius: 10px;
 }
 
 .ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
-	left: 0 !important;
-	right: unset !important;
+    left: 0 !important;
+    right: unset !important;
 }
+
 .ql-snow .ql-editor blockquote {
-	border-left: none !important;
-	border-right: 4px solid #ccc;
-	margin-bottom: 5px;
-	margin-top: 5px;
-	padding-left: 0;
-	padding-right: 16px;
+    border-left: none !important;
+    border-right: 4px solid #ccc;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-left: 0;
+    padding-right: 16px;
 }
 
 .ql-editor {
-	text-align: right !important;
+    text-align: right !important;
 }
 
 .progress {
-	animation: progress 1s infinite linear;
+    animation: progress 1s infinite linear;
 }
 
 .left-right {
-	transform-origin: 0% 50%;
+    transform-origin: 0% 50%;
 }
+
+.ck-content {
+    direction: rtl;
+    text-align: right !important;
+    line-height: 2.2;
+    word-break: break-word;
+    min-height: 300px;
+}
+
+.ck.ck-balloon-panel.ck-balloon-panel_arrowless.ck-balloon-panel_visible.ck-toolbar-container,
+.ck.ck-balloon-panel.ck-balloon-panel_arrowless.ck-balloon-panel_visible.ck-powered-by-balloon {
+    position: relative;
+    display: none;
+}
+
+.has-table-content table td {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
 @keyframes progress {
-	0% {
-		transform: translateX(0) scaleX(0);
-	}
-	40% {
-		transform: translateX(0) scaleX(0.4);
-	}
-	100% {
-		transform: translateX(100%) scaleX(0.5);
-	}
+    0% {
+        transform: translateX(0) scaleX(0);
+    }
+    40% {
+        transform: translateX(0) scaleX(0.4);
+    }
+    100% {
+        transform: translateX(100%) scaleX(0.5);
+    }
 }
 
 @media screen and (max-width: 580px) {
-	.sso-login-btns {
-		width: 330px;
-	}
+    .sso-login-btns {
+        width: 330px;
+    }
 }

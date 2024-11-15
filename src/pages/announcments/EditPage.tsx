@@ -19,7 +19,6 @@ import { useEditAnnouncement, useGetAnnouncementById } from '../../services/anno
 import DatePicker, { DateObject } from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
-import CustomTextEditor from '../../components/general/textEditor/CustomTextEditor';
 import { enqueueSnackbar } from 'notistack';
 import { useNavigate, useParams } from 'react-router-dom';
 import CustomLineSpinner from '../../components/general/spinners/CustomLineSpinner';
@@ -27,6 +26,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import CustomRadioButton from '../../components/general/radioButton/CustomRadioButton';
 import CustomAlert from '../../components/general/alerts/CustomAlert';
 import { MdOutlineCloudUpload } from 'react-icons/md';
+import CustomTextEditor2 from '../../components/general/textEditor/CustomTextEditor2';
 
 const AnnouncementsEditPage = () => {
 	const [image, setImage] = useState<File | undefined>(undefined);
@@ -120,7 +120,6 @@ const AnnouncementsEditPage = () => {
 			id: announcementData.id,
 			base64Image: imageString
 		};
-		console.log(data);
 		mutate(data, {
 			onSuccess: () => {
 				enqueueSnackbar('اطلاعیه با موفقیت ویرایش شد', { variant: 'success' });
@@ -228,7 +227,7 @@ const AnnouncementsEditPage = () => {
 						name='body'
 						control={control}
 						render={({ field: { value, onChange } }) => (
-							<CustomTextEditor
+							<CustomTextEditor2
 								showPreview={true}
 								label='متن اطلاعیه'
 								value={value}
