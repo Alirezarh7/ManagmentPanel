@@ -15,6 +15,7 @@
   "dependencies": {
     "@ag-grid-enterprise/all-modules": "^27.3.0",
     "@ant-design/icons": "^5.3.6",
+    "@ckeditor/ckeditor5-react": "^8.0.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -52,6 +53,7 @@
     "antd": "^5.16.1",
     "apexcharts": "^3.49.1",
     "axios": "^1.6.8",
+    "ckeditor5": "^43.3.1",
     "clsx": "^2.1.0",
     "echarts": "^5.5.0",
     "env-cmd": "^10.1.0",

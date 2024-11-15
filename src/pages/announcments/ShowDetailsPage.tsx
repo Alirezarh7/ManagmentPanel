@@ -79,7 +79,7 @@ const AnnouncementsShowDetailsPage = () => {
 							<label className='form-label'>متن اطلاعیه</label>
 							<div
 								dangerouslySetInnerHTML={{ __html: data.body }}
-								className='w-full px-3 py-3 text-base border border-gray-300 rounded-md'></div>
+								className='w-full px-3 py-3 text-base border border-gray-300 rounded-md has-table-content'></div>
 						</div>
 					</div>
 				</div>

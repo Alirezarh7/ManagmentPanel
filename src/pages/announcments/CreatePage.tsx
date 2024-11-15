@@ -20,6 +20,7 @@ import DatePicker, { DateObject } from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import CustomTextEditor from '../../components/general/textEditor/CustomTextEditor';
+import CustomTextEditor2 from '../../components/general/textEditor/CustomTextEditor2';
 import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 import CustomRadioButton from '../../components/general/radioButton/CustomRadioButton';
@@ -187,7 +188,7 @@ const AnnouncementsCreatePage = () => {
 						name='body'
 						control={control}
 						render={({ field: { value, onChange } }) => (
-							<CustomTextEditor
+							<CustomTextEditor2
 								showPreview={true}
 								label='متن اطلاعیه'
 								value={value}
