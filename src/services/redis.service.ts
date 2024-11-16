@@ -2,16 +2,16 @@ import ManagementAxiosInstance from '../configs/managementAxiosInstance';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { IDeleteRedisCacheDto, IRedisCacheDto, IRedisCacheGetAllResponse } from '../typs/redisCache.types';
 
-const getRedisCacheKeysFn = async (page: number) => {
-	const url = `/Redis/GetAllKeys?page=${page}`;
+const getRedisCacheKeysFn = async (page: number, size: number) => {
+	const url = `/Redis/GetAllKeys?page=${page}&size=${size}`;
 	const response = await ManagementAxiosInstance.get<IRedisCacheGetAllResponse>(url);
 
 	return response.data;
 };
-const useGetRedisCacheKeys = (page: number) => {
+const useGetRedisCacheKeys = (page: number, size: number) => {
 	return useQuery({
-		queryKey: ['getRedisCacheKeys', page],
-		queryFn: () => getRedisCacheKeysFn(page)
+		queryKey: ['getRedisCacheKeys', page, size],
+		queryFn: () => getRedisCacheKeysFn(page, size)
 	});
 };
 
@@ -29,6 +29,7 @@ const useGetRedisCacheValue = (cacheKey: string) => {
 		retry: 0
 	});
 };
+
 const editRedisCacheFn = (data: IRedisCacheDto) => {
 	return ManagementAxiosInstance.put('/Redis/UpdateValue', data);
 };

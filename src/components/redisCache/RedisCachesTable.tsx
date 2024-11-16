@@ -4,12 +4,22 @@ import Pagination from '../general/Table/Pagination';
 interface IProps {
 	keys: string[];
 	currentPage: number;
+	currentSize: number;
 	pageCount: number;
 	isLoading: boolean;
 	setNewPageHandler: (newPage: number) => void;
+	setNewSizeHandler: (newSize: number) => void;
 }
 
-const RedisCachesTable = ({ keys, currentPage, pageCount, isLoading, setNewPageHandler }: IProps) => {
+const RedisCachesTable = ({
+	keys,
+	currentPage,
+	currentSize,
+	pageCount,
+	isLoading,
+	setNewPageHandler,
+	setNewSizeHandler
+}: IProps) => {
 	return (
 		<div className='rounded-md border !border-stroke bg-white md:px-4 md:py-4 space-y-2 shadow-default dark:border-strokedark dark:bg-boxdark'>
 			<div className='max-w-full overflow-x-auto'>
@@ -29,7 +39,13 @@ const RedisCachesTable = ({ keys, currentPage, pageCount, isLoading, setNewPageH
 				</table>
 			</div>
 			{keys.length > 0 ? null : <h5>هیچ کلیدی ثبت نشده است</h5>}
-			<Pagination currentPage={currentPage} pageCount={pageCount} setNewPageHandler={setNewPageHandler} />
+			<Pagination
+				currentPage={currentPage}
+				currentSize={currentSize}
+				pageCount={pageCount}
+				setNewPageHandler={setNewPageHandler}
+				setNewSizeHandler={setNewSizeHandler}
+			/>
 		</div>
 	);
 };

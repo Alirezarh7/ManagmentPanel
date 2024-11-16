@@ -108,6 +108,10 @@
     display: none;
 }
 
+.has-table-content table {
+    width: 100%;
+}
+
 .has-table-content table td {
     border: 1px solid rgba(0, 0, 0, 0.8);
 }

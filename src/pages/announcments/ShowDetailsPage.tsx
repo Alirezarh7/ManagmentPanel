@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useGetAnnouncementById } from '../../services/announcement.service';
 import Breadcrumb from '../../components/Layout/Breadcrumb';
 import { PATHS } from '../../router/paths';
@@ -8,6 +8,8 @@ import { DateObject } from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import CustomLineSpinner from '../../components/general/spinners/CustomLineSpinner';
+import CustomButton from '../../components/general/Buttons/CustomButton';
+import React from 'react';
 
 const AnnouncementsShowDetailsPage = () => {
 	const { id } = useParams();
@@ -21,9 +23,9 @@ const AnnouncementsShowDetailsPage = () => {
 			{isLoading || isFetching ? <CustomLineSpinner /> : null}
 
 			{!isLoading && data && (
-				<div className='max-w-screen-xl w-full mx-auto flex flex-col'>
+				<div className='max-w-screen-xl w-full mx-auto flex flex-col gap-4'>
 					<div className='grid grid-cols-3 gap-4'>
-						<div className='col-span-2'>
+						<div className='col-span-2 space-y-4'>
 							<CustomInput label='آی دی' type={'text'} value={data.id} onChange={() => {}} disabled={true} />
 							<CustomInput
 								label='سرویس اطلاعیه'
@@ -60,27 +62,30 @@ const AnnouncementsShowDetailsPage = () => {
 								onChange={() => {}}
 								disabled={true}
 							/>
+							<CustomInput
+								className='col-span-2'
+								label='موضوع اطلاعیه'
+								type={'text'}
+								value={data.subject}
+								onChange={() => {}}
+								disabled={true}
+							/>
 						</div>
 						<div>
 							<label className='form-label'>تصویر اطلاعیه</label>
 							<img src={data.base64Image} alt='تصویر آگهی' className='max-w-96 rounded-md' />
 						</div>
 					</div>
-					<div>
-						<CustomInput
-							className='col-span-2'
-							label='موضوع اطلاعیه'
-							type={'text'}
-							value={data.subject}
-							onChange={() => {}}
-							disabled={true}
-						/>
-						<div className='col-span-2'>
+					<div className='grid gap-4'>
+						<div>
 							<label className='form-label'>متن اطلاعیه</label>
 							<div
 								dangerouslySetInnerHTML={{ __html: data.body }}
 								className='w-full px-3 py-3 text-base border border-gray-300 rounded-md has-table-content'></div>
 						</div>
+						<Link to={PATHS.announcements.index}>
+							<CustomButton variant={'danger'} type={'button'} label={'بازگشت'} onClick={() => {}} />
+						</Link>
 					</div>
 				</div>
 			)}

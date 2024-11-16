@@ -22,10 +22,11 @@ import persian_fa from 'react-date-object/locales/persian_fa';
 import CustomTextEditor from '../../components/general/textEditor/CustomTextEditor';
 import CustomTextEditor2 from '../../components/general/textEditor/CustomTextEditor2';
 import { enqueueSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CustomRadioButton from '../../components/general/radioButton/CustomRadioButton';
 import { MdOutlineCloudUpload } from 'react-icons/md';
 import CustomAlert from '../../components/general/alerts/CustomAlert';
+import { extractAxiosValidationErrors } from '../../utils/axiosErrorUtils';
 
 const AnnouncementsCreatePage = () => {
 	const [image, setImage] = useState<File | undefined>(undefined);
@@ -94,8 +95,9 @@ const AnnouncementsCreatePage = () => {
 				enqueueSnackbar('اطلاعیه با موفقیت ایجاد شد', { variant: 'success' });
 				navigate(PATHS.announcements.index);
 			},
-			onError: error => {
-				enqueueSnackbar('خطا در ایجاد اطلاعیه جدید', { variant: 'error' });
+			onError: (error: any) => {
+				const errors = extractAxiosValidationErrors(error);
+				errors.forEach(errorText => enqueueSnackbar(errorText, { variant: 'error' }));
 			}
 		});
 	};
@@ -308,8 +310,11 @@ const AnnouncementsCreatePage = () => {
 						</div>
 					</div>
 
-					<div>
+					<div className='flex items-center gap-2'>
 						<CustomButton variant={'primary'} type={'submit'} label={'ذخیره'} onClick={() => {}} loading={isPending} />
+						<Link to={PATHS.announcements.index}>
+							<CustomButton variant={'danger'} type={'button'} label={'بازگشت'} onClick={() => {}} disabled={isPending} />
+						</Link>
 					</div>
 				</form>
 			</div>
