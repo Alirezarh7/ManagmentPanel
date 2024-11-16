@@ -35,6 +35,7 @@ import {
 } from 'ckeditor5';
 
 import 'ckeditor5/ckeditor5.css';
+import CustomButton from '../Buttons/CustomButton';
 
 interface IProps {
 	showPreview: boolean;
@@ -46,9 +47,10 @@ interface IProps {
 }
 
 const CustomTextEditor2 = ({ showPreview, label, value, onChange, disabled = false, error }: IProps) => {
+	const [isLayoutReady, setIsLayoutReady] = useState(false);
+	const [showPreviewState, setShowPreviewState] = useState<boolean>(false);
 	const editorContainerRef = useRef(null);
 	const editorRef = useRef(null);
-	const [isLayoutReady, setIsLayoutReady] = useState(false);
 
 	useEffect(() => {
 		setIsLayoutReady(true);
@@ -198,12 +200,20 @@ const CustomTextEditor2 = ({ showPreview, label, value, onChange, disabled = fal
 					</div>
 				</div>
 			</div>
-			{showPreview ? <h4>پیش نمایش متن اطلاعیه</h4> : null}
 			{showPreview ? (
+				<CustomButton
+					variant={'light'}
+					type={'button'}
+					label={showPreviewState ? 'عدم مشاهده پیش نمایش متن اطلاعیه' : 'مشاهده پیش نمایش متن اطلاعیه'}
+					onClick={() => setShowPreviewState(prev => !prev)}
+				/>
+			) : null}
+			<div
+				className={`grid ${showPreview && showPreviewState ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'} transition-all duration-500`}>
 				<div
 					dangerouslySetInnerHTML={{ __html: value }}
-					className='w-full px-3 py-3 text-base border border-gray-300 rounded-md has-table-content'></div>
-			) : null}
+					className={`w-full px-3 py-3 ${showPreview && showPreviewState ? '' : 'hidden'} text-base border !border-dashed !border-blue-300 rounded-md has-table-content overflow-hidden`}></div>
+			</div>
 		</div>
 	);
 };

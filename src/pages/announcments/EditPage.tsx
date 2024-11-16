@@ -20,13 +20,14 @@ import DatePicker, { DateObject } from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import { enqueueSnackbar } from 'notistack';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import CustomLineSpinner from '../../components/general/spinners/CustomLineSpinner';
 import { useQueryClient } from '@tanstack/react-query';
 import CustomRadioButton from '../../components/general/radioButton/CustomRadioButton';
 import CustomAlert from '../../components/general/alerts/CustomAlert';
 import { MdOutlineCloudUpload } from 'react-icons/md';
 import CustomTextEditor2 from '../../components/general/textEditor/CustomTextEditor2';
+import { extractAxiosValidationErrors } from '../../utils/axiosErrorUtils';
 
 const AnnouncementsEditPage = () => {
 	const [image, setImage] = useState<File | undefined>(undefined);
@@ -128,8 +129,9 @@ const AnnouncementsEditPage = () => {
 				});
 				navigate(PATHS.announcements.index);
 			},
-			onError: error => {
-				enqueueSnackbar('خطا در ویرایش اطلاعیه', { variant: 'error' });
+			onError: (error: any) => {
+				const errors = extractAxiosValidationErrors(error);
+				errors.forEach(errorText => enqueueSnackbar(errorText, { variant: 'error' }));
 			}
 		});
 	};
@@ -350,8 +352,11 @@ const AnnouncementsEditPage = () => {
 						</div>
 					</div>
 
-					<div>
+					<div className='flex items-center gap-2'>
 						<CustomButton variant={'primary'} type={'submit'} label={'ذخیره'} onClick={() => {}} loading={isPending} />
+						<Link to={PATHS.announcements.index}>
+							<CustomButton variant={'danger'} type={'button'} label={'بازگشت'} onClick={() => {}} disabled={isPending} />
+						</Link>
 					</div>
 				</form>
 			</div>

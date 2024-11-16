@@ -12,8 +12,9 @@ const RedisCachePage = () => {
 	useTitle('کش ردیس', 'ناوشگران');
 	const [showDeleteAllModal, setShowDeleteAllModal] = useState(false);
 	const [page, setPage] = useState(1);
+	const [size, setSize] = useState(10);
 
-	const { data, isLoading, isFetching, isError } = useGetRedisCacheKeys(page);
+	const { data, isLoading, isFetching, isError } = useGetRedisCacheKeys(page, size);
 
 	const isPageLoading: boolean = isLoading || isFetching;
 
@@ -41,9 +42,11 @@ const RedisCachePage = () => {
 				<RedisCachesTable
 					keys={data.keys}
 					currentPage={page}
+					currentSize={size}
 					pageCount={data.pageCount}
 					isLoading={isPageLoading}
 					setNewPageHandler={newPage => setPage(newPage)}
+					setNewSizeHandler={newSize => setSize(newSize)}
 				/>
 			)}
 			{showDeleteAllModal && (
