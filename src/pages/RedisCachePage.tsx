@@ -7,14 +7,18 @@ import { useGetRedisCacheKeys } from '../services/redis.service';
 import RedisCachesTable from '../components/redisCache/RedisCachesTable';
 import DeleteAllRedisCacheKeysModal from '../components/redisCache/DeleteAllRedisCacheKeysModal';
 import CustomButton from '../components/general/Buttons/CustomButton';
+import useDebounce from '../hooks/useDebounce';
 
 const RedisCachePage = () => {
 	useTitle('کش ردیس', 'ناوشگران');
 	const [showDeleteAllModal, setShowDeleteAllModal] = useState(false);
 	const [page, setPage] = useState(1);
 	const [size, setSize] = useState(10);
+	const [q, setQ] = useState('');
 
-	const { data, isLoading, isFetching, isError } = useGetRedisCacheKeys(page, size);
+	const debouncedQ = useDebounce(q, 1000);
+
+	const { data, isLoading, isFetching, isError } = useGetRedisCacheKeys(page, size, debouncedQ);
 
 	const isPageLoading: boolean = isLoading || isFetching;
 
@@ -35,6 +39,17 @@ const RedisCachePage = () => {
 					label='حذف کلیه کلیدهای ردیس'
 					onClick={() => setShowDeleteAllModal(true)}
 					disabled={isPageLoading}
+				/>
+			</div>
+			<div>
+				<input
+					type='text'
+					placeholder='جستجو در کلیدهای ردیس...'
+					value={q}
+					onChange={event => {
+						setPage(1);
+						setQ(event.target.value);
+					}}
 				/>
 			</div>
 			{isPageLoading ? <CustomLineSpinner /> : null}
