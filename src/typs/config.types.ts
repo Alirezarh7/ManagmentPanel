@@ -4,6 +4,7 @@ export interface IEditConfigDto {
 	isOpenPassengerGroup: boolean;
 	isOpenReserve: boolean;
 	isOpenPayment: boolean;
+	isActive: boolean;
 }
 
 export interface IConfigResponse extends IEditConfigDto {

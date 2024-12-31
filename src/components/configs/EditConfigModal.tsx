@@ -29,7 +29,8 @@ const EditConfigModal = ({ data, isOpen, onSuccess, onCancel }: IProps) => {
 		isOpenCompletion: data.isOpenCompletion,
 		isOpenPassengerGroup: data.isOpenPassengerGroup,
 		isOpenReserve: data.isOpenReserve,
-		isOpenPayment: data.isOpenPayment
+		isOpenPayment: data.isOpenPayment,
+		isActive: data.isActive
 	};
 
 	const editConfigSchema = Yup.object().shape({
@@ -37,14 +38,11 @@ const EditConfigModal = ({ data, isOpen, onSuccess, onCancel }: IProps) => {
 		isOpenCompletion: Yup.boolean().required('این فیلد اجباری است'),
 		isOpenPassengerGroup: Yup.boolean().required('این فیلد اجباری است'),
 		isOpenReserve: Yup.boolean().required('این فیلد اجباری است'),
-		isOpenPayment: Yup.boolean().required('این فیلد اجباری است')
+		isOpenPayment: Yup.boolean().required('این فیلد اجباری است'),
+		isActive: Yup.boolean().required('این فیلد اجباری است')
 	});
 
-	const {
-		control,
-		handleSubmit,
-		formState: { errors }
-	} = useForm<IEditConfigDto>({
+	const {control, handleSubmit, formState: { errors }} = useForm<IEditConfigDto>({
 		defaultValues: defaultFormValues,
 		resolver: yupResolver(editConfigSchema)
 	});
@@ -140,6 +138,24 @@ const EditConfigModal = ({ data, isOpen, onSuccess, onCancel }: IProps) => {
 									))}
 								</div>
 								{errors.isOpenPayment ? <span className='text-danger'>{errors.isOpenPayment.message}</span> : null}
+							</div>
+						)}
+					/>
+					<Controller
+						name='isActive'
+						control={control}
+						render={({ field: { value, onChange } }) => (
+							<div className='px-2 border !border-gray-300 rounded-md'>
+								<label>بروز رسانی</label>
+								<div className='px-4 py-2 text-base bg-white flex flex-col gap-2'>
+									{booleanIsActiveValuesArray.map(item => (
+										<div key={item.label} className={`flex items-center gap-2 ${value === item.value ? 'text-blue-500' : ''}`}>
+											<CustomRadioButton value={item.value} checked={value === item.value} onClick={onChange} />
+											<span>{item.label}</span>
+										</div>
+									))}
+								</div>
+								{errors.isActive ? <span className='text-danger'>{errors.isActive.message}</span> : null}
 							</div>
 						)}
 					/>
