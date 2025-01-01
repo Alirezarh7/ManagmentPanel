@@ -49,19 +49,17 @@ const ConfigsTableRow = ({ data }: IProps) => {
 	return (
 		<>
 			<tr className='border-b hover:bg-gray-100'>
-				<td className='py-2 px-1 text-center dark:border-strokedark'>
-					<p className='text-black dark:text-white'>{data.id}</p>
-				</td>
 				<td className='py-2 px-3 dark:border-strokedark'>
 					<span
-						className={`bg-opacity-10 py-1 px-3  text-sm font-medium rounded-2xl ${getServiceDetails(data.configActionType).classes}`}>
+						className={`bg-opacity-10 p-1 md:px-4 text-sm font-medium rounded-2xl ${getServiceDetails(data.configActionType).classes}`}>
 						{getServiceDetails(data.configActionType).label}
 					</span>
 				</td>
-				{getBooleanTd(data.isOpenCompletion)}
 				{getBooleanTd(data.isOpenPassengerGroup)}
 				{getBooleanTd(data.isOpenReserve)}
 				{getBooleanTd(data.isOpenPayment)}
+				{getBooleanTd(data.isOpenCompletion)}
+				{getBooleanTd(data.isActive)}
 				<td className='py-2 px-3 dark:border-strokedark'>
 					<div className='flex justify-center items-center'>
 						<button className='hover:hover:text-primary'>
