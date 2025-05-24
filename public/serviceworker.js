@@ -6,7 +6,7 @@ const self = this;
 self.addEventListener("install", (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
-            console.log("cache opened");
+
             return cache.addAll(urlsToCache);
         })
     );

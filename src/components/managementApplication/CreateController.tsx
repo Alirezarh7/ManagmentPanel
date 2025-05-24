@@ -1,6 +1,8 @@
-import React from 'react';
 
-const CreateController = () => {
+interface IProps {
+  serviceId:number
+}
+const CreateController = ({serviceId}:IProps) => {
   return (
     <div>
       

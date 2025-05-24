@@ -3,11 +3,12 @@ import {SlPrinter} from "react-icons/sl";
 import {IoClose} from "react-icons/io5";
 import {MdAddToPhotos, MdOutlineEdit} from "react-icons/md";
 import CustomInput from "../inputs/CustomInput";
-import { Controller} from "react-hook-form";
+import {Controller} from "react-hook-form";
+import {VscDebugContinueSmall} from "react-icons/vsc";
 
 interface IProps {
   bodyData: Record<string, any>[];
-  headData: { title: string; key: string ,numberInput?:boolean ,name?:string}[];
+  headData: { title: string; key: string, numberInput?: boolean, name?: string }[];
   RowNumber?: boolean;
   pagination?: boolean;
   currentPage?: number; // ← صفحه فعلی
@@ -22,7 +23,8 @@ interface IProps {
   onPrint?: (row: Record<string, any>) => void;
   onView?: (row: Record<string, any>) => void;
   onAdd?: (row: Record<string, any>) => void;
-  onEdit?:(row: Record<string, any>) => void;
+  onEdit?: (row: Record<string, any>) => void;
+  onContinue?: (row: Record<string, any>) => void;
 }
 
 
@@ -41,20 +43,21 @@ const DataGrid = ({
                     onAdd,
                     control,
                     onEdit,
+                    onContinue,
                   }: IProps) => {
   return (
     <>
       <div className="max-md:hidden p-2">
-        <div className=" w-full overflow-x-auto">
+        <div className=" w-full overflow-x-auto bg-gray-100">
           <table className="table-auto w-full text-right text-sm">
-            <thead className="bg-sliderColor text-white text-sm ">
+            <thead className="bg-black text-white text-sm ">
             <tr className={'text-center'}>
-              {RowNumber && <th className="p-1 border border-goldColor whitespace-nowrap">ردیف</th>}
+              {RowNumber && <th className="p-1 border !border-goldColor whitespace-nowrap">ردیف</th>}
               {headData?.map((item, index) => (
                 <th key={index}
-                    className="p-1 border border-goldColor whitespace-nowrap">{item.title}</th>
+                    className="p-1 border !border-goldColor whitespace-nowrap">{item.title}</th>
               ))}
-              {activities && <th className="p-1 border border-goldColor whitespace-nowrap">عملیات</th>}
+              {activities && <th className="p-1 border !border-goldColor whitespace-nowrap">عملیات</th>}
             </tr>
             </thead>
             <tbody className="text-center">
@@ -76,8 +79,8 @@ const DataGrid = ({
                         <Controller
                           name={`items.${index}.${headItem.name}`}
                           control={control}
-                          render={({ field: { value, onChange } }) => (
-                            <CustomInput type="number" value={value} onChange={onChange} />
+                          render={({field: {value, onChange}}) => (
+                            <CustomInput type="number" value={value} onChange={onChange}/>
                           )}
                         />
                       ) : (
@@ -113,6 +116,12 @@ const DataGrid = ({
                             <SlPrinter
                               className="text-blue-700 w-6 h-6 mx-2 cursor-pointer"
                               onClick={() => onPrint(item)}
+                            />
+                          )}
+                          {onContinue && (
+                            <VscDebugContinueSmall
+                              className="text-yellow-500 w-6 h-6 mx-2 cursor-pointer"
+                              onClick={() => onContinue(item)}
                             />
                           )}
                           {onDelete && (
@@ -166,13 +175,13 @@ const DataGrid = ({
         ) : null}
       </div>
 
-      <div className=" md:hidden flex flex-col gap-5 p-1.5 py-4 border border-goldColor   ">
+      <div className=" md:hidden flex flex-col gap-5 p-1.5 py-4 border  bg-gray-100  ">
         {bodyData.map((item, index) => {
           const showActions = item?.hasActions;
           return (
-            <div key={index} className="border border-sliderColor/30 rounded-xl shadow  bg-white">
-              <div className={'relative'}>
-                <div className={'absolute -top-3.5  rounded-full bg-white w-fit px-1.5 '}>
+            <div key={index} className="border border-sliderColor/30 rounded-xl   bg-gray-100">
+              <div className={'relative '}>
+                <div className={'absolute -top-3.5  rounded-full bg-gray-100 w-fit px-1.5 '}>
                   {index + 1}
                 </div>
               </div>
@@ -203,13 +212,21 @@ const DataGrid = ({
                     {onEdit &&
                         <MdOutlineEdit className="text-green-700 w-5 h-5 cursor-pointer" onClick={() => onEdit(item)}/>}
                     {onView &&
-                        <RiCalendarView className="text-green-700 w-5 h-5 cursor-pointer" onClick={() => onView(item)}/>}
+                        <RiCalendarView className="text-green-700 w-5 h-5 cursor-pointer"
+                                        onClick={() => onView(item)}/>}
                     {onAdd &&
                         <MdAddToPhotos className="text-green-700 w-5 h-5 cursor-pointer" onClick={() => onAdd(item)}/>}
                     {onPrint &&
                         <SlPrinter className="text-blue-700 w-5 h-5 cursor-pointer" onClick={() => onPrint(item)}/>}
+                    {onContinue && (
+                      <VscDebugContinueSmall
+                        className="text-yellow-500 w-5 h-5 cursor-pointer"
+                        onClick={() => onContinue(item)}
+                      />
+                    )}
                     {onDelete &&
                         <IoClose className="text-red-700 w-5 h-5 cursor-pointer" onClick={() => onDelete(item)}/>}
+
                   </div>
                 </div>
               )}

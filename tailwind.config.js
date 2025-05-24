@@ -18,6 +18,8 @@
 				colors: {
 					current: 'currentColor',
 					transparent: 'transparent',
+					sliderColor: '#0D2A4C',
+					goldColor: '#e1ac33',
 					white: '#FFFFFF',
 					black: '#1C2434',
 					'black-2': '#010101',

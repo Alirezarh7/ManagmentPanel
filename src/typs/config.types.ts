@@ -12,9 +12,7 @@ export interface IConfigResponse extends IEditConfigDto {
   configActionTypeId: number;
 }
 
-export interface IGetServices {
-  id: number, title: string
-}
+
 
 
 

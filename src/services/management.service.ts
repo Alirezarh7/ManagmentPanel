@@ -1,6 +1,6 @@
 import ManagementAxiosInstance from "../configs/managementAxiosInstance";
-import {IConfigResponse, IGetServices} from "../typs/config.types";
 import {useQuery} from "@tanstack/react-query";
+import {IGetServices} from "../typs/managment.types";
 
 const getServices = async () => {
   const response = await ManagementAxiosInstance.get<IGetServices[]>('/Service/GetServices');

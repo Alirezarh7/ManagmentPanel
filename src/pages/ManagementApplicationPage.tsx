@@ -1,9 +1,11 @@
 import React, { useState} from 'react';
 import {useLocation} from "react-router-dom";
 import CustomStepper from "../components/general/stepper/CustomStepper";
-import CreateService from "../components/managementApplication/CreateService";
+import CreateService from "../components/managementApplication/createService/CreateService";
 import CreateController from "../components/managementApplication/CreateController";
 import CreateAction from "../components/managementApplication/CreateAction";
+import {useForm} from "react-hook-form";
+import {TUseForm} from "../typs/managment.types";
 
 
 const ManagementApplicationPage = () => {
@@ -11,8 +13,9 @@ const ManagementApplicationPage = () => {
 
   const Location = useLocation();
   const [currentStep, setCurrentStep] = useState<number>(0);
+  const {setValue,watch} = useForm<TUseForm>()
 
-
+  console.log(watch('serviceId'))
 
   const next = (forceStep?: number): any => {
     if (currentStep <= 2) setCurrentStep(forceStep ? forceStep : currentStep + 1);
@@ -22,14 +25,13 @@ const ManagementApplicationPage = () => {
   };
 
 
-
   let steps = ['اکشن','کنترلر','سرویس'];
   let getContent = () => {
     switch (currentStep) {
       case 0:
-        return <CreateService/>
+        return <CreateService setValue={setValue} next={next} />
       case 1:
-        return <CreateController/>
+        return <CreateController serviceId={watch('serviceId')}/>
       case 2:
         return <CreateAction/>
     }
