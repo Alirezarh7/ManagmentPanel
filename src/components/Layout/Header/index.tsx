@@ -20,7 +20,6 @@ const Header = ({ sidebarOpen, setSidebarOpen, isConnected }: IProps) => {
 						<img src={ZiaratLogo} alt='Logo' className='w-10 h-10' />
 					</Link>
 				</div>
-
 				<div className='flex items-center gap-3 2xsm:gap-7'>
 					{/*<DropdownUser />*/}
 					<div className='flex'>{!isConnected ? '' : <LogOut />}</div>
@@ -30,7 +29,7 @@ const Header = ({ sidebarOpen, setSidebarOpen, isConnected }: IProps) => {
 							e.stopPropagation();
 							setSidebarOpen(!sidebarOpen);
 						}}
-						className='z-99999 block rounded-sm border border-stroke bg-white shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden'>
+						className=' dark:border-strokedark dark:bg-boxdark lg:hidden'>
 						<GiHamburgerMenu className='w-8 h-8 text-black' />
 					</button>
 				</div>

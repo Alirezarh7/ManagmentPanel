@@ -47,7 +47,7 @@ const FaqContentsTableRow = ({ data }: IProps) => {
 	return (
 		<>
 			<tr className='border-b hover:bg-gray-100'>
-				<td className='py-2 px-1 text-center dark:border-strokedark'>
+				<td className=' max-md:hidden py-2 px-1 text-center dark:border-strokedark'>
 					<p className='text-black dark:text-white'>{data.id}</p>
 				</td>
 				<td className='py-2 px-3 dark:border-strokedark'>
@@ -55,8 +55,12 @@ const FaqContentsTableRow = ({ data }: IProps) => {
 						{data.question.substring(0, 50)}
 						{data.question.length > 50 ? '...' : ''}
 					</p>
+					<span
+						className={`md:hidden bg-opacity-10 p-1  text-[10px] font-medium rounded-2xl ${getServiceDetails(data.serviceType).classes}`}>
+						{getServiceDetails(data.serviceType).label}
+					</span>
 				</td>
-				<td className='py-2 px-1 text-center dark:border-strokedark'>
+				<td className='max-md:hidden py-2 px-1 text-center dark:border-strokedark'>
 					<span
 						className={`bg-opacity-10 py-1 px-3  text-sm font-medium rounded-2xl ${getServiceDetails(data.serviceType).classes}`}>
 						{getServiceDetails(data.serviceType).label}
@@ -70,13 +74,13 @@ const FaqContentsTableRow = ({ data }: IProps) => {
 				<td className='py-2 px-3 dark:border-strokedark'>
 					<div className='flex justify-between items-center'>
 						<button className='hover:hover:text-primary'>
-							<FiEye className='w-5 h-5' onClick={() => navigate(PATHS.faqContents.showFn(data.id))} />
+							<FiEye className='w-5 h-5' onClick={() => navigate(PATHS.faqContents.showFn(data.id))}/>
 						</button>
 						<button className='hover:hover:text-primary'>
-							<FaRegEdit className='w-5 h-5' onClick={() => navigate(PATHS.faqContents.editFn(data.id))} />
+							<FaRegEdit className='w-5 h-5' onClick={() => navigate(PATHS.faqContents.editFn(data.id))}/>
 						</button>
 						<button className='hover:hover:text-primary'>
-							<AiOutlineDelete className='w-5 h-5' onClick={() => setShowDeleteModal(true)} />
+							<AiOutlineDelete className='w-5 h-5' onClick={() => setShowDeleteModal(true)}/>
 						</button>
 					</div>
 				</td>
