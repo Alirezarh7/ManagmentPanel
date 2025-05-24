@@ -1,5 +1,6 @@
 import {useGetServices} from "../../../services/management.service";
 import DataGrid from "../../general/gridShow/DataGrid";
+import AddItemModal from "./AddItemModal";
 
 interface IProps {
   setValue:any,
@@ -36,6 +37,7 @@ const CreateService = ({setValue,next}:IProps) => {
                     onDelete={onDelete}/>
           : null}
       </div>
+      <AddItemModal />
     </div>
   );
 };
