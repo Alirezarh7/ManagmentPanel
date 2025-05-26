@@ -12,7 +12,7 @@ export interface IProps {
 const CustomStepper = ({onPrev, onNext, steps, currentStep, content}: IProps) => {
   const [t] = useTranslation();
   return (
-    <ol className=' flex w-full text-gray-900 font-medium sm:text-base bg-gray-100 '>
+    <ol className=' flex w-full text-gray-900 font-medium sm:text-base '>
       {steps.map((step, index) => (
         <li
           key={index}

@@ -77,10 +77,10 @@ const DataGrid = ({
                     <td key={idx} className="p-1 border border-goldColor whitespace-nowrap">
                       {headItem.numberInput ? (
                         <Controller
-                          name={`items.${index}.${headItem.name}`}
+                          name={`${headItem.name}`}
                           control={control}
                           render={({field: {value, onChange}}) => (
-                            <CustomInput type="number" value={value} onChange={onChange}/>
+                            <CustomInput type="text" value={value} onChange={onChange}/>
                           )}
                         />
                       ) : (
@@ -192,10 +192,10 @@ const DataGrid = ({
                     <span className="text-gray-800">
                     {headItem.numberInput ? (
                       <Controller
-                        name={`items.${index}.${headItem.name}`}
+                        name={`${headItem.name}`}
                         control={control}
                         render={({field: {value, onChange}}) => (
-                          <CustomInput type="number" value={value} onChange={onChange}/>
+                          <CustomInput type="text" value={value} onChange={onChange}/>
                         )}
                       />
                     ) : (

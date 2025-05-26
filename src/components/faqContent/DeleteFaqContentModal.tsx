@@ -50,7 +50,7 @@ const DeleteFaqContentModal = ({ data, isOpen, onSuccess, onCancel }: IProps) =>
 					onClick={deleteFaqContentHandler}
 					loading={isPending}
 				/>
-				<CustomButton variant={'danger'} type={'button'} label='خیر' onClick={onCancel} disabled={isPending} />
+				<CustomButton variant={'Cancel'} type={'button'} label='خیر' onClick={onCancel} disabled={isPending} />
 			</div>
 		</CustomModal>
 	);

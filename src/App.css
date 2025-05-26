@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply font-normal text-base text-black bg-whiten relative z-1;
+        @apply font-normal text-base text-black  relative z-1;
     }
 
     input[type='text'], input[type='number'] {

@@ -14,4 +14,17 @@ const useGetServices = () => {
   });
 };
 
-export {useGetServices}
+const getServiceById = async (id:number) => {
+  const response = await ManagementAxiosInstance.get<IGetServices>(`Service/GetServiceById/${id}`);
+
+  return response.data;
+};
+const useGetServiceById = (id:number) => {
+  return useQuery({
+    queryFn:()=> getServiceById(id),
+    queryKey: ['getServiceById',id],
+    enabled:false
+  });
+};
+
+export {useGetServices,useGetServiceById}

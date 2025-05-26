@@ -160,8 +160,8 @@ const EditConfigModal = ({ data, isOpen, onSuccess, onCancel }: IProps) => {
 						)}
 					/>
 					<div className='flex flex-col md:flex-row gap-4 mt-10'>
-						<CustomButton variant={'primary'} type={'submit'} label={'ویرایش'} onClick={() => {}} loading={isPending} />
-						<CustomButton variant={'danger'} type={'button'} label='انصراف' onClick={onCancel} disabled={isPending} />
+						<CustomButton variant={'Cancel'} type={'submit'} label={'ویرایش'} onClick={() => {}} loading={isPending} />
+						<CustomButton variant={'Cancel'} type={'button'} label='انصراف' onClick={onCancel} disabled={isPending} />
 					</div>
 				</form>
 			</div>
