@@ -175,13 +175,13 @@ const DataGrid = ({
         ) : null}
       </div>
 
-      <div className=" md:hidden flex flex-col gap-5 p-1.5 py-4 border  bg-gray-100  ">
+      <div className=" md:hidden flex flex-col gap-5 p-1.5 py-4 ">
         {bodyData.map((item, index) => {
           const showActions = item?.hasActions;
           return (
-            <div key={index} className="border border-sliderColor/30 rounded-xl   bg-gray-100">
+            <div key={index} className="border !border-gray-300 rounded-xl pb-2">
               <div className={'relative '}>
-                <div className={'absolute -top-3.5  rounded-full bg-gray-100 w-fit px-1.5 '}>
+                <div className={'absolute -top-3.5  rounded-full  w-fit px-1.5 bg-gray-100'}>
                   {index + 1}
                 </div>
               </div>
@@ -207,8 +207,8 @@ const DataGrid = ({
               </div>
 
               {showActions && (
-                <div className='border-t border-sliderColor/30 '>
-                  <div className="flex justify-center gap-3 my-2 p-2">
+                <div className='border-t !border-gray-300 mt-1'>
+                  <div className="flex justify-center gap-3  p-2">
                     {onEdit &&
                         <MdOutlineEdit className="text-green-700 w-5 h-5 cursor-pointer" onClick={() => onEdit(item)}/>}
                     {onView &&

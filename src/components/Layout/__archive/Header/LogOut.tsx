@@ -1,4 +1,4 @@
-import React, {ComponentType} from 'react';
+import React, {ComponentType, useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import userManager from '../../../../store/userManager';
@@ -10,11 +10,17 @@ import NapLoading from '../../../general/NapLoading/NapLoading';
 import {shareData} from '../../../../shareData';
 import {MdAccountBox} from "react-icons/md";
 import {TbLogout} from "react-icons/tb";
+import {RiArrowDropDownLine, RiArrowDropUpLine} from "react-icons/ri";
 
 type IProps = typeof dashboardActions & IApplicationState;
 
-const LogOut = ({oidc,toggleLogoutConfirm,clearUserClaims,dashboard}: IProps) => {
+const LogOut = ({oidc,clearUserClaims,dashboard}: IProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [t] = useTranslation();
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
   const logout = (event: any) => {
     event.preventDefault();
     window.localStorage.getItem(shareData.CONSTANT.SSO_APPROACH) === 'organization' && userManager.signoutRedirect();
@@ -47,32 +53,35 @@ const LogOut = ({oidc,toggleLogoutConfirm,clearUserClaims,dashboard}: IProps) =>
 
   return (
     <React.Fragment>
-      <div className='dropdown inline mx-2  border p-2 rounded-md shadow-sm'>
-				<span
-          className='dropdown-toggle cup'
-          id='dropdownMenuButton'
-          data-toggle='dropdown'
-          aria-haspopup='true'
-          aria-expanded='false'>
-					<span className='mdi mdi-account-outline line-height-20px mdi-20px ml-1'></span>
-					<span>
-						{oidc.user?.profile?.firstName} {oidc.user?.profile?.lastName}
-					</span>
-				</span>
-        <div className='dropdown-menu shadow border-0' aria-labelledby='dropdownMenuButton'>
-          <Link
-            className='dropdown-item flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100'
-            to={'/user-information'} title={t('userAccount')}>
-            <MdAccountBox/>
-            {t('userAccount')}
-          </Link>
-          {isVipUser && (
-            <Link className='dropdown-item' to={'/replace-user'} title={'بروز رسانی کاربر'}>
-              {'بروز رسانی کاربر'}
-            </Link>
-          )}
+      <NapLoading loading={dashboard.userPassUpdate.loading}/>
+      <div className="z-10 mx-2 md:mx-10">
+        <div ref={dropdownRef}>
           <button
-            className='dropdown-item flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100'
+            type="button"
+            className="w-fit h-10 items-center text-sm font-medium rounded-lg border border-goldColor bg-white text-gray-800 shadow-sm hover:bg-gray-50"
+            onClick={toggleDropdown}>
+            <div className="flex justify-around w-full items-center ">
+              <strong className="font-weight-bold text-gray-800 px-4">
+                {oidc.user?.profile?.firstName} {oidc.user?.profile?.lastName}
+              </strong>
+              <div className="border-r p-1 border-goldColor">
+                {isOpen ? (
+                  <RiArrowDropUpLine className="h-6 w-6 text-goldColor "/>
+                ) : (
+                  <RiArrowDropDownLine className="h-6 w-6 text-goldColor "/>
+                )}
+              </div>
+            </div>
+          </button>
+          <div className={`${!isOpen ? 'hidden' : ''} w-fit mt-2 py-2 p-2 absolute rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5`}>
+            <Link
+              className='w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100'
+              to={'/user-information'} title={t('userAccount')}>
+              <MdAccountBox/>
+              {t('userAccount')}
+            </Link>
+          <button
+            className='w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100'
             onClick={event => logout(event)}>
             <TbLogout/>
             {t('logOut')}
@@ -80,7 +89,8 @@ const LogOut = ({oidc,toggleLogoutConfirm,clearUserClaims,dashboard}: IProps) =>
         </div>
       </div>
       <ChangePass/>
-      <NapLoading loading={dashboard.userPassUpdate.loading}/>
+
+      </div>
     </React.Fragment>
   );
 };
