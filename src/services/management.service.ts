@@ -15,25 +15,41 @@ const useGetServices = () => {
   });
 };
 
-const getServiceById = async (id:number) => {
+const getServiceById = async (id: number) => {
   const response = await ManagementAxiosInstance.get<IGetServices>(`Service/GetServiceById/${id}`);
 
   return response.data;
 };
-const useGetServiceById = (id:number) => {
+const useGetServiceById = (id: number) => {
   return useQuery({
-    queryFn:()=> getServiceById(id),
-    queryKey: ['getServiceById',id],
-    enabled:false
+    queryFn: () => getServiceById(id),
+    queryKey: ['getServiceById', id],
+    enabled: false
   });
 };
 
 const DeleteService = (id: number) => {
-  return ManagementAxiosInstance.delete(`/ManagementPanel/api/Service/DeleteService?Id=${id}`);
+  return ManagementAxiosInstance.delete(`Service/DeleteService?Id=${id}`);
 };
 const useDeleteService = () => {
-  return useMutation({ mutationFn: DeleteService });
+  return useMutation({mutationFn: DeleteService});
+};
+
+const createService = (data: { "title": string, "description": string }) => {
+  return ManagementAxiosInstance.post(`/Service/CreateService`, data);
+};
+const useCreateService = () => {
+  return useMutation({mutationFn: createService});
+};
+
+const updateService = (data: {"id": number, "title": string, "description": string }) => {
+  return ManagementAxiosInstance.put(`/Service/UpdateService`, data);
+};
+const useUpdateService = () => {
+  return useMutation({mutationFn: updateService});
 };
 
 
-export {useGetServices,useGetServiceById,useDeleteService}
+
+
+export {useGetServices, useGetServiceById, useDeleteService, useCreateService ,useUpdateService}

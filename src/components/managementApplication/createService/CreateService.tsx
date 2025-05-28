@@ -1,10 +1,16 @@
-import {useDeleteService, useGetServiceById, useGetServices} from "../../../services/management.service";
+import {
+  useCreateService,
+  useDeleteService,
+  useGetServiceById,
+  useGetServices, useUpdateService
+} from "../../../services/management.service";
 import DataGrid from "../../general/gridShow/DataGrid";
 import AddItemModal from "./AddItemModal";
 import  {useState} from "react";
 import CancelModal from "../cancelModal/CancelModal";
 import EditModal from "../cancelModal/EditModal";
 import NapLoading from "../../general/NapLoading/NapLoading";
+import {enqueueSnackbar} from "notistack";
 
 
 interface IProps {
@@ -14,7 +20,7 @@ interface IProps {
 }
 
 const CreateService = ({setValue, next, serviceId}: IProps) => {
-  const {data} = useGetServices()
+  const {data,refetch:getServiceRefetch,isLoading,isFetching} = useGetServices()
   const [deleteService, setDeleteService] = useState<boolean>(false)
   const [editService, setEditService] = useState<boolean>(false)
   const [addService, setAddService] = useState<boolean>(false)
@@ -32,8 +38,8 @@ const CreateService = ({setValue, next, serviceId}: IProps) => {
     setValue('serviceId', row.id)
     next()
   }
+  /*Edit service */
   const {data: GetServiceByIdData, refetch, isRefetching} = useGetServiceById(serviceId)
-
   const onEdit = (row: any) => {
     setValue('serviceId', row.id)
     setTimeout(() => {
@@ -42,20 +48,32 @@ const CreateService = ({setValue, next, serviceId}: IProps) => {
       })
     }, 100)
   }
+  const {mutate:UpdateServiceMutate} =useUpdateService()
 
+
+  /*delete service */
   const onDelete = (row: any) => {
     setValue('serviceId', row.id)
     setDeleteService(true)
   }
-
-  const {mutate} = useDeleteService()
-
+  const {mutate,isPending} = useDeleteService()
   const onActionDelete = () => {
-    console.log(setValue)
+    mutate(serviceId,{onSuccess:()=>{
+        getServiceRefetch().then(()=>{
+          setDeleteService(false)
+        })
+        enqueueSnackbar('سرورس مورد نظر با موفقعیت حذف کردید',{variant: 'success'})
+      },onError:(err)=>{
+        console.log(err)
+      }
+    })
   }
+
+  const {mutate:createServiceMutate} = useCreateService()
+
   return (
     <>
-      <NapLoading loading={isRefetching}/>
+      <NapLoading loading={isRefetching || isPending || isLoading || isFetching}/>
       <div className=' pt-5'>
         <div className='flex  justify-between items-center mx-2'>
           <p>سرویس جدید را اضافه کنید.</p>
@@ -70,9 +88,9 @@ const CreateService = ({setValue, next, serviceId}: IProps) => {
             : null}
         </div>
         <CancelModal isOpen={deleteService} onDismiss={() => setDeleteService(false)} onAction={onActionDelete}/>
-        {editService ? <EditModal editService={editService} setEditService={() => setEditService(false)}
+        {editService ? <EditModal getServiceRefetch={getServiceRefetch} onAction={UpdateServiceMutate} editService={editService} setEditService={() => setEditService(false)}
                                   dataForEdit={GetServiceByIdData!}/> : null}
-        <AddItemModal isOpen={addService} onDismiss={() => setAddService(false)}/>
+        <AddItemModal getServiceRefetch={getServiceRefetch} onAction={createServiceMutate} isOpen={addService} onDismiss={() => setAddService(false)}/>
       </div>
     </>
   );
