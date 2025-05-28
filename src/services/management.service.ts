@@ -1,6 +1,7 @@
 import ManagementAxiosInstance from "../configs/managementAxiosInstance";
-import {useQuery} from "@tanstack/react-query";
+import {useMutation, useQuery} from "@tanstack/react-query";
 import {IGetServices} from "../typs/managment.types";
+import {ICreateContentDto} from "../typs/content.types";
 
 const getServices = async () => {
   const response = await ManagementAxiosInstance.get<IGetServices[]>('/Service/GetServices');
@@ -27,4 +28,12 @@ const useGetServiceById = (id:number) => {
   });
 };
 
-export {useGetServices,useGetServiceById}
+const DeleteService = (id: number) => {
+  return ManagementAxiosInstance.delete(`/ManagementPanel/api/Service/DeleteService?Id=${id}`);
+};
+const useDeleteService = () => {
+  return useMutation({ mutationFn: DeleteService });
+};
+
+
+export {useGetServices,useGetServiceById,useDeleteService}

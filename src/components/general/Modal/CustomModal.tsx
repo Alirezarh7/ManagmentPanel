@@ -42,7 +42,7 @@ const CustomModal = ({ isOpen, title = 'My Modal', onDismiss, children, footerDa
 						{children}
 					</div>
 					{footerData ? (
-						<div className='w-full flex items-center justify-center py-3 mt-5 border-t !border-gray-300 z-10'>{footerData}</div>
+						<div className='w-full flex items-center justify-center py-2 mt-2 border-t !border-gray-300 z-10'>{footerData}</div>
 					) : null}
 				</div>
 			</div>

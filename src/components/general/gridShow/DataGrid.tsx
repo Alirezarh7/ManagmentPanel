@@ -48,16 +48,16 @@ const DataGrid = ({
   return (
     <>
       <div className="max-md:hidden p-2">
-        <div className=" w-full overflow-x-auto bg-gray-100">
+        <div className=" w-full overflow-x-auto ">
           <table className="table-auto w-full text-right text-sm">
             <thead className="bg-black text-white text-sm ">
             <tr className={'text-center'}>
               {RowNumber && <th className="p-1 border !border-goldColor whitespace-nowrap">ردیف</th>}
               {headData?.map((item, index) => (
                 <th key={index}
-                    className="p-1 border !border-goldColor whitespace-nowrap">{item.title}</th>
+                    className="p-1 !border !border-goldColor whitespace-nowrap">{item.title}</th>
               ))}
-              {activities && <th className="p-1 border !border-goldColor whitespace-nowrap">عملیات</th>}
+              {activities && <th className="p-1 !border !border-goldColor whitespace-nowrap">عملیات</th>}
             </tr>
             </thead>
             <tbody className="text-center">
@@ -69,12 +69,12 @@ const DataGrid = ({
                   className={`${item.status === 1 ? 'bg-gray-300' : ''}`}
                 >
                   {RowNumber && (
-                    <td className="p-1 border border-goldColor whitespace-nowrap">
+                    <td className="p-1 !border !border-gray-400 whitespace-nowrap">
                       {index + 1}
                     </td>
                   )}
                   {headData.map((headItem, idx) => (
-                    <td key={idx} className="p-1 border border-goldColor whitespace-nowrap">
+                    <td key={idx} className="p-1 !border !border-gray-400 whitespace-nowrap">
                       {headItem.numberInput ? (
                         <Controller
                           name={`${headItem.name}`}
@@ -91,7 +91,7 @@ const DataGrid = ({
 
                   {/* شرط نمایش ستون عملیات برای هر سطر */}
                   {activities && (
-                    <td className="p-1 border border-goldColor whitespace-nowrap">
+                    <td className="p-1 !border !border-gray-400 whitespace-nowrap">
                       {showActions ? (
                         <div className="flex justify-around items-center">
                           {onEdit && (
