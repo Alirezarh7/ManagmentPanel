@@ -30,7 +30,8 @@ const EditConfigModal = ({ data, isOpen, onSuccess, onCancel }: IProps) => {
 		isOpenPassengerGroup: data.isOpenPassengerGroup,
 		isOpenReserve: data.isOpenReserve,
 		isOpenPayment: data.isOpenPayment,
-		isActive: data.isActive
+		isActive: data.isActive,
+		isEnableDispatchAndReligion:data.isEnableDispatchAndReligion
 	};
 
 	const editConfigSchema = Yup.object().shape({
@@ -39,7 +40,8 @@ const EditConfigModal = ({ data, isOpen, onSuccess, onCancel }: IProps) => {
 		isOpenPassengerGroup: Yup.boolean().required('این فیلد اجباری است'),
 		isOpenReserve: Yup.boolean().required('این فیلد اجباری است'),
 		isOpenPayment: Yup.boolean().required('این فیلد اجباری است'),
-		isActive: Yup.boolean().required('این فیلد اجباری است')
+		isActive: Yup.boolean().required('این فیلد اجباری است'),
+		isEnableDispatchAndReligion: Yup.boolean().required('این فیلد اجباری است')
 	});
 
 	const {control, handleSubmit, formState: { errors }} = useForm<IEditConfigDto>({
@@ -159,9 +161,27 @@ const EditConfigModal = ({ data, isOpen, onSuccess, onCancel }: IProps) => {
 							</div>
 						)}
 					/>
-					<div className='flex flex-col md:flex-row gap-4 mt-10'>
-						<CustomButton variant={'Cancel'} type={'submit'} label={'ویرایش'} onClick={() => {}} loading={isPending} />
-						<CustomButton variant={'Cancel'} type={'button'} label='انصراف' onClick={onCancel} disabled={isPending} />
+					<Controller
+						name='isEnableDispatchAndReligion'
+						control={control}
+						render={({ field: { value, onChange } }) => (
+							<div className='px-2 border !border-gray-300 rounded-md'>
+								<label>استان و مذهب</label>
+								<div className='px-4 py-2 text-base bg-white flex flex-col gap-2'>
+									{booleanIsActiveValuesArray.map(item => (
+										<div key={item.label} className={`flex items-center gap-2 ${value === item.value ? 'text-blue-500' : ''}`}>
+											<CustomRadioButton value={item.value} checked={value === item.value} onClick={onChange} />
+											<span>{item.label}</span>
+										</div>
+									))}
+								</div>
+								{errors.isEnableDispatchAndReligion ? <span className='text-danger'>{errors.isEnableDispatchAndReligion.message}</span> : null}
+							</div>
+						)}
+					/>
+					<div className=' w-full flex items-center justify-center py-2 mt-2 border-t !border-gray-300 z-10'>
+						<CustomButton variant={'primary'} type={'submit'} label={'ویرایش'} onClick={() => {}} loading={isPending}/>
+						<CustomButton variant={'Cancel'} type={'button'} label='انصراف' onClick={onCancel} disabled={isPending}/>
 					</div>
 				</form>
 			</div>

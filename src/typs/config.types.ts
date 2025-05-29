@@ -5,6 +5,7 @@ export interface IEditConfigDto {
   isOpenReserve: boolean;
   isOpenPayment: boolean;
   isActive: boolean;
+  isEnableDispatchAndReligion:boolean
 }
 
 export interface IConfigResponse extends IEditConfigDto {
