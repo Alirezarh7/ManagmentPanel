@@ -11,14 +11,17 @@ interface IProps {
   isOpen: boolean;
   onDismiss: () => void;
   onAction:  UseMutateFunction<AxiosResponse<any, any>, Error, any, unknown>
-  getServiceRefetch : (options?: (RefetchOptions | undefined)) => Promise<QueryObserverResult<any, Error>>
+  Refetch : (options?: (RefetchOptions | undefined)) => Promise<QueryObserverResult<any, Error>>,
+  currentStep:number,
+  serviceId?:number,
+  controllerId?:number
 }
 
 
-const AddItemModal = ({isOpen, onDismiss,onAction,getServiceRefetch}: IProps) => {
+const AddItemModal = ({isOpen, onDismiss,onAction,Refetch,currentStep,serviceId,controllerId}: IProps) => {
 
   const {control, watch} = useForm()
-  console.log(watch())
+
   const editPersianName = watch('editPersianName')
   const editEnglishName = watch('editEnglishName')
   const headData = [
@@ -30,8 +33,16 @@ const AddItemModal = ({isOpen, onDismiss,onAction,getServiceRefetch}: IProps) =>
     editPersianName: watch('editPersianName'),
     englishName: watch('editEnglishName'),
   }];
-
-  const dataSend = {
+  const dataSend = currentStep === 1 ? {
+    description:editPersianName,
+    title:editEnglishName,
+  }:currentStep === 2 ? {
+    serviceId:serviceId,
+    description:editPersianName,
+    title:editEnglishName,
+  }: {
+    controllerId,
+    serviceId:serviceId,
     description:editPersianName,
     title:editEnglishName,
   }
@@ -41,7 +52,7 @@ const AddItemModal = ({isOpen, onDismiss,onAction,getServiceRefetch}: IProps) =>
                    footerData={
                      <>
                        <CustomButton label={'ارسال'} onClick={()=>onAction(dataSend ,{onSuccess:()=>{
-                           getServiceRefetch().then(()=>{
+                           Refetch().then(()=>{
                              onDismiss()
                              enqueueSnackbar('سرویس با موقعیت اضافه شد',{variant: 'success'});
                            })

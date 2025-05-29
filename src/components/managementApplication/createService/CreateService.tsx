@@ -6,7 +6,7 @@ import {
 } from "../../../services/management.service";
 import DataGrid from "../../general/gridShow/DataGrid";
 import AddItemModal from "./AddItemModal";
-import  {useState} from "react";
+import {useState} from "react";
 import CancelModal from "../cancelModal/CancelModal";
 import EditModal from "../cancelModal/EditModal";
 import NapLoading from "../../general/NapLoading/NapLoading";
@@ -16,11 +16,12 @@ import {enqueueSnackbar} from "notistack";
 interface IProps {
   setValue: any,
   next: any
-  serviceId: number
+  serviceId: number,
+  currentStep: number
 }
 
-const CreateService = ({setValue, next, serviceId}: IProps) => {
-  const {data,refetch:getServiceRefetch,isLoading,isFetching} = useGetServices()
+const CreateService = ({setValue, next, serviceId, currentStep}: IProps) => {
+  const {data, refetch: getServiceRefetch, isLoading, isFetching} = useGetServices()
   const [deleteService, setDeleteService] = useState<boolean>(false)
   const [editService, setEditService] = useState<boolean>(false)
   const [addService, setAddService] = useState<boolean>(false)
@@ -48,7 +49,7 @@ const CreateService = ({setValue, next, serviceId}: IProps) => {
       })
     }, 100)
   }
-  const {mutate:UpdateServiceMutate} =useUpdateService()
+  const {mutate: UpdateServiceMutate} = useUpdateService()
 
 
   /*delete service */
@@ -56,20 +57,8 @@ const CreateService = ({setValue, next, serviceId}: IProps) => {
     setValue('serviceId', row.id)
     setDeleteService(true)
   }
-  const {mutate,isPending} = useDeleteService()
-  const onActionDelete = () => {
-    mutate(serviceId,{onSuccess:()=>{
-        getServiceRefetch().then(()=>{
-          setDeleteService(false)
-        })
-        enqueueSnackbar('سرورس مورد نظر با موفقعیت حذف کردید',{variant: 'success'})
-      },onError:(err)=>{
-        console.log(err)
-      }
-    })
-  }
-
-  const {mutate:createServiceMutate} = useCreateService()
+  const {mutate, isPending} = useDeleteService()
+  const {mutate: createServiceMutate} = useCreateService()
 
   return (
     <>
@@ -87,10 +76,13 @@ const CreateService = ({setValue, next, serviceId}: IProps) => {
                       onDelete={onDelete}/>
             : null}
         </div>
-        <CancelModal isOpen={deleteService} onDismiss={() => setDeleteService(false)} onAction={onActionDelete}/>
-        {editService ? <EditModal getServiceRefetch={getServiceRefetch} onAction={UpdateServiceMutate} editService={editService} setEditService={() => setEditService(false)}
+        <CancelModal currentStep={currentStep} id={serviceId} Refetch={getServiceRefetch} isOpen={deleteService}
+                     onDismiss={() => setDeleteService(false)} onAction={mutate}/>
+        {editService ? <EditModal currentStep={currentStep} Refetch={getServiceRefetch} onAction={UpdateServiceMutate}
+                                  edit={editService} setEdit={() => setEditService(false)}
                                   dataForEdit={GetServiceByIdData!}/> : null}
-        <AddItemModal getServiceRefetch={getServiceRefetch} onAction={createServiceMutate} isOpen={addService} onDismiss={() => setAddService(false)}/>
+        <AddItemModal currentStep={currentStep} Refetch={getServiceRefetch} onAction={createServiceMutate} isOpen={addService}
+                      onDismiss={() => setAddService(false)}/>
       </div>
     </>
   );

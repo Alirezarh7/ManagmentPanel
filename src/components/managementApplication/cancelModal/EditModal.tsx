@@ -1,6 +1,5 @@
 import CustomModal from "../../general/Modal/CustomModal";
 import CustomButton from "../../general/Buttons/CustomButton";
-import {IGetServices} from "../../../typs/managment.types";
 import DataGrid from "../../general/gridShow/DataGrid";
 import {useForm} from "react-hook-form";
 import {QueryObserverResult, RefetchOptions, UseMutateFunction} from "@tanstack/react-query";
@@ -9,14 +8,18 @@ import {enqueueSnackbar} from "notistack";
 
 
 interface IProps {
-  editService: boolean,
-  setEditService: () => void,
+  edit: boolean,
+  currentStep: number
+  serviceId?: number
+  controllerId?: number
+  setEdit: () => void,
   onAction: UseMutateFunction<AxiosResponse<any, any>, Error, any, unknown>,
-  dataForEdit: IGetServices
-  getServiceRefetch: (options?: (RefetchOptions | undefined)) => Promise<QueryObserverResult<any, Error>>
+  dataForEdit: any
+  Refetch: (options?: (RefetchOptions | undefined)) => Promise<QueryObserverResult<any, Error>>
 }
 
-const EditModal = ({dataForEdit, setEditService, editService, onAction, getServiceRefetch}: IProps) => {
+const EditModal = ({dataForEdit, setEdit, edit, onAction, Refetch, currentStep, serviceId, controllerId}: IProps) => {
+
 
   const {control, watch} = useForm(
     {
@@ -41,27 +44,38 @@ const EditModal = ({dataForEdit, setEditService, editService, onAction, getServi
       persianName: dataForEdit.description,
     }] : [];
 
-  const sendData = {
+  const sendData = currentStep === 1 ? {
     id: dataForEdit.id,
     description: editPersianName,
     title: editEnglishName,
+  } : currentStep === 2 ? {
+    serviceId: serviceId,
+    id: dataForEdit.id,
+    description: editPersianName,
+    title: editEnglishName,
+  } : {
+    serviceId: serviceId,
+    controllerId: controllerId,
+    id: dataForEdit.id,
+    title: editEnglishName,
+    description: editPersianName
   }
 
   return (
     <>
-      <CustomModal title={'اصلاح موارد'} isOpen={editService} onDismiss={setEditService} footerData={
+      <CustomModal title={'اصلاح موارد'} isOpen={edit} onDismiss={setEdit} footerData={
         <>
           <div className=' w-full flex  items-center justify-center '>
             <CustomButton label={'ارسال'} onClick={() => onAction(sendData, {
               onSuccess: () => {
-                getServiceRefetch().then(() => {
-                  setEditService()
+                Refetch().then(() => {
+                  setEdit()
                 })
                 enqueueSnackbar('سرویس با موقعیت تغییر کرد', {variant: 'success'});
               }
             })}
                           type={'button'} variant='primary'/>
-            <CustomButton label={'انصراف'} onClick={setEditService} type={'button'} variant='Cancel'/>
+            <CustomButton label={'انصراف'} onClick={setEdit} type={'button'} variant='Cancel'/>
           </div>
         </>
       }>
