@@ -313,7 +313,7 @@ const AnnouncementsCreatePage = () => {
 					<div className='flex items-center gap-2'>
 						<CustomButton variant={'primary'} type={'submit'} label={'ذخیره'} onClick={() => {}} loading={isPending} />
 						<Link to={PATHS.announcements.index}>
-							<CustomButton variant={'danger'} type={'button'} label={'بازگشت'} onClick={() => {}} disabled={isPending} />
+							<CustomButton variant={'Cancel'} type={'button'} label={'بازگشت'} onClick={() => {}} disabled={isPending} />
 						</Link>
 					</div>
 				</form>

@@ -39,7 +39,7 @@ const PaymentConfirmation = (props: IProps) => {
 		}
 	}, [props.isChechPromise.data]);
 
-	console.log(props.getPaymentData.data);
+
 
 	return (
 		<>

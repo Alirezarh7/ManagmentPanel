@@ -44,7 +44,7 @@ const DeleteContentModal = ({ data, isOpen, onSuccess, onCancel }: IProps) => {
 			</div>
 			<div className='flex flex-col md:flex-row gap-4 mt-10'>
 				<CustomButton variant={'primary'} type={'button'} label='بله حذف کن' onClick={deleteContentHandler} loading={isPending} />
-				<CustomButton variant={'danger'} type={'button'} label='خیر' onClick={onCancel} disabled={isPending} />
+				<CustomButton variant={'Cancel'} type={'button'} label='خیر' onClick={onCancel} disabled={isPending} />
 			</div>
 		</CustomModal>
 	);

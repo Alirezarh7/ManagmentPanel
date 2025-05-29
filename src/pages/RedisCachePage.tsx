@@ -34,7 +34,7 @@ const RedisCachePage = () => {
 			<div className='flex justify-between items-center'>
 				<h1 className='text-xl'>کش ردیس</h1>
 				<CustomButton
-					variant={'danger'}
+					variant={'Cancel'}
 					type={'button'}
 					label='حذف کلیه کلیدهای ردیس'
 					onClick={() => setShowDeleteAllModal(true)}

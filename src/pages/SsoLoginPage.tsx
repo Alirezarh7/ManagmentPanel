@@ -20,8 +20,7 @@ function SsoLoginPage(): React.JSX.Element {
 	useEffect((): void => {
 		// auto select mygov approach when the user opens mybeta.haj.ir from mygov.com
 		if (window.location.pathname === shareData.CONSTANT.SSO_URL_FROM_MY_GOV) {
-			console.log(window.location.pathname);
-			console.log('shareData.CONSTANT.SSO_URL_FROM_MY_GOV');
+
 			myGovSso();
 		}
 	}, []);

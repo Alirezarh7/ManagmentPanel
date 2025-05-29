@@ -13,12 +13,12 @@ const ContentsTable = ({ contents }: IProps) => {
 				<table className='w-full table-auto'>
 					<thead>
 						<tr className='bg-gray-100 text-right dark:bg-meta-4'>
-							<th className='w-[50px] py-3 px-1 text-center font-medium text-black dark:text-white'>آی دی</th>
-							<th className='min-w-[200px] max-w-[200px] py-3 px-3 font-medium text-black dark:text-white'>موضوع محتوا</th>
-							<th className='w-[120px] py-3 px-1 text-center font-medium text-black dark:text-white'>خدمت</th>
-							<th className='w-[120px] py-3 px-1 text-center font-medium text-black dark:text-white'>زیر-خدمت</th>
-							<th className='w-[120px] py-3 px-1 text-center font-medium text-black dark:text-white'>مکان محتوا</th>
-							<th className='w-[200px] py-3 px-1 text-center font-medium text-black dark:text-white'>عملیات</th>
+							<th className='max-md:hidden  py-3  text-center font-medium text-black dark:text-white'>آی دی</th>
+							<th className=' max-w-[200px] py-3 font-medium text-black dark:text-white'>موضوع محتوا</th>
+							<th className='max-md:hidden  py-3  text-center font-medium text-black dark:text-white'>خدمت</th>
+							<th className='max-md:hidden  py-3  text-center font-medium text-black dark:text-white'>زیر-خدمت</th>
+							<th className='  py-3  text-center font-medium text-black dark:text-white'>مکان محتوا</th>
+							<th className=' py-3  text-center font-medium text-black dark:text-white'>عملیات</th>
 						</tr>
 					</thead>
 					<tbody>{contents?.map(item => <ContentsTableRow key={item.id} data={item} />)}</tbody>

@@ -35,23 +35,24 @@ const DeleteAnnouncementModal = ({ data, isOpen, onSuccess, onCancel }: IProps) 
 	};
 
 	return (
-		<CustomModal isOpen={isOpen} title='تایید حذف آگهی' onDismiss={onCancel}>
-			<div className='m-3 flex flex-col gap-4'>
-				<p className='text-lg'>آیا از حذف این آیتم اطمینان دارید؟</p>
-				<div className='flex items-center gap-4'>
-					<img src={data.base64Image} alt='تصویر آگهی' className='w-20 h-20' />
-					<p>{data.subject}</p>
-				</div>
-			</div>
-			<div className='flex flex-col md:flex-row gap-4 mt-10'>
+		<CustomModal isOpen={isOpen} title='تایید حذف آگهی' onDismiss={onCancel} footerData={
+			<div className='flex'>
 				<CustomButton
 					variant={'primary'}
 					type={'button'}
-					label='بله حذف کن'
+					label='بله'
 					onClick={deleteAnnouncementHandler}
 					loading={isPending}
 				/>
-				<CustomButton variant={'danger'} type={'button'} label='خیر' onClick={onCancel} disabled={isPending} />
+				<CustomButton variant={'Cancel'} type={'button'} label='خیر' onClick={onCancel} disabled={isPending}/>
+			</div>
+		}>
+			<div className='m-3 flex flex-col gap-4'>
+				<p className='text-lg'>آیا از حذف این آیتم اطمینان دارید؟</p>
+				<div className='flex items-center gap-4'>
+					<img src={data.base64Image} alt='تصویر آگهی' className='w-20 h-20'/>
+					<p>{data.subject}</p>
+				</div>
 			</div>
 		</CustomModal>
 	);

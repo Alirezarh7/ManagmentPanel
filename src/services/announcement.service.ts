@@ -15,17 +15,19 @@ const getAnnouncementsFn = async () => {
 const useGetAnnouncements = () => {
 	return useQuery({
 		queryKey: ['getAnnouncements'],
-		queryFn: getAnnouncementsFn
+		queryFn: getAnnouncementsFn,
+		refetchOnWindowFocus:false,
 	});
 };
 
 const getAnnouncementsByMainPageFn = async () => {
 	const response = await ManagementAxiosInstance.get<IAnnouncementResponse[]>('/Announcement/GetAnnouncementByMainPage');
-
 	return response.data;
 };
 const useGetAnnouncementsByMainPage = () => {
 	return useQuery({
+		retry:false,
+		refetchOnWindowFocus:false,
 		queryKey: ['getAnnouncementsByMainPage'],
 		queryFn: getAnnouncementsByMainPageFn
 	});
@@ -38,7 +40,8 @@ const getAnnouncementsStatisticsFn = async () => {
 const useGetAnnouncementsStatistics = () => {
 	return useQuery({
 		queryKey: ['getAnnouncementsStatistics'],
-		queryFn: getAnnouncementsStatisticsFn
+		queryFn: getAnnouncementsStatisticsFn,
+		refetchOnWindowFocus:false,
 	});
 };
 
@@ -50,7 +53,8 @@ const getAnnouncementByIdFn = async (id: string) => {
 const useGetAnnouncementById = (id: string) => {
 	return useQuery({
 		queryKey: ['getAnnouncementById', id],
-		queryFn: () => getAnnouncementByIdFn(id)
+		queryFn: () => getAnnouncementByIdFn(id),
+		refetchOnWindowFocus:false,
 	});
 };
 

@@ -26,7 +26,7 @@ const ConfirmationModal = ({
 			</div>
 			<div className='flex flex-col md:flex-row gap-4'>
 				<CustomButton variant={'primary'} type={'button'} label={acceptLabel} onClick={onAccept} />
-				<CustomButton variant={'danger'} type={'button'} label={cancelLabel} onClick={onCancel} />
+				<CustomButton variant={'Cancel'} type={'button'} label={cancelLabel} onClick={onCancel} />
 			</div>
 		</CustomModal>
 	);

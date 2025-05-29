@@ -18,7 +18,7 @@ const menuItems = [
 	{ id: 4, label: 'سوالات پرتکرار', route: PATHS.faqContents.index, icon: <PiQuestion className='w-4 h-4' /> },
 	{ id: 5, label: 'کش ردیس', route: PATHS.redisCache, icon: <SiRedis className='w-4 h-4' /> },
 	{ id: 6, label: 'تنظیمات', route: PATHS.configs, icon: <MdOutlineSettings className='w-4 h-4' /> },
-	{ id: 7, label: 'تقویم', route: PATHS.calender, icon: <SlCalender className='w-4 h-4' /> }
+	{ id: 7, label: 'مدیریت نرم افزارها', route: PATHS.managementApplication, icon: <SlCalender className='w-4 h-4' /> }
 ];
 
 interface IProps {

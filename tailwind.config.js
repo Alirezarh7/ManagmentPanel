@@ -18,6 +18,12 @@
 				colors: {
 					current: 'currentColor',
 					transparent: 'transparent',
+					sliderColor: '#0D2A4C',
+					customBlue: '#01445e',
+					gridColor: '#36a3cf',
+					goldColor: '#e1ac33',
+					ColorFullRead : '#970C0C',
+					ColorLessRead : '#d35856',
 					white: '#FFFFFF',
 					black: '#1C2434',
 					'black-2': '#010101',

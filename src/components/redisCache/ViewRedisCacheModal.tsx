@@ -18,7 +18,7 @@ const ViewRedisCacheModal = ({ cacheKey, isOpen, onSuccess, onCancel }: IProps) 
 	const isFormInLoadingState = isLoading || isFetching;
 
 	return (
-		<CustomModal isOpen={isOpen} title='مشاهده محتویات کش ردیس' onDismiss={onCancel} size={'xlg'}>
+		<CustomModal isOpen={isOpen} title='مشاهده محتویات کش ردیس' onDismiss={onCancel} >
 			<div className={`flex flex-col gap-6 ${isFormInLoadingState ? 'blur-sm pointer-events-none' : ''}`}>
 				<p className='text-lg rtl'>مشاهده محتویات کش ردیس</p>
 				<CustomInput
@@ -39,7 +39,7 @@ const ViewRedisCacheModal = ({ cacheKey, isOpen, onSuccess, onCancel }: IProps) 
 					disabled={true}
 				/>
 				<div className='flex flex-col md:flex-row gap-4 mt-10'>
-					<CustomButton variant={'danger'} type={'button'} label='بستن' onClick={onCancel} disabled={isFormInLoadingState} />
+					<CustomButton variant={'Cancel'} type={'button'} label='بستن' onClick={onCancel} disabled={isFormInLoadingState} />
 				</div>
 			</div>
 		</CustomModal>

@@ -29,5 +29,6 @@ export const PATHS = {
 	},
 	configs: '/configs',
 	redisCache: 'redis-cache',
-	calender: '/calender'
+	calender: '/calender',
+	managementApplication : 'management-application',
 };
