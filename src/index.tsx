@@ -29,7 +29,7 @@ if (window.location.pathname === PATHS.frameWork.silentCallback) {
 				<Provider store={store}>
 					{/*@ts-ignore*/}
 					<OidcProvider userManager={userManager} store={store as Store}>
-						<SnackbarProvider>
+						<SnackbarProvider autoHideDuration={4000} >
 							{/*if user does not select a sso approach to login in application show a sso login page */}
 							{localStorage.getItem(shareData.CONSTANT.SSO_APPROACH_SELECTED) === 'true' ? <App /> : <SsoLoginPage />}
 						</SnackbarProvider>
