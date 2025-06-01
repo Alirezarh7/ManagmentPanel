@@ -16,8 +16,8 @@ const AnnouncementsTable = ({ announcements, announcementsByMainPage }: IProps) 
 	return (
 		<div className='rounded-md border !border-stroke bg-white md:py-4 space-y-2 shadow-default dark:border-strokedark dark:bg-boxdark'>
 			<div className='flex items-center gap-4'>
-				<CustomButton variant={'secondary'} type={'button'} label={'همه'} onClick={() => setShowType('all')} />
-				<CustomButton variant={'secondary'} type={'button'} label={'صفحه اصلی'} onClick={() => setShowType('mainPage')} />
+				<CustomButton variant={'primary'} type={'button'} label={'همه'} onClick={() => setShowType('all')} />
+				<CustomButton variant={'primary'} type={'button'} label={'صفحه اصلی'} onClick={() => setShowType('mainPage')} />
 			</div>
 			<div className='max-w-full'>
 				<table className='w-full table-auto'>

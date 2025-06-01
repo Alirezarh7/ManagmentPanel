@@ -314,7 +314,7 @@ const TamatoMyDocumentsContents = (props: IProps) => {
 					<p className='text-center mt-2 text-lg'>
 						در صورت بارگذاری نشدن اطلاعات سند مورد نظر
 						<CustomButton
-							variant={'secondary'}
+							variant={'primary'}
 							type={'button'}
 							label={'اینجا'}
 							onClick={() => props.setToggleSearchModal(true)}

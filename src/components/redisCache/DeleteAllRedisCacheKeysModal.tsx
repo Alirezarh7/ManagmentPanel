@@ -42,7 +42,7 @@ const DeleteAllRedisCacheKeysModal = ({ isOpen, onSuccess, onCancel }: IProps) =
 						onClick={() => deleteCacheHandler()}
 						loading={isPending}
 					/>
-					<CustomButton variant={'danger'} type={'button'} label='انصراف' onClick={onCancel} disabled={isPending} />
+					<CustomButton variant={'Cancel'} type={'button'} label='انصراف' onClick={onCancel} disabled={isPending} />
 				</div>
 			</div>
 		</CustomModal>

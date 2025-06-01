@@ -84,7 +84,7 @@ const AnnouncementsShowDetailsPage = () => {
 								className='w-full px-3 py-3 text-base border border-gray-300 rounded-md has-table-content'></div>
 						</div>
 						<Link to={PATHS.announcements.index}>
-							<CustomButton variant={'danger'} type={'button'} label={'بازگشت'} onClick={() => {}} />
+							<CustomButton variant={'Cancel'} type={'button'} label={'بازگشت'} onClick={() => {}} />
 						</Link>
 					</div>
 				</div>

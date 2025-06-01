@@ -18,7 +18,7 @@ const menuItems = [
 	{ id: 4, label: 'سوالات پرتکرار', route: PATHS.faqContents.index, icon: <PiQuestion className='w-4 h-4' /> },
 	{ id: 5, label: 'کش ردیس', route: PATHS.redisCache, icon: <SiRedis className='w-4 h-4' /> },
 	{ id: 6, label: 'تنظیمات', route: PATHS.configs, icon: <MdOutlineSettings className='w-4 h-4' /> },
-	{ id: 7, label: 'تقویم', route: PATHS.calender, icon: <SlCalender className='w-4 h-4' /> }
+	{ id: 7, label: 'مدیریت نرم افزارها', route: PATHS.managementApplication, icon: <SlCalender className='w-4 h-4' /> }
 ];
 
 interface IProps {
@@ -103,6 +103,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: IProps) => {
 								<NavLink
 									key={item.id}
 									to={item.route}
+									onClick={() => setSidebarOpen(!sidebarOpen)}
 									className='group relative flex items-center gap-2.5 rounded-sm py-2 px-4 md:px-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4'>
 									{item.icon}
 									<span>{item.label}</span>

@@ -69,7 +69,7 @@ const EditRedisCacheModal = ({ cacheKey, isOpen, onSuccess, onCancel }: IProps) 
 	};
 
 	return (
-		<CustomModal isOpen={isOpen} title='ویرایش محتویات کش ردیس' onDismiss={onCancel} size={'xlg'}>
+		<CustomModal isOpen={isOpen} title='ویرایش محتویات کش ردیس' onDismiss={onCancel} >
 			<div className='m-3 flex flex-col gap-4 '>
 				<p className='text-lg'>لطفا محتویات کش مورد نظر را ویرایش کنید</p>
 				<form
@@ -117,7 +117,7 @@ const EditRedisCacheModal = ({ cacheKey, isOpen, onSuccess, onCancel }: IProps) 
 							onClick={() => {}}
 							loading={isFormInLoadingState}
 						/>
-						<CustomButton variant={'danger'} type={'button'} label='انصراف' onClick={onCancel} disabled={isFormInLoadingState} />
+						<CustomButton variant={'Cancel'} type={'button'} label='انصراف' onClick={onCancel} disabled={isFormInLoadingState} />
 					</div>
 				</form>
 			</div>

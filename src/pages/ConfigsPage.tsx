@@ -6,7 +6,7 @@ import CustomLineSpinner from '../components/general/spinners/CustomLineSpinner'
 import ConfigsTable from '../components/configs/ConfigsTable';
 import { useGetConfigs } from '../services/configs.service';
 
-const CalenderPage = () => {
+const ConfigsPage = () => {
 	useTitle('settings', 'ناوشگران');
 
 	const { data: configs, isLoading, isFetching, isError } = useGetConfigs();
@@ -31,4 +31,4 @@ const CalenderPage = () => {
 	);
 };
 
-export default CalenderPage;
+export default ConfigsPage;

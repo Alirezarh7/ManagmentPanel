@@ -43,7 +43,7 @@ const TransformationRules = () => {
 							<CustomButton variant={'primary'} type={'button'} label={'ادامه'} onClick={() => {}} disabled={!isValidNextBtn} />
 						</Link>
 						<Link to={'/tamato/my-documents'}>
-							<CustomButton variant={'secondary'} type={'button'} label={'بازگشت'} onClick={() => {}} />
+							<CustomButton variant={'primary'} type={'button'} label={'بازگشت'} onClick={() => {}} />
 						</Link>
 					</div>
 				</div>

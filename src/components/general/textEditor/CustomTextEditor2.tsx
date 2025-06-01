@@ -202,7 +202,7 @@ const CustomTextEditor2 = ({ showPreview, label, value, onChange, disabled = fal
 			</div>
 			{showPreview ? (
 				<CustomButton
-					variant={'light'}
+					variant={'primary'}
 					type={'button'}
 					label={showPreviewState ? 'عدم مشاهده پیش نمایش متن اطلاعیه' : 'مشاهده پیش نمایش متن اطلاعیه'}
 					onClick={() => setShowPreviewState(prev => !prev)}
