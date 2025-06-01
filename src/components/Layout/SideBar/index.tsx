@@ -103,6 +103,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: IProps) => {
 								<NavLink
 									key={item.id}
 									to={item.route}
+									onClick={() => setSidebarOpen(!sidebarOpen)}
 									className='group relative flex items-center gap-2.5 rounded-sm py-2 px-4 md:px-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4'>
 									{item.icon}
 									<span>{item.label}</span>

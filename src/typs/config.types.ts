@@ -5,11 +5,12 @@ export interface IEditConfigDto {
   isOpenReserve: boolean;
   isOpenPayment: boolean;
   isActive: boolean;
+  isEnableDispatchAndReligion:boolean
 }
 
 export interface IConfigResponse extends IEditConfigDto {
-  configActionType: string;
-  configActionTypeId: number;
+  configActionType: string,
+  configActionTypeId: number,
 }
 
 

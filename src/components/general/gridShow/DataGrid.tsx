@@ -47,7 +47,7 @@ const DataGrid = ({
                   }: IProps) => {
   return (
     <>
-      <div className="max-md:hidden p-2">
+      <div className="max-md:hidden p-2 w-full">
         <div className=" w-full overflow-x-auto ">
           <table className="table-auto w-full text-right text-sm">
             <thead className="bg-black text-white text-sm ">
@@ -175,7 +175,7 @@ const DataGrid = ({
         ) : null}
       </div>
 
-      <div className=" md:hidden flex flex-col gap-5 p-1.5 py-4 ">
+      <div className=" md:hidden w-full flex flex-col gap-5 p-1.5 py-4 ">
         {bodyData.map((item, index) => {
           const showActions = item?.hasActions;
           return (
