@@ -9,8 +9,8 @@ export interface IEditConfigDto {
 }
 
 export interface IConfigResponse extends IEditConfigDto {
-  configActionType: string;
-  configActionTypeId: number;
+  configActionType: string,
+  configActionTypeId: number,
 }
 
 

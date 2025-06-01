@@ -1,4 +1,3 @@
-import React from 'react';
 import CustomModal from '../general/Modal/CustomModal';
 import CustomButton from '../general/Buttons/CustomButton';
 import { enqueueSnackbar } from 'notistack';
@@ -10,6 +9,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { booleanIsActiveValuesArray } from '../../constants/general.const';
 import CustomRadioButton from '../general/radioButton/CustomRadioButton';
+import {useEffect} from "react";
 
 interface IProps {
 	data: IConfigResponse;
@@ -44,37 +44,58 @@ const EditConfigModal = ({ data, isOpen, onSuccess, onCancel }: IProps) => {
 		isEnableDispatchAndReligion: Yup.boolean().required('این فیلد اجباری است')
 	});
 
-	const {control, handleSubmit, formState: { errors }} = useForm<IEditConfigDto>({
+	const {control, watch, formState: { errors },reset} = useForm<IEditConfigDto>({
 		defaultValues: defaultFormValues,
 		resolver: yupResolver(editConfigSchema)
 	});
+	useEffect(() => {
+		reset(defaultFormValues)
+	}, [data.id]);
 
-	const onSubmitFormHandler = (data: IEditConfigDto) => {
-		mutate(data, {
+	const onSubmitFormHandler = () => {
+		const dataSeand = {
+			id: data.id,
+			configActionType:data.configActionType,
+			configActionTypeId:data.configActionTypeId,
+			isOpenCompletion: watch('isOpenCompletion'),
+			isOpenPassengerGroup: watch('isOpenPassengerGroup'),
+			isOpenReserve: watch('isOpenReserve'),
+			isOpenPayment: watch('isOpenPayment'),
+			isActive: watch('isActive'),
+			isEnableDispatchAndReligion:watch('isEnableDispatchAndReligion')
+		}
+		console.log(dataSeand)
+		mutate(dataSeand, {
 			onSuccess: () => {
 				enqueueSnackbar('تنظیمات انتخاب شده با موفقیت ویرایش شد', { variant: 'success' });
 				queryClient.invalidateQueries({
 					queryKey: ['getConfigs']
-				});
-				onSuccess();
+				}).then(()=>onSuccess());
+
 			},
-			onError: error => {
+			onError: () => {
 				enqueueSnackbar('خطا در ویرایش تنظیمات انتخاب شده ', { variant: 'error' });
 			}
 		});
 	};
 
 	return (
-		<CustomModal isOpen={isOpen} title='ویرایش تنظیمات سایت' onDismiss={onCancel}>
+		<CustomModal isOpen={isOpen} title='ویرایش تنظیمات سایت' onDismiss={onCancel} footerData={
+			<>
+				<CustomButton variant={'primary'} type={'submit'} label={'ویرایش'} onClick={onSubmitFormHandler} loading={isPending}/>
+				<CustomButton variant={'Cancel'} type={'button'} label='انصراف' onClick={onCancel} disabled={isPending}/>
+			</>
+		}>
 			<div className='m-3 flex flex-col gap-4 '>
 				<p className='text-lg'>لطفا وضعیت موارد مورد نظر را ویرایش کنید</p>
 				<form
 					className={`flex flex-col gap-6 ${isPending ? 'blur-sm pointer-events-none' : ''}`}
-					onSubmit={handleSubmit(onSubmitFormHandler)}>
+					onSubmit={() => {
+					}}>
 					<Controller
 						name='isOpenCompletion'
 						control={control}
-						render={({ field: { value, onChange } }) => (
+						render={({field: {value, onChange } }) => (
 							<div className='px-2 border !border-gray-300 rounded-md'>
 								<label>تکمیل اطلاعات</label>
 								<div className='px-4 py-2 text-base bg-white flex flex-col gap-2'>
@@ -179,10 +200,6 @@ const EditConfigModal = ({ data, isOpen, onSuccess, onCancel }: IProps) => {
 							</div>
 						)}
 					/>
-					<div className=' w-full flex items-center justify-center py-2 mt-2 border-t !border-gray-300 z-10'>
-						<CustomButton variant={'primary'} type={'submit'} label={'ویرایش'} onClick={() => {}} loading={isPending}/>
-						<CustomButton variant={'Cancel'} type={'button'} label='انصراف' onClick={onCancel} disabled={isPending}/>
-					</div>
 				</form>
 			</div>
 		</CustomModal>

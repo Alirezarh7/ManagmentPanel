@@ -1,8 +1,7 @@
 import {IConfigResponse} from '../../typs/config.types';
-import ConfigsTableRow from './ConfigsTableRow';
 import DataGrid from "../general/gridShow/DataGrid";
 import EditConfigModal from "./EditConfigModal";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 interface IProps {
   configs: IConfigResponse[] | undefined;
@@ -10,6 +9,8 @@ interface IProps {
 
 const ConfigsTable = ({configs}: IProps) => {
   const [showEditModal, setShowEditModal] = useState(false);
+  const [activeModal, setActiveModal] = useState(false);
+  const [dataSelect, setDataSelect] = useState<IConfigResponse>();
   const headData = [
     {title: "نوع سرویس", key: "configActionTypeId"},
     {title: "تکمیل اطلاعات", key: "isOpenCompletion"},
@@ -20,6 +21,7 @@ const ConfigsTable = ({configs}: IProps) => {
     {title: "استان و مذهب", key: "isEnableDispatchAndReligion"},
   ];
   const bodyData = configs?.map((destructure) => ({
+    allData:destructure,
     configActionTypeId: destructure.configActionTypeId === 1 ? 'حج' : "عمره",
     isOpenCompletion: destructure.isOpenCompletion ? "✅" : "❌",
     isOpenPassengerGroup: destructure.isOpenPassengerGroup ? "✅" : "❌",
@@ -28,36 +30,26 @@ const ConfigsTable = ({configs}: IProps) => {
     isActive: destructure.isActive ? "✅" : "❌",
     isEnableDispatchAndReligion: destructure.isEnableDispatchAndReligion ? "✅" : "❌",
     hasActions: true,
+
   })) ?? [];
 
-
+  useEffect(() => {
+    if(dataSelect && activeModal){
+      setShowEditModal(true);
+      setActiveModal(false)
+    }
+  }, [dataSelect?.id,activeModal]);
   return (
     <div className={'w-full'}>
-      {/*<div className='rounded-md border !border-stroke bg-white md:px-4 md:py-4 space-y-2 shadow-default'>*/}
-      {/*  <div className='max-w-full '>*/}
-      {/*    <table className='w-full table-auto'>*/}
-      {/*      <thead>*/}
-      {/*      <tr className='bg-gray-100 text-right dark:bg-meta-4 max-sm:text-[9px]'>*/}
-      {/*        <th className=' py-3 px-3  text-black dark:text-white'>نوع سرویس</th>*/}
-      {/*        <th className=' py-3 px-0.5 text-center font-medium text-black  '>گروه بندی</th>*/}
-      {/*        <th className=' py-3 px-0.5 text-center font-medium text-black  '>رزرو</th>*/}
-      {/*        <th className=' py-3 px-0.5 text-center font-medium text-black  '>پرداخت</th>*/}
-      {/*        <th className=' py-3 px-0.5 text-center  font-medium text-black '> تکمیل اطلاعات</th>*/}
-      {/*        <th className=' py-3 px-0.5 text-center font-medium text-black  '>بروز رسانی</th>*/}
-      {/*        <th className=' py-3 px-0.5 text-center font-medium text-black  '>عملیات</th>*/}
-
-      {/*      </tr>*/}
-      {/*      </thead>*/}
-      {/*      <tbody>{configs?.map(item => <ConfigsTableRow key={item.id} data={item}/>)}</tbody>*/}
-      {/*    </table>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
-      <div className={'w-full flex justify-center items-center'}>
-        <DataGrid bodyData={bodyData} headData={headData} activities={true} onEdit={() => setShowEditModal(true)}/>
+      <div className={'w-full flex justify-center items-center pb-10'}>
+        <DataGrid bodyData={bodyData} headData={headData} activities={true} onEdit={(row:any) => {
+          setDataSelect(row.allData)
+          setActiveModal(true)
+        }}/>
       </div>
-      {configs?.map(item => <EditConfigModal data={item} isOpen={showEditModal}
+      {dataSelect ? <EditConfigModal data={dataSelect} isOpen={showEditModal}
                                              onSuccess={() => setShowEditModal(false)}
-                                             onCancel={() => setShowEditModal(false)}/>)}
+                                             onCancel={() => setShowEditModal(false)}/> : null }
     </div>
   );
 };
