@@ -71,7 +71,7 @@ const CreateController = ({setValue, next, controllerId, prev, serviceId, curren
       <NapLoading loading={isRefetching || isPending || isLoading || isFetching}/>
       <div className=' pt-5'>
         <div className='flex  justify-between items-center mx-2'>
-          <p>کنترلر جدید را اضافه کنید.</p>
+          <p>رول جدید را اضافه کنید.</p>
 
           <button onClick={() => setAddController(true)}
                   className={'bg-sliderColor text-white border rounded-lg !border-goldColor p-1'}>اضافه کردن

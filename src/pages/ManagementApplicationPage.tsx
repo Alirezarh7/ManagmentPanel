@@ -21,7 +21,7 @@ const ManagementApplicationPage = () => {
   };
 
 
-  let steps = ['سرویس', 'کنترلر', 'اکشن'];
+  let steps = ['نرم افزار', 'رول', 'فعالیت'];
   let getContent = () => {
     switch (currentStep) {
       case 1:

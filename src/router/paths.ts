@@ -31,4 +31,5 @@ export const PATHS = {
 	redisCache: 'redis-cache',
 	calender: '/calender',
 	managementApplication : 'management-application',
+	managementMember : 'management-member',
 };

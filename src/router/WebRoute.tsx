@@ -28,6 +28,7 @@ import FaqContentsEditPage from '../pages/faqContents/EditPage';
 import ConfigsPage from '../pages/ConfigsPage';
 import RedisCachePage from '../pages/RedisCachePage';
 import ManagementApplicationPage from "../pages/ManagementApplicationPage";
+import ManagementMemberPage from "../pages/ManagementMemberPage";
 
 export interface IProps {}
 
@@ -70,6 +71,7 @@ class WebRoute extends React.Component<IProps, IState> {
 				<Route path={PATHS.redisCache} element={<RedisCachePage />} />
 				<Route path={PATHS.configs} element={<ConfigsPage />} />
 				<Route path={PATHS.managementApplication} element={<ManagementApplicationPage />} />
+				<Route path={PATHS.managementMember} element={<ManagementMemberPage />} />
 				<Route path={PATHS.calender} element={<CalenderPage />} />
 
 				<Route path={shareData.CONSTANT.SSO_URL_FROM_MY_GOV} element={<Navigate to='/' />} />
