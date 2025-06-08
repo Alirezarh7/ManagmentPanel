@@ -1,10 +1,9 @@
 import ManagementAxiosInstance from "../configs/managementAxiosInstance";
-import {IGetServices} from "../typs/managment.types";
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {createUser} from "../typs/user.types";
 
 const advancedSearchUsers = async (users: string) => {
-  const response = await ManagementAxiosInstance.get<IGetServices[]>(`/User/AdvancedSearchUsers/${users}`);
+  const response = await ManagementAxiosInstance.get(`/User/AdvancedSearchUsers/${users}`);
   return response.data;
 };
 const useAdvancedSearchUsers = (users: string) => {
@@ -15,11 +14,22 @@ const useAdvancedSearchUsers = (users: string) => {
   });
 };
 
-const createUser = (data: createUser) => {
+const createUser2 = (data: createUser) => {
   return ManagementAxiosInstance.post(`/User/CreateUser`, data);
 };
-const useCreateUser = () => {
-  return useMutation({mutationFn: createUser});
+const useCreateUser2 = () => {
+  return useMutation({mutationFn: createUser2});
 };
 
-export {useAdvancedSearchUsers,useCreateUser}
+const getSSOUserByMobile = (phoneNumber:number) => {
+  return ManagementAxiosInstance.get(`/User/GetSSOUserByMobile/${phoneNumber}`);
+};
+const useGetSSOUserByMobile = (phoneNumber:number) => {
+  return useQuery({
+    enabled:false,
+    queryKey: ['getSSOUserByMobile',phoneNumber],
+    queryFn: () => getSSOUserByMobile(phoneNumber)
+  });
+};
+
+export {useAdvancedSearchUsers,useCreateUser2,useGetSSOUserByMobile}

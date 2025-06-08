@@ -17,9 +17,7 @@ body,
   height: 100%;
 }
 
-body {
-  background-color: #f4f7fa;
-}
+
 
 .overlay::before {
   content: "";
@@ -562,7 +560,6 @@ header {
 
 .login .form-control-holder .form-control:focus {
   box-shadow: none;
-  border-color: #e2e2e2;
 }
 
 .login .form-control-holder .form-control:focus + .mdi {

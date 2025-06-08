@@ -65,7 +65,7 @@ const Input = ({
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
   return (
     <div
-      className={`w-full relative flex  h-12 border  border-gray-600 rounded-lg  ${isTextArea ? 'h-auto' : ''} ${
+      className={`w-full relative flex  h-12 border  !border-gray-600 rounded-lg  ${isTextArea ? 'h-auto' : ''} ${
         customClassName ? customClassName : ''
       }`}>
       {isDatePicker ? (
