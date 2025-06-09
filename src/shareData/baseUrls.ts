@@ -1,5 +1,5 @@
 export const currentBaseUrl = process.env.REACT_APP_BASEURL;
-export const getTokenUrl = process.env.REACT_APP_GETTOKEN_URL;
+export const getManagementTokenUrl = process.env.REACT_APP_GETMABAGENEBTOABELTOKEN_URL;
 export const currentPaymentBaseUrl = process.env.REACT_APP_PAYMENT_BASEURL;
 export const managementPanelBaseUrl = process.env.REACT_APP_MANAGEMENT_BASEURL;
 export const managementPanelCreatPerson = process.env.REACT_APP_CREATE_PERSON_URL;

@@ -31,7 +31,8 @@ const SignInCallbackPage = (props: IProps) => {
 
 	const successCallback = (user: User) => {
 		props.setUserClaims(user.access_token);
-		props.setCreateToken(true, automaticlyLogout, user.access_token);
+		console.log(user?.profile?.nationalId)
+		props.setCreateManagementToken(true, automaticlyLogout, user.access_token , user?.profile?.nationalId);
 		let redirectPath = user.state.path as string;
 		history(redirectPath);
 	};

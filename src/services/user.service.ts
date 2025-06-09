@@ -1,4 +1,6 @@
-import ManagementAxiosInstance from "../configs/managementAxiosInstance";
+import ManagementAxiosInstance, {
+  managementAxiosInstanceCreatPerson
+} from "../configs/managementAxiosInstance";
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {createUser} from "../typs/user.types";
 
@@ -32,4 +34,15 @@ const useGetSSOUserByMobile = (phoneNumber:number) => {
   });
 };
 
-export {useAdvancedSearchUsers,useCreateUser2,useGetSSOUserByMobile}
+const GetProvinceListByCountryId = () => {
+  return managementAxiosInstanceCreatPerson.get(`/Province/GetProvinceListByCountryId?CountryId=1`);
+};
+const useGetProvinceListByCountryId = () => {
+  return useQuery({
+    enabled:false,
+    queryKey: ['GetProvinceListByCountryId'],
+    queryFn: () => GetProvinceListByCountryId()
+  });
+};
+
+export {useAdvancedSearchUsers,useCreateUser2,useGetSSOUserByMobile,useGetProvinceListByCountryId}

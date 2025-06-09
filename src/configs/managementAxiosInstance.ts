@@ -1,7 +1,12 @@
 import axios from 'axios';
-import { managementPanelBaseUrl } from '../shareData/baseUrls';
+import {managementPanelBaseUrl,managementPanelCreatPerson,} from '../shareData/baseUrls';
 
 export default axios.create({
-	headers: { Authorization: JSON.parse(localStorage.getItem('token') as string)},
+	headers: { Authorization: JSON.parse(localStorage.getItem("tokenMangement") as string)},
 	baseURL: managementPanelBaseUrl
 });
+
+export const managementAxiosInstanceCreatPerson = axios.create({
+	headers: { Authorization: JSON.parse(localStorage.getItem("tokenBasic") as string)},
+	baseURL: managementPanelCreatPerson
+})

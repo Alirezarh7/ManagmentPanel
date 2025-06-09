@@ -73,7 +73,7 @@ const App = (props: IProps) => {
 						if (isLogin) setIsLogin(false);
 					} else {
 						props.setUserClaims(user.access_token);
-						props.setCreateToken(false, automaticlyLogout, user.access_token);
+						props.setCreateManagementToken(false, automaticlyLogout, user.access_token , user?.profile?.nationalId);
 						if (!isLogin) {
 							setIsLogin(true);
 						}

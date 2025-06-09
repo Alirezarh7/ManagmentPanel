@@ -1,13 +1,13 @@
 import {Controller, useForm} from "react-hook-form";
 import Input from "../general/inputs/Input";
-import { useGetSSOUserByMobile} from "../../services/user.service";
+import {useGetProvinceListByCountryId, useGetSSOUserByMobile} from "../../services/user.service";
 import CustomModal from "../general/Modal/CustomModal";
 import CustomButton from "../general/Buttons/CustomButton";
 import {enqueueSnackbar} from "notistack";
-import DataSummary from "../general/DataSummary";
 import CustomCard from "../general/Card/CustomCard";
-import Title from "../tamato/myDocuments/cardInfo/Title";
 import TitleInfo from "../tamato/myDocuments/cardInfo/TitleInfo.";
+import CustomSelect from "../general/Select/CustomSelect";
+import {useEffect} from "react";
 
 
 interface IProps {
@@ -18,6 +18,13 @@ interface IProps {
 const CreateUserModal = ({isOpen, onDismiss}: IProps) => {
   const {control,watch} = useForm()
   const {refetch} = useGetSSOUserByMobile(watch('phoneNumber'))
+  const {data,refetch:provinceListByCountryIdRefetch} =useGetProvinceListByCountryId()
+
+  useEffect(() => {
+    if(isOpen){
+      provinceListByCountryIdRefetch()
+    }
+  },[isOpen])
 
   return (
     <CustomModal isOpen={isOpen} title={'اضافه کردن'} onDismiss={onDismiss} footerData={
@@ -56,6 +63,9 @@ const CreateUserModal = ({isOpen, onDismiss}: IProps) => {
             <Controller control={control} name={'hajNumber'} render={({field: {value, onChange}}) =>
               <Input value={value} onChange={onChange} placeholder={'کد کارگزاری عمره'}/>
             }/>
+            {/*<Controller control={control} name={'hajNumber'} render={({field: {value, onChange}}) =>*/}
+            {/*  <CustomSelect valueID={data!} onChange={onChange} placeholder={'کد کارگزاری عمره'}/>*/}
+            {/*}/>*/}
           </div>
         </CustomCard>
 
