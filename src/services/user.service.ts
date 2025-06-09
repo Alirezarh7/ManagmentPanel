@@ -2,29 +2,31 @@ import ManagementAxiosInstance, {
   managementAxiosInstanceCreatPerson
 } from "../configs/managementAxiosInstance";
 import {useMutation, useQuery} from "@tanstack/react-query";
-import {createUser} from "../typs/user.types";
+import {IAdvancedSearchUsers, ICreateUser2, IRegistrationState} from "../typs/user.types";
 
-const advancedSearchUsers = async (users: string) => {
-  const response = await ManagementAxiosInstance.get(`/User/AdvancedSearchUsers/${users}`);
+const advancedSearchUsers = async (users?: string) => {
+  const url = users ? `/User/AdvancedSearchUsers/${users}` : '/User/AdvancedSearchUsers';
+  const response = await ManagementAxiosInstance.get<IAdvancedSearchUsers[]>(url);
   return response.data;
 };
-const useAdvancedSearchUsers = (users: string) => {
+
+const useAdvancedSearchUsers = (users?: string) => {
   return useQuery({
-    enabled:false,
     queryKey: ['advancedSearchUsers',users],
     queryFn: () => advancedSearchUsers(users)
   });
 };
 
-const createUser2 = (data: createUser) => {
+const createUser2 = (data: ICreateUser2) => {
   return ManagementAxiosInstance.post(`/User/CreateUser`, data);
 };
 const useCreateUser2 = () => {
   return useMutation({mutationFn: createUser2});
 };
 
-const getSSOUserByMobile = (phoneNumber:number) => {
-  return ManagementAxiosInstance.get(`/User/GetSSOUserByMobile/${phoneNumber}`);
+const getSSOUserByMobile = async (phoneNumber:number) => {
+  const response = await ManagementAxiosInstance.get<IRegistrationState>(`/User/GetSSOUserByMobile/${phoneNumber}`);
+  return response.data;
 };
 const useGetSSOUserByMobile = (phoneNumber:number) => {
   return useQuery({
@@ -34,15 +36,18 @@ const useGetSSOUserByMobile = (phoneNumber:number) => {
   });
 };
 
-const GetProvinceListByCountryId = () => {
-  return managementAxiosInstanceCreatPerson.get(`/Province/GetProvinceListByCountryId?CountryId=1`);
+const GetUserActionsByUserId = async (id:number) => {
+  const response = await ManagementAxiosInstance.get<IRegistrationState>(`/User/GetUserActionsByUserId/${id}`);
+  return response.data;
 };
-const useGetProvinceListByCountryId = () => {
+const useGetUserActionsByUserId = (id:number) => {
   return useQuery({
     enabled:false,
-    queryKey: ['GetProvinceListByCountryId'],
-    queryFn: () => GetProvinceListByCountryId()
+    queryKey: ['GetUserActionsByUserId',id],
+    queryFn: () => GetUserActionsByUserId(id)
   });
 };
 
-export {useAdvancedSearchUsers,useCreateUser2,useGetSSOUserByMobile,useGetProvinceListByCountryId}
+
+
+export {useAdvancedSearchUsers,useCreateUser2,useGetSSOUserByMobile,useGetUserActionsByUserId}

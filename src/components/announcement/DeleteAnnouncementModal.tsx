@@ -29,6 +29,7 @@ const DeleteAnnouncementModal = ({ data, isOpen, onSuccess, onCancel }: IProps) 
 				onSuccess();
 			},
 			onError: error => {
+				console.log(error)
 				enqueueSnackbar('خطا در حذف اطلاعیه ', { variant: 'error' });
 			}
 		});

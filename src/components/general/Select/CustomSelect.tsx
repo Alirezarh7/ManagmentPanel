@@ -62,7 +62,7 @@ const CustomSelect = ({  options, placeholder, valueID, onChange, important ,	di
     normalizeString(option.label).toLowerCase().includes(normalizeString(searchQuery).toLowerCase())
   );
   return (
-    <div className={`w-full   relative   cursor-pointer  ${className}`} ref={selectRef} onClick={() => {
+    <div className={`w-full   relative   cursor-pointer   ${className}`} ref={selectRef} onClick={() => {
       !disabledInput ? setIsOpen(!isOpen) : setIsOpen(false);
     }}>
       <div className={`w-full flex my-auto`}>
@@ -108,7 +108,7 @@ const CustomSelect = ({  options, placeholder, valueID, onChange, important ,	di
         {important && <div className={'mx-[1px] text-red-500 text-sm'}>*</div>}
       </label>
       {isOpen && (
-        <div className='absolute z-50 w-full text-sm bg-white border border-gray-600 rounded-lg mt-1 max-h-32 overflow-y-auto'>
+        <div className='absolute z-40 w-full text-sm bg-white border border-gray-600 rounded-lg mt-1 max-h-32 overflow-y-auto'>
           {filteredOptions?.map((option, index) => (
             <div
               key={index}

@@ -10,3 +10,16 @@ export const useModalStore = create<ModalState>((set) => ({
   open: (key) => set((state) => ({modals: { ...state.modals, [key]: true }})),
   close: (key) => set((state) => ({modals: { ...state.modals, [key]: false }})),
 }));
+
+type dataToSet  = {
+  data: any,
+  setData: (ids: any) => Promise<void>,
+}
+
+export const useDataToSet = create<dataToSet>((set) => ({
+  data: [],
+  setData: (ids: any) => new Promise<void>(resolve => {
+    set({data: ids});
+    setTimeout(resolve , 0)
+  })
+}));
