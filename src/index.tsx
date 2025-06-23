@@ -17,14 +17,21 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { PATHS } from './router/paths';
 
 const root = createRoot(document.getElementById('root')!);
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries : {
+			retry:false,
+			refetchOnWindowFocus: false
+		}
+	}
+});
 const initialState = (window as any).initialReduxState;
 const store = configureStore(initialState);
 if (window.location.pathname === PATHS.frameWork.silentCallback) {
 	userManager.signinSilentCallback();
 } else {
 	root.render(
-		<QueryClientProvider client={queryClient}>
+		<QueryClientProvider  client={queryClient}>
 			<BrowserRouter>
 				<Provider store={store}>
 					{/*@ts-ignore*/}

@@ -5,6 +5,7 @@ import CreateUserModal from "../components/Management/CreateUserModal";
 import {useDataToSet, useModalStore} from "../store/ZustandStore";
 import {useAdvancedSearchUsers} from "../services/user.service";
 import DataGrid from "../components/general/gridShow/DataGrid";
+import ConfigControllerModal from "../components/Management/ConfigControllerModal";
 
 
 const ManagementMemberPage = () => {
@@ -13,8 +14,14 @@ const ManagementMemberPage = () => {
   const {control} = useForm()
   const {modals,open,close} =useModalStore()
   const isOpenCreateUserModal = modals['createUserModal']
+  const isOpenConfigControllerModal = modals['configControllerModal']
   const {data:editData,setData:setEditData} = useDataToSet()
 
+  const onEdit = async (row: any) => {
+    return await setEditData(row.id).then(()=>{
+      open('createUserModal')
+    })
+  };
   const headData = [
     {title: "نام", key: "name"},
     {title: "کد ملی", key: "nationalCode"},
@@ -27,13 +34,10 @@ const ManagementMemberPage = () => {
     hasActions : true
   })) ?? [];
 
-  const onEdit = (row: any) => {
-    setEditData(row.id).then(()=>{
-      console.log(editData)
-    })
-  }
 
-  const onContinue = (row: any) => {}
+  const onContinue = (row: any) => {
+    open('configControllerModal')
+  }
   return (
     <div>
       <div className={'grid grid-cols-2 justify-around my-5'}>
@@ -48,7 +52,8 @@ const ManagementMemberPage = () => {
         </div>
       </div>
       {AdvancedSearchData  ? <DataGrid bodyData={bodyData} headData={headData} onEdit={onEdit} activities={true} onContinue={onContinue}  /> : null }
-      <CreateUserModal isOpen={isOpenCreateUserModal} onDismiss={()=>close('createUserModal')} />
+      <CreateUserModal editData ={editData ?? 0} isOpen={isOpenCreateUserModal} onDismiss={()=>close('createUserModal')} />
+      <ConfigControllerModal editData ={editData ?? 0} onDismiss={()=>close('configControllerModal')} isOpen={isOpenConfigControllerModal} />
     </div>
   );
 };

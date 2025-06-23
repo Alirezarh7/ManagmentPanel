@@ -35,3 +35,15 @@ export interface IAdvancedSearchUsers extends Const {
   "businessId": string,
   "provinceName": string,
 }
+
+export type IUpdateUser = {
+  "userId": number,
+  "provinceId": number,
+  "kargozarNoHaj": number,
+  "kargozarNoUmrah": number,
+  "mobile": {
+  "value": string
+},
+  "isActive": boolean
+
+}

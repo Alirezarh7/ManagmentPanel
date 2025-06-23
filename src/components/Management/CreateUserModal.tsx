@@ -12,23 +12,32 @@ import {useGetProvinceListByCountryId} from "../../services/basicInfo.service";
 import NapLoading from "../general/NapLoading/NapLoading";
 import CustomToggle from "../general/toggle/CustomToggle";
 import {useQueryClient} from "@tanstack/react-query";
+import {useDataToSet} from "../../store/ZustandStore";
 
 
 interface IProps {
   isOpen: boolean;
   onDismiss: () => void;
-  id?:number
+  id?:number,
+  editData:number
 }
 
-const CreateUserModal = ({isOpen, onDismiss,id}: IProps) => {
+const CreateUserModal = ({isOpen, onDismiss,editData}: IProps) => {
 
-  const {refetch:ActionsByUserIdRefetch} = useGetUserActionsByUserId(id!)
+  const {setData:setEditData} = useDataToSet()
 
+  const {refetch:ActionsByUserIdRefetch} = useGetUserActionsByUserId(editData)
+  console.log(editData ,'editData')
   useEffect(() => {
-    if(id){
+    if(editData){
       ActionsByUserIdRefetch()
     }
-  }, [id]);
+  }, [editData]);
+  useEffect(() => {
+    if (!isOpen){
+      setEditData(0)
+    }
+  }, [isOpen]);
 
   const {control, watch} = useForm()
   const [isEnabled, setIsEnabled] = useState<boolean>(false);
@@ -88,6 +97,7 @@ const CreateUserModal = ({isOpen, onDismiss,id}: IProps) => {
         </div>
       }>
         <div className='flex flex-col justify-center items-center'>
+          {!editData ?
           <div className={' max-w-52 mt-3'}>
             <Controller control={control} name={'phoneNumber'} render={({field: {value, onChange}}) =>
               <Input value={value} onChange={onChange} buttonTitle={'جستجو'} placeholder={'شماره موبایل'}
@@ -101,6 +111,7 @@ const CreateUserModal = ({isOpen, onDismiss,id}: IProps) => {
               />
             }/>
           </div>
+          : null}
           {SSOUserData ?
             <CustomCard title={'مشخصات'}>
               <TitleInfo infoOne={'نام'} answerOne={SSOUserData.name + ' ' + SSOUserData.family}

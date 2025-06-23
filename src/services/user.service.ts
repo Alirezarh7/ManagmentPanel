@@ -2,7 +2,7 @@ import ManagementAxiosInstance, {
   managementAxiosInstanceCreatPerson
 } from "../configs/managementAxiosInstance";
 import {useMutation, useQuery} from "@tanstack/react-query";
-import {IAdvancedSearchUsers, ICreateUser2, IRegistrationState} from "../typs/user.types";
+import {IAdvancedSearchUsers, ICreateUser2, IRegistrationState, IUpdateUser} from "../typs/user.types";
 
 const advancedSearchUsers = async (users?: string) => {
   const url = users ? `/User/AdvancedSearchUsers/${users}` : '/User/AdvancedSearchUsers';
@@ -48,6 +48,12 @@ const useGetUserActionsByUserId = (id:number) => {
   });
 };
 
+const updateUser = (data: IUpdateUser) => {
+  return ManagementAxiosInstance.post(`/User/UpdateUser`, data);
+};
+const useUpdateUser = () => {
+  return useMutation({mutationFn: updateUser});
+};
 
 
-export {useAdvancedSearchUsers,useCreateUser2,useGetSSOUserByMobile,useGetUserActionsByUserId}
+export {useAdvancedSearchUsers,useCreateUser2,useGetSSOUserByMobile,useGetUserActionsByUserId,useUpdateUser}
