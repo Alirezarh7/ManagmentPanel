@@ -11,12 +11,12 @@ const ReservePage = (props: IProps) => {
 	useEffect(() => {
 		props.GetReserveDetail();
 	}, []);
-	console.log(props.GetReserveDetail);
+
 	const history = useNavigate();
 	const PrintPage = () => {
 		history('/OmreMofrade/Print');
 	};
-	console.log(props.getReserveDetailList.data);
+
 
 	return (
 		<div className='flex flex-grow-1 confirm-parent'>

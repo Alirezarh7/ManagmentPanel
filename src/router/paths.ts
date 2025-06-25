@@ -32,4 +32,5 @@ export const PATHS = {
 	calender: '/calender',
 	managementApplication : 'management-application',
 	managementMember : 'management-member',
+	managementMemberService : 'management-member/:id',
 };

@@ -11,6 +11,7 @@ export type Const = {
 
 
 export interface IRegistrationState extends Const {
+  isActive: boolean
   userName: string,
   email: string,
   emailConfirmed: boolean,
@@ -32,6 +33,9 @@ export type ICreateUser2 = {
   isActive: boolean
 }
 export interface IAdvancedSearchUsers extends Const {
+  total:number
+  kargozarNoHaj: number,
+  kargozarNoUmrah:number
   "businessId": string,
   "provinceName": string,
 }

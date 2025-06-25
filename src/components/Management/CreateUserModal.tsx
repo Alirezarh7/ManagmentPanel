@@ -1,6 +1,10 @@
 import {Controller, useForm} from "react-hook-form";
 import Input from "../general/inputs/Input";
-import {useCreateUser2, useGetSSOUserByMobile, useGetUserActionsByUserId} from "../../services/user.service";
+import {
+  useCreateUser2,
+  useGetSSOUserByMobile,
+  useGetUserById
+} from "../../services/user.service";
 import CustomModal from "../general/Modal/CustomModal";
 import CustomButton from "../general/Buttons/CustomButton";
 import {enqueueSnackbar} from "notistack";
@@ -18,44 +22,49 @@ import {useDataToSet} from "../../store/ZustandStore";
 interface IProps {
   isOpen: boolean;
   onDismiss: () => void;
-  id?:number,
-  editData:number
+  editData: number
 }
 
-const CreateUserModal = ({isOpen, onDismiss,editData}: IProps) => {
+const CreateUserModal = ({isOpen, onDismiss, editData}: IProps) => {
 
-  const {setData:setEditData} = useDataToSet()
-
-  const {refetch:ActionsByUserIdRefetch} = useGetUserActionsByUserId(editData)
-  console.log(editData ,'editData')
+  const {setData: setEditData} = useDataToSet()
+  const {control, watch,setValue} = useForm()
+  const {refetch: getUserByIdRefetch ,data:getUserByIdData} = useGetUserById(editData)
+  const queryClient = useQueryClient()
   useEffect(() => {
-    if(editData){
-      ActionsByUserIdRefetch()
+    if (editData && isOpen) {
+      getUserByIdRefetch()
     }
-  }, [editData]);
+  }, [editData, isOpen]);
   useEffect(() => {
-    if (!isOpen){
+    if (!isOpen) {
       setEditData(0)
+      setValue('phoneNumber',null)
+      queryClient.removeQueries({queryKey:['getSSOUserByMobile']})
     }
   }, [isOpen]);
 
-  const {control, watch} = useForm()
+
   const [isEnabled, setIsEnabled] = useState<boolean>(false);
   const {
-    refetch, data: SSOUserData, isLoading: SSOUserIsLoading, isRefetching: SSOUserIsRefetching} = useGetSSOUserByMobile(watch('phoneNumber'))
+    refetch, data: SSOUserData, isLoading: SSOUserIsLoading, isRefetching: SSOUserIsRefetching
+  } = useGetSSOUserByMobile(watch('phoneNumber'))
   const {
-    data: ProvinceData, refetch: provinceListRefetch, isLoading: provinceListLoading, isRefetching: provinceListRefetching} = useGetProvinceListByCountryId()
+    data: ProvinceData,
+    refetch: provinceListRefetch,
+    isLoading: provinceListLoading,
+    isRefetching: provinceListRefetching
+  } = useGetProvinceListByCountryId()
 
   useEffect(() => {
-    if (isOpen && SSOUserData) {
+    if (isOpen && (SSOUserData || getUserByIdData )) {
       provinceListRefetch()
     }
   }, [isOpen, SSOUserData])
 
 
-
   const {mutate} = useCreateUser2()
-  const submitData = () =>{
+  const submitData = () => {
     const sendData = {
       name: SSOUserData!.name,
       family: SSOUserData!.family,
@@ -66,19 +75,20 @@ const CreateUserModal = ({isOpen, onDismiss,editData}: IProps) => {
       mobile: SSOUserData!.phoneNumber,
       isActive: isEnabled
     }
-    mutate(sendData,{onSuccess:()=>{
+    mutate(sendData, {
+      onSuccess: () => {
         useQueryClient().invalidateQueries(
           {queryKey: ['advancedSearchUsers']}
-        ).then(()=>{
+        ).then(() => {
           onDismiss()
-          enqueueSnackbar('شخص مورد نظر با موفقیت اضافه شد',{variant: 'success'})
+          enqueueSnackbar('شخص مورد نظر با موفقیت اضافه شد', {variant: 'success'})
         })
-      },onError:(err)=>{
+      }, onError: (err) => {
         console.log(err)
         // enqueueSnackbar('شخص مورد نظر با موفقیت اضافه شد',{variant: 'success'})
-      }})
+      }
+    })
   }
-
 
 
   return (
@@ -98,25 +108,25 @@ const CreateUserModal = ({isOpen, onDismiss,editData}: IProps) => {
       }>
         <div className='flex flex-col justify-center items-center'>
           {!editData ?
-          <div className={' max-w-52 mt-3'}>
-            <Controller control={control} name={'phoneNumber'} render={({field: {value, onChange}}) =>
-              <Input value={value} onChange={onChange} buttonTitle={'جستجو'} placeholder={'شماره موبایل'}
-                     disabledButton={false}
-                     withButton={true}
-                     onClick={() => {
-                       console.log(value)
-                       if (value.toString().length < 11) return enqueueSnackbar('شماره موبایل به درستی وارد نشده است.', {variant: "warning"})
-                       else refetch()
-                     }}
-              />
-            }/>
-          </div>
-          : null}
-          {SSOUserData ?
-            <CustomCard title={'مشخصات'}>
-              <TitleInfo infoOne={'نام'} answerOne={SSOUserData.name + ' ' + SSOUserData.family}
-                         infoTow={'کد ملی'} answerTow={SSOUserData.nationalCode}/>
-              <div className={'w-full grid grid-cols-2 md:grid-cols-3 items-center justify-center gap-5 my-4'}>
+            <div className={' max-w-52 mt-3'}>
+              <Controller control={control} name={'phoneNumber'} render={({field: {value, onChange}}) =>
+                <Input value={value} onChange={onChange} buttonTitle={'جستجو'} placeholder={'شماره موبایل'}
+                       disabledButton={false}
+                       withButton={true}
+                       onClick={() => {
+                         console.log(value)
+                         if (value.toString().length < 11) return enqueueSnackbar('شماره موبایل به درستی وارد نشده است.', {variant: "warning"})
+                         else refetch()
+                       }}
+                />
+              }/>
+            </div>
+            : null}
+          {SSOUserData || getUserByIdData ?
+            <CustomCard title={'مشخصات'} className={'text-sm'}>
+              <TitleInfo infoOne={'نام'} answerOne={SSOUserData ? SSOUserData.name + ' ' + SSOUserData.family : getUserByIdData?.name + ' ' + getUserByIdData?.family}
+                         infoTow={'کد ملی'} answerTow={SSOUserData?.nationalCode ?? getUserByIdData?.nationalCode}/>
+              <div className={'w-full px-1 grid grid-cols-2 md:grid-cols-3 items-center justify-center gap-5 my-4'}>
                 <Controller control={control} name={'kargozarNoHaj'} render={({field: {value, onChange}}) =>
                   <Input value={value} onChange={onChange} placeholder={'کد کارگزاری حج'}/>
                 }/>
@@ -127,7 +137,7 @@ const CreateUserModal = ({isOpen, onDismiss,editData}: IProps) => {
                   <CustomSelect options={ProvinceData} valueID={value} onChange={onChange}
                                 placeholder={'کد کارگزاری عمره'}/>
                 }/>
-                <CustomToggle checked={isEnabled} onChange={setIsEnabled} label={'فعال'} />
+                <CustomToggle checked={getUserByIdData ? getUserByIdData.isActive : isEnabled} onChange={setIsEnabled} label={'فعال'}/>
               </div>
             </CustomCard>
             : null}

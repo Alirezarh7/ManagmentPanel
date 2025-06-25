@@ -4,16 +4,22 @@ import ManagementAxiosInstance, {
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {IAdvancedSearchUsers, ICreateUser2, IRegistrationState, IUpdateUser} from "../typs/user.types";
 
-const advancedSearchUsers = async (users?: string) => {
-  const url = users ? `/User/AdvancedSearchUsers/${users}` : '/User/AdvancedSearchUsers';
-  const response = await ManagementAxiosInstance.get<IAdvancedSearchUsers[]>(url);
+const advancedSearchUsers = async (pageNumber:number,pageSize:number,text?: string) => {
+  const queryParams = new URLSearchParams({
+    PageNumber:pageNumber.toString(),
+    PageSize : pageSize.toString()
+  });
+  if (text) {
+    queryParams.append("Text", text);
+  }
+  const response = await ManagementAxiosInstance.get<IAdvancedSearchUsers[]>(`/User/AdvancedSearchUsers?${queryParams.toString()}`);
   return response.data;
 };
 
-const useAdvancedSearchUsers = (users?: string) => {
+const useAdvancedSearchUsers = (pageNumber:number,pageSize:number,text?: string) => {
   return useQuery({
-    queryKey: ['advancedSearchUsers',users],
-    queryFn: () => advancedSearchUsers(users)
+    queryKey: ['advancedSearchUsers', pageNumber , pageSize,text],
+    queryFn: () => advancedSearchUsers(pageNumber , pageSize,text)
   });
 };
 
@@ -36,15 +42,15 @@ const useGetSSOUserByMobile = (phoneNumber:number) => {
   });
 };
 
-const GetUserActionsByUserId = async (id:number) => {
-  const response = await ManagementAxiosInstance.get<IRegistrationState>(`/User/GetUserActionsByUserId/${id}`);
+const getUserById = async (id:number) => {
+  const response = await ManagementAxiosInstance.get<IRegistrationState>(`/User/GetUserById/${id}`);
   return response.data;
 };
-const useGetUserActionsByUserId = (id:number) => {
+const useGetUserById = (id:number) => {
   return useQuery({
     enabled:false,
-    queryKey: ['GetUserActionsByUserId',id],
-    queryFn: () => GetUserActionsByUserId(id)
+    queryKey: ['getUserById',id],
+    queryFn: () => getUserById(id)
   });
 };
 
@@ -56,4 +62,4 @@ const useUpdateUser = () => {
 };
 
 
-export {useAdvancedSearchUsers,useCreateUser2,useGetSSOUserByMobile,useGetUserActionsByUserId,useUpdateUser}
+export {useAdvancedSearchUsers,useCreateUser2,useGetSSOUserByMobile,useGetUserById,useUpdateUser}
