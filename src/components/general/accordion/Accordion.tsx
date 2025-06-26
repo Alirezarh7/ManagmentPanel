@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {HiOutlineChevronDown} from "react-icons/hi";
 import {HiOutlineClipboardDocumentList} from "react-icons/hi2";
-import TitleInfo from "../../general/Card/TitleInfo";
-import {useGetControllersByServiceId} from "../../../services/management.service";
+import {useGetUserActionsByUserIdAndServiceId} from "../../../services/user.service";
 
 interface IProps{
-  editData:number
+  serviceID:number,
+  id:number,
 }
-const Accordion = ({editData}:IProps) => {
-  const {} =useGetControllersByServiceId(editData)
+const Accordion = ({serviceID,id}:IProps) => {
+  const {} =useGetUserActionsByUserIdAndServiceId(id,serviceID)
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
   const toggleHandler = (index: number) => {
     if (selectedItem !== index) {

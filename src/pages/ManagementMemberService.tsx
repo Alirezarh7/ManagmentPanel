@@ -24,10 +24,10 @@ const ManagementMemberService = () => {
     hasActions: true,
   })) ?? [];
   const {modals, open, close} = useModalStore()
-  const {data: editData, setData: setEditData} = useDataToSet()
+  const {data: serviceID, setData: setServiceID} = useDataToSet()
   const isOpenConfigControllerModal = modals['configControllerModal']
   const onContinue = (row: any) => {
-    setEditData(row.id).then(() => {
+    setServiceID(row.id).then(() => {
       open('configControllerModal')
     })
   }
@@ -42,7 +42,7 @@ const ManagementMemberService = () => {
       </CustomCard>
       {servicesData ?
         <DataGrid onContinue={onContinue} bodyData={bodyData} headData={headData} activities={true}/> : null}
-      <ConfigControllerModal editData={editData ?? 0} onDismiss={() => close('configControllerModal')}
+      <ConfigControllerModal id = {state.data.id} serviceID={serviceID ?? 0} onDismiss={() => close('configControllerModal')}
                              isOpen={isOpenConfigControllerModal}/>
     </div>
   );

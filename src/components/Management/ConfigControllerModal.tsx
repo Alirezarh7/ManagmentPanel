@@ -5,10 +5,11 @@ import Accordion from "../general/accordion/Accordion";
 interface IProps {
   isOpen: boolean;
   onDismiss: () => void;
-  editData : number
+  serviceID : number,
+  id: number
 }
 
-const ConfigControllerModal = ({ onDismiss, isOpen ,editData }: IProps) => {
+const ConfigControllerModal = ({ onDismiss, isOpen ,serviceID ,id }: IProps) => {
   return (
     <CustomModal
       isOpen={isOpen}
@@ -22,7 +23,7 @@ const ConfigControllerModal = ({ onDismiss, isOpen ,editData }: IProps) => {
       }
     >
       <>
-       <Accordion editData={editData} />
+       <Accordion id={id} serviceID={serviceID} />
       </>
     </CustomModal>
   );

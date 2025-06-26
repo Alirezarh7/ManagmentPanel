@@ -42,6 +42,17 @@ const useGetSSOUserByMobile = (phoneNumber:number) => {
   });
 };
 
+const getUserActionsByUserIdAndServiceId = async (id:number,serviceId:number) => {
+  const response = await ManagementAxiosInstance.get(`/User/GetUserActionsByUserIdAndServiceId?id=${id}&serviceId=${serviceId}`);
+  return response.data;
+};
+const useGetUserActionsByUserIdAndServiceId = (id:number,serviceId:number) => {
+  return useQuery({
+    queryKey: ['getUserActionsByUserIdAndServiceId',id,serviceId],
+    queryFn: () => getUserActionsByUserIdAndServiceId(id,serviceId)
+  });
+};
+
 const getUserById = async (id:number) => {
   const response = await ManagementAxiosInstance.get<IRegistrationState>(`/User/GetUserById/${id}`);
   return response.data;
@@ -62,4 +73,4 @@ const useUpdateUser = () => {
 };
 
 
-export {useAdvancedSearchUsers,useCreateUser2,useGetSSOUserByMobile,useGetUserById,useUpdateUser}
+export {useAdvancedSearchUsers,useCreateUser2,useGetSSOUserByMobile,useGetUserById,useUpdateUser,useGetUserActionsByUserIdAndServiceId}
