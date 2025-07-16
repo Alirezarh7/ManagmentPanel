@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "private": true,
   "scripts": {
+    "modal-generate": "node script/modal-generate.cjs",
     "start": " set PORT=5119 HOST=nav.haj.ir && react-scripts start",
     "build:dev": "env-cmd -f .env react-scripts build",
     "build:sadad": "env-cmd -f .env.sadad react-scripts build",
@@ -10,7 +11,8 @@
     "eject": "react-scripts eject",
     "check-lint": "eslint . --ext ts --ext tsx --ext js --ext jsx",
     "check-types": "tsc --pretty --noEmit",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "zustand": "^5.0.5"
   },
   "dependencies": {
     "@ag-grid-enterprise/all-modules": "^27.3.0",
@@ -90,7 +92,8 @@
     "redux-thunk": "^3.1.0",
     "swiper": "^11.1.1",
     "typescript": "^4",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "zustand": "^5.0.5"
   },
   "eslintConfig": {
     "extends": "react-app"

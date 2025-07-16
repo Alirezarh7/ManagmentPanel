@@ -2,7 +2,7 @@ import axios from "axios";
 import {currentBaseUrl} from "../../shareData/baseUrls";
 
 export default axios.create({
-  headers: {Authorization: JSON.parse(localStorage.getItem('token') as string)},
+  headers: {Authorization: JSON.parse(localStorage.getItem("tokenMangement") as string)},
   // Origin server
   baseURL: currentBaseUrl
   // Testing server

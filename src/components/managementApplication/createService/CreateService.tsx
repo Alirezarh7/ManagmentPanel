@@ -65,7 +65,7 @@ const CreateService = ({setValue, next, serviceId, currentStep}: IProps) => {
       <NapLoading loading={isRefetching || isPending || isLoading || isFetching}/>
       <div className=' pt-5'>
         <div className='flex  justify-between items-center mx-2'>
-          <p>سرویس جدید را اضافه کنید.</p>
+          <p>نرم افزار جدید را اضافه کنید.</p>
           <button onClick={() => setAddService(true)}
                   className={'bg-sliderColor text-white border rounded-lg !border-goldColor p-1'}>اضافه کردن
           </button>

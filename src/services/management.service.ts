@@ -130,7 +130,6 @@ const useUpdateAction = () => {
 };
 
 const deleteAction = (data:{id: number, serviceId: number,controllerId:number}) => {
-  console.log(data)
   return ManagementAxiosInstance.delete(`/Service/DeleteAction?ServiceId=${data.serviceId}&ControllerId=${data.controllerId}&Id=${data.id}`);
 };
 const useDeleteAction = () => {

@@ -5,6 +5,7 @@ interface IProps {
 		| "primary"
 		| "Cancel"
 		| "select"
+		| 'InputClass'
 	type?: "submit" | "button";
 	label?: any;
 	labelClassName?: string;
@@ -30,6 +31,8 @@ const CustomButton = ({
 		" w-fit text-white text-sm !bg-gradient-to-r !from-customBlue !to-gridColor hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-gridColor font-medium rounded-lg  p-2.5 text-center  m-2  ";
 	const CancelClasses =
 		" w-fit text-white text-sm !bg-gradient-to-r !from-ColorFullRead !to-ColorLessRead hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-gridColor font-medium rounded-lg  p-2.5 text-center  m-2  ";
+	const InputClass =
+		'!bg-gradient-to-r !from-customBlue !to-gridColor hover:bg-gradient-to-bl border !border-gray-900 !rounded-tl-lg !rounded-bl-lg outline-0  !text-black px-2 ';
 	const SelectClasses =
 		` ${className ? className : 'w-fit m-2'} text-white text-sm !bg-gradient-to-r !from-sliderColor !to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-gridColor font-medium rounded-lg  p-2.5 text-center  `;
 
@@ -41,6 +44,8 @@ const CustomButton = ({
 			finalClassName += CancelClasses;
 		} else if (variant === "select") {
 			finalClassName += SelectClasses;
+		}else if (variant === 'InputClass') {
+			finalClassName += InputClass;
 		}
 		finalClassName +=
 			"  !disabled:bg-gray-300 !disabled:border-gray-300";

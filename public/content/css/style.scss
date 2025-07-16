@@ -1,5 +1,28 @@
-@import url('../fonts/iransans/css/style.css');
-@import url('../lib/MaterialDesign/css/materialdesignicons.min.css');
+@font-face {
+    font-family: 'Vazir';
+    src: url('../../font/vazirFont/Vazir.eot') format('embedded-opentype'),
+    url('../../font/vazirFont/Vazir.ttf') format('truetype'),
+    url('../../font/vazirFont/Vazir.woff') format('woff'),
+    url('../../font/vazirFont/Vazir.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: url('../../font/vazirBoldFont/Vazir-Bold.eot') format('embedded-opentype'),
+    url('../../font/vazirBoldFont/Vazir-Bold.ttf') format('truetype'),
+    url('../../font/vazirBoldFont/Vazir-Bold.woff') format('woff'),
+    url('../../font/vazirBoldFont/Vazir-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Vazir', sans-serif;
+    direction: rtl;
+    unicode-bidi: bidi-override;
+}
 
 $color-success: #0abb87;
 $color-warning: #ffb822;
@@ -52,9 +75,6 @@ body,
     height: 100%;
 }
 
-body {
-    background-color: #f4f7fa;
-}
 
 .overlay {
     &::before {
@@ -627,7 +647,6 @@ header {
 
             &:focus {
                 box-shadow: none;
-                border-color: #e2e2e2;
 
                 +.mdi {
                     opacity: 1;

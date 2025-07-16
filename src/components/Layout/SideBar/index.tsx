@@ -8,7 +8,7 @@ import { IoHomeOutline } from 'react-icons/io5';
 import { SlCalender } from 'react-icons/sl';
 import { BsFileEarmarkText } from 'react-icons/bs';
 import { PiQuestion } from 'react-icons/pi';
-import { MdOutlineSettings } from 'react-icons/md';
+import {MdManageAccounts, MdOutlineSettings} from 'react-icons/md';
 import { SiRedis } from 'react-icons/si';
 
 const menuItems = [
@@ -18,7 +18,8 @@ const menuItems = [
 	{ id: 4, label: 'سوالات پرتکرار', route: PATHS.faqContents.index, icon: <PiQuestion className='w-4 h-4' /> },
 	{ id: 5, label: 'کش ردیس', route: PATHS.redisCache, icon: <SiRedis className='w-4 h-4' /> },
 	{ id: 6, label: 'تنظیمات', route: PATHS.configs, icon: <MdOutlineSettings className='w-4 h-4' /> },
-	{ id: 7, label: 'مدیریت نرم افزارها', route: PATHS.managementApplication, icon: <SlCalender className='w-4 h-4' /> }
+	{ id: 7, label: 'مدیریت نرم افزارها', route: PATHS.managementApplication, icon: <SlCalender className='w-4 h-4' /> },
+	{ id: 6, label: 'مدیریت کاربران', route: PATHS.managementMember, icon: <MdManageAccounts  className='w-4 h-4' /> }
 ];
 
 interface IProps {

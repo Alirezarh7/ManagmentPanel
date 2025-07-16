@@ -6,7 +6,9 @@ import { jwtDecode } from 'jwt-decode';
 import NDate from '@nepo/ndate';
 import { shareData } from '../../../../shareData';
 import axios from 'axios';
-import { currentBaseUrl, getTokenUrl, managementPanelCreatPerson } from '../../../../shareData/baseUrls';
+import {
+	getManagementTokenUrl,
+} from '../../../../shareData/baseUrls';
 
 export const dashboardActions = {
 	setCrumbs:
@@ -48,85 +50,16 @@ export const dashboardActions = {
 			});
 		},
 
-	// setCreatePerson: (data: any, callInSuccessCallback: boolean, automaticlyLogout: any): AppAction<KnownAction> => async (dispatch, getState) => {
-	//     dispatch({type: DashboardActionTypes.CreatePerson});
-	//     try {
-	//         const result = await API.post('/People/CreatePerson', data);
-	//         dispatch({
-	//             type: DashboardActionTypes.CreatePersonSuccess
-	//         });
-	//
-	//         if (localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY)) {
-	//             const updatedTime = new NDate().subDays(-1);
-	//             updatedTime.date.setHours(new Date().getHours() + 4);
-	//             const updateExpiredGovSsoTime = new Date(updatedTime.date).getTime();
-	//
-	//             const access = JSON.parse(localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY) as any);
-	//             if (localStorage.getItem(shareData.CONSTANT.REPLACE_SSN) && localStorage.getItem(shareData.CONSTANT.REPLACE_BIRTH_DATE)) {
-	//                 result.data.nationalCode = JSON.parse(localStorage.getItem(shareData.CONSTANT.REPLACE_SSN) as any);
-	//                 result.data.birthDate = JSON.parse(localStorage.getItem(shareData.CONSTANT.REPLACE_BIRTH_DATE) as any);
-	//             }
-	//             if (callInSuccessCallback) {
-	//                 delete access.expires_at;
-	//                 localStorage.setItem(shareData.CONSTANT.UPDATE_SSO_EXPIRE_TIME, JSON.stringify(updateExpiredGovSsoTime));
-	//                 access.expires_at = updateExpiredGovSsoTime;
-	//             } else {
-	//                 delete access.expires_at;
-	//                 access.expires_at = JSON.parse(localStorage.getItem(shareData.CONSTANT.UPDATE_SSO_EXPIRE_TIME) as string);
-	//             }
-	//             access.profile = result.data;
-	//             localStorage.setItem(shareData.CONSTANT.GOV_STORAGE_KEY, JSON.stringify(access));
-	//             callInSuccessCallback && window.location.reload();
-	//         }
-	//
-	//     } catch (error) {
-	//         automaticlyLogout();
-	//         dispatch({
-	//             type: DashboardActionTypes.CreatePersonFailed
-	//         });
-	//     }
-	// },
 
-	setUpdatePerson:
-		(automaticlyLogout: any): AppAction<KnownAction> =>
-		async (dispatch, getState) => {
-			if (localStorage.getItem(shareData.CONSTANT.REPLACE_SSN) && localStorage.getItem(shareData.CONSTANT.REPLACE_BIRTH_DATE)) {
-				try {
-					const result = await API.post(
-						'/People/CreatePerson',
-						localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY)
-							? shareData.validDataReplaceSsn(
-									JSON.parse(localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY) as string).profile
-								)
-							: shareData.validDataReplaceSsn(
-									JSON.parse(localStorage.getItem(shareData.ORGANIZATION_STORAGE_KEY) as string).profile
-								)
-					);
-					dispatch({
-						type: DashboardActionTypes.CreatePersonSuccess
-					});
-					const access = localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY)
-						? JSON.parse(localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY) as string)
-						: JSON.parse(localStorage.getItem(shareData.ORGANIZATION_STORAGE_KEY) as string);
-					access.profile.nationalCode = JSON.parse(localStorage.getItem(shareData.CONSTANT.REPLACE_SSN) as any);
-					access.profile.birthDate = JSON.parse(localStorage.getItem(shareData.CONSTANT.REPLACE_BIRTH_DATE) as any);
-					localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY)
-						? localStorage.setItem(shareData.CONSTANT.GOV_STORAGE_KEY, JSON.stringify(access))
-						: localStorage.setItem(shareData.ORGANIZATION_STORAGE_KEY, JSON.stringify(access));
-				} catch (error) {
-					automaticlyLogout();
-				}
-			}
-		},
-
-	setCreateToken:
-		(callInSuccessCallback: boolean, automaticlyLogout: any, accessToken: string): AppAction<KnownAction> =>
+	setCreateManagementToken:
+		(callInSuccessCallback: boolean, automaticlyLogout: any, accessToken: string,nationalCode:string): AppAction<KnownAction> =>
 		async (dispatch, getState) => {
 			dispatch({ type: DashboardActionTypes.CreateToken });
+
 			try {
 				const resultToken = await axios.post(
-					`${getTokenUrl}`,
-					{},
+					`${getManagementTokenUrl}`,
+					{nationalCode},
 					{
 						headers: { Authorization: accessToken }
 					}
@@ -134,7 +67,8 @@ export const dashboardActions = {
 
 				if (resultToken.status === 200) {
 					dispatch({ type: DashboardActionTypes.CreateTokenSuccess });
-					localStorage.setItem('token', JSON.stringify(resultToken.data[0]));
+					localStorage.setItem('tokenMangement', JSON.stringify((resultToken?.data).tokenMangement));
+					localStorage.setItem('tokenBasic', JSON.stringify((resultToken?.data).tokenBasic));
 
 					/*		if (localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY)) {
 						const updatedTime = new NDate().subDays(-1);
@@ -142,7 +76,7 @@ export const dashboardActions = {
 						const updateExpiredGovSsoTime = new Date(updatedTime.date).getTime();
 
 						const access = JSON.parse(localStorage.getItem(shareData.CONSTANT.GOV_STORAGE_KEY) as any);
-					
+
 						if (callInSuccessCallback) {
 							delete access.expires_at;
 							localStorage.setItem(shareData.CONSTANT.UPDATE_SSO_EXPIRE_TIME, JSON.stringify(updateExpiredGovSsoTime));

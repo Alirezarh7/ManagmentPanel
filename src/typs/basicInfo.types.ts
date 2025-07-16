@@ -1,0 +1,1 @@
+export interface IBasicInfo { value: number; label: string }[]
